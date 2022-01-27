@@ -1,1 +1,4 @@
 Single-database configuration for Flask.
+
+このフォルダはデータベースをmigrationによって管理すためのものです．
+ファイルの追加や記述をする必要はありません．
