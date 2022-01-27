@@ -1,3 +1,4 @@
 # ここに必要なライブラリを記述しておけば一括でインストールできるから便利
 flask
 flask_sqlalchemy
+Flask-Migrate
