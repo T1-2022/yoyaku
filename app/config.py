@@ -11,4 +11,3 @@ class DevelopmentConfig:
 
 
 Config = DevelopmentConfig
-print("a", Config.SQLALCHEMY_DATABASE_URI)
