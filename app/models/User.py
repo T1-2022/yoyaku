@@ -1,10 +1,13 @@
-from sqlalchemy import Column, Integer, String, Boolean
-from database import Base
+from models.database import db
 
-class User(Base):
+class User(db.Model):
     __tablename__ = 'users'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(20), unique=True)
-    email = Column(String(100), unique=True)
-    passwd = Column(String(30))
-    admin = Column(Boolean)
+
+    id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(20), nullable=False, unique=True)
+    email = db.Column(db.String(50), nullable=False, unique=True)
+    passwd = db.Column(db.String(30), nullable=False)
+    admin = db.Column(db.Boolean, default="0")
+
+    reserve = db.relationship("Reserve")
+    

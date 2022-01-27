@@ -1,7 +1,6 @@
 from flask import Flask, render_template
-import database 
+from models import database 
 
-# 本番環境に向けてメインファイルの構成を変更
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
