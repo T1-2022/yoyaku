@@ -1,18 +1,18 @@
-#from flask import Flask, render_template
-#from project.app.models.database import init_db
+from flask import Flask, render_template
+import database 
 
 # 本番環境に向けてメインファイルの構成を変更
-#app = Flask(__name__)
+app = Flask(__name__)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dbtest/test.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SQLALCHEMY_ECHO'] = True
 
-#@app.route("/")
-#def home():
-#    return render_template("index.html")
+database.init_db(app)
 
-from flask import Flask
-from app import create_app
-
-app = create_app()
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 if __name__ == '__main__':
     app.run()
