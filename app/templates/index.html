@@ -1,23 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-	<title>予約システム</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="{{ url_for('static',filename='images/icons/favicon.ico') }}"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='fonts/iconic/css/material-design-iconic-font.min.css') }}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/util.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
-<!--===============================================================================================-->
-</head>
-<body>
+{% extends "template.html" %}
+{% block content %}
 
 	<div class="limiter">
 		<div class="container-login100">
@@ -27,7 +9,7 @@
 						ようこそ
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Invalid Emai">
+					<div class="wrap-input100 validate-input" data-validate = "Invalid Email">
 						<input class="input100" type="text" name="email">
 						<span class="focus-input100" data-placeholder="メール"></span>
 					</div>
@@ -53,15 +35,4 @@
 		</div>
 	</div>
 
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/animsition/js/animsition.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/bootstrap/js/popper.js') }}"></script>
-	<script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
-
-</body>
-</html>
+{% endblock %}
