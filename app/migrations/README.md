@@ -32,3 +32,9 @@ flask db upgrade
 ```
 flask db downgrade
 ```
+
+※要注意：データベースを最初に戻す
+
+```
+flask db upgrade head
+```
