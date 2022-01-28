@@ -5,7 +5,7 @@ created by Shinoda Hiroki.
 @ this file is ... 
   * table name    : reserves
   * id            : int       , nullable=False, primary_key, autoincrement
-  * user_id       : string(20), nullable=False, foreignkey("users.id")
+  * user_id       : int       , nullable=False, foreignkey("users.id")
   * conference_id : int       , nullable=False, foreignkey("conferences.id")
   * date          : string(30), nullable=False 
   * time          : string(30), nullable=False
@@ -26,7 +26,7 @@ class Reserve(db.Model):
 
     # テーブルのカラムを設定
     id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True) # 主キー
-    user_id = db.Column(db.String(20), db.ForeignKey("users.id"),  nullable=False) # 外部キー
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"),  nullable=False) # 外部キー
     conference_id = db.Column(db.Integer, db.ForeignKey("conferences.id"), nullable=False) # 外部キー
     date = db.Column(db.String(30), nullable=False)
     time = db.Column(db.String(30), nullable=False)

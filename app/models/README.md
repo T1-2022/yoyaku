@@ -1,7 +1,48 @@
 # データベースに関して
 
 ## データベース定義
-ここにデータベースの定義を書く．
+
+### User
+* table name    : users
+* id     : 主キー，オートインクリメント（整数）
+* name   : ユーザーネーム(文字列，20文字上限)
+* email  : メールアドレス(文字列，50文字上限)
+* passwd : パスワード(文字列，30文字上限)
+* admin  : 管理者フラグ（Boolean）
+
+* reserve : ユーザーと紐づく予約一覧
+
+* コンストラクタ：User(name, email, passwd, admin)
+
+### Conference
+* table name    : conferences
+* id            : 主キー，オートインクリメント（整数）
+* name          : 会議室名（文字列，20文字上限）
+* capacity      : 許容人数（整数）
+* equipment     : 備品（文字列，30文字上限）
+* fhoto_id      : 写真番号（整数）
+* remakes       : 備考（文字列，100文字上限）
+
+* reserve : 会議室と紐づく予約一覧
+
+* コンストラクタ：Conference(name, capacity, equipment, fhoto_id, remarks)
+
+### Reserve
+* table name    : reserves
+* id            : 予約id（整数，主キー，オートインクリメント）
+* user_id       : ユーザーid（整数，外部キー）
+* conference_id : 会議室id（整数，外部キー）
+* date          : 日付（文字列，30文字上限） 
+* time          : 時間（文字列，30文字上限）
+* user_name     : 利用者名（文字列，20文字上限）
+* user_email    : 利用者メールアドレス（文字列，50文字上限）
+* purpose       : 目的（文字列，100文字上限）
+* remakes       : 備考（文字列，100文字上限）
+
+* user : 1名のユーザと紐づく
+* conference : 1つの会議室と紐づく
+
+* コンストラクタ：Reserve(user_id, conference_id, date, time, user_name, user_email, purpose, remarks)
 
 ## データベース（SQL）の使い方
 ここでは、基本的なCRUD操作について記述する．
@@ -26,11 +67,21 @@ db.session.flush()
 db.session.commit()
 ```
 ### Read (データの読み出し)
+リレーションなし
 ```
 # 全てのユーザーの読み込み
 users = User.query.all()
 # 名前でフィルターを掛ける(1人の)場合
 user = db.session.query(User).filter_by(name='tarou').first()
+```
+リレーションあり
+```
+# 予約の取得
+reserve = db.session.query(Reserve).filter(Reserve.id==1).first()
+# リレーションを張ったユーザーが取得できる
+user = reserve.user
+# リレーションを張ったユーザーが取得できる
+conference = reserve.conference
 ```
 
 ### Delete（データの削除）
