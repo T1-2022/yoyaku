@@ -38,3 +38,13 @@ class Reserve(db.Model):
     # 他テーブルとのリレーションを設定
     user = db.relationship("User")
     conference = db.relationship("Conference")
+
+    def __init__(self, user_id, conference_id, date, time, user_name, user_email, purpose, remarks):
+      self.user_id = user_id
+      self.conference_id = conference_id
+      self.date = date
+      self.time = time
+      self.user_name = user_name
+      self.user_email = user_email
+      self.purpose = purpose
+      self.remarks = remarks
