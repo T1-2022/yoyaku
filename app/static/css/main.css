@@ -2,8 +2,7 @@
 
 
 
-/*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
+/*[ FONT ]*/
 
 @font-face {
   font-family: Poppins-Regular;
@@ -28,8 +27,7 @@
 
 
 
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
+/*[ RESTYLE TAG ]*/
 
 * {
 	margin: 0px; 
@@ -62,7 +60,7 @@ a:focus {
 a:hover {
 	text-decoration: none;
   color: #cb3333;
-  color: -webkit-linear-gradient(left, #1c1c1c, #bc1b21);
+  color: -webkit-linear-gradient(left, #7c7c7c, #bc1b21);
   color: -o-linear-gradient(left, #1c1c1c, #bc1b21);
   color: -moz-linear-gradient(left, #1c1c1c, #bc1b21);
   color: linear-gradient(left, #1c1c1c, #bc1b21);
@@ -137,8 +135,7 @@ iframe {
 	border: none !important;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ login ]*/
+/*[ Login ]*/
 
 .limiter {
   width: 100%;
@@ -175,8 +172,7 @@ iframe {
 }
 
 
-/*------------------------------------------------------------------
-[ Form ]*/
+/*[ Form ]*/
 
 .login100-form {
   width: 100%;
@@ -194,8 +190,7 @@ iframe {
   font-size: 60px;
 }
 
-/*------------------------------------------------------------------
-[ Input ]*/
+/*[ Input ]*/
 
 .wrap-input100 {
   width: 100%;
@@ -243,10 +238,10 @@ iframe {
   transition: all 0.4s;
 
   background: #cb3333;
-  background: -webkit-linear-gradient(left, #1c1c1c, #bc1b21);
-  background: -o-linear-gradient(left, #1c1c1c, #bc1b21);
-  background: -moz-linear-gradient(left, #1c1c1c, #bc1b21);
-  background: linear-gradient(left, #1c1c1c, #bc1b21);
+  background: -webkit-linear-gradient(left, #26547C, #bc1b21);
+  background: -o-linear-gradient(left, #26547C, #bc1b21);
+  background: -moz-linear-gradient(left, #26547C, #bc1b21);
+  background: linear-gradient(left, #26547C, #bc1b21);
 }
 
 .focus-input100::after {
@@ -310,18 +305,18 @@ iframe {
 
 .btn-show-pass:hover {
   color: #cb3333;
-  color: -webkit-linear-gradient(left, #1c1c1c, #bc1b21);
-  color: -o-linear-gradient(left, #1c1c1c, #bc1b21);
-  color: -moz-linear-gradient(left, #1c1c1c, #bc1b21);
-  color: linear-gradient(left, #1c1c1c, #bc1b21);
+  color: -webkit-linear-gradient(left, #26547C, #bc1b21);
+  color: -o-linear-gradient(left, #26547C, #bc1b21);
+  color: -moz-linear-gradient(left, #26547C, #bc1b21);
+  color: linear-gradient(left, #26547C, #bc1b21);
 }
 
 .btn-show-pass.active {
   color: #cb3333;
-  color: -webkit-linear-gradient(left, #1c1c1c, #bc1b21);
-  color: -o-linear-gradient(left, #1c1c1c, #bc1b21);
-  color: -moz-linear-gradient(left, #1c1c1c, #bc1b21);
-  color: linear-gradient(left, #1c1c1c, #bc1b21);
+  color: -webkit-linear-gradient(left, #26547C, #bc1b21);
+  color: -o-linear-gradient(left, #26547C, #bc1b21);
+  color: -moz-linear-gradient(left, #26547C, #bc1b21);
+  color: linear-gradient(left, #26547C, #bc1b21);
 }
 
 
@@ -355,10 +350,10 @@ iframe {
   width: 300%;
   height: 100%;
   background: #1c1c1c;
-  background: -webkit-linear-gradient(right, #1c1c1c, #bc1b21, #1c1c1c, #bc1b21);
-  background: -o-linear-gradient(right, #1c1c1c, #bc1b21, #1c1c1c, #bc1b21);
-  background: -moz-linear-gradient(right, #1c1c1c, #bc1b21, #1c1c1c, #bc1b21);
-  background: linear-gradient(right, #1c1c1c, #bc1b21, #1c1c1c, #bc1b21);
+  background: -webkit-linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
+  background: -o-linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
+  background: -moz-linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
+  background: linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
   top: 0;
   left: -100%;
 
@@ -392,8 +387,7 @@ iframe {
 }
 
 
-/*------------------------------------------------------------------
-[ Responsive ]*/
+/*[ Responsive ]*/
 
 @media (max-width: 576px) {
   .wrap-login100 {
@@ -403,8 +397,7 @@ iframe {
 
 
 
-/*------------------------------------------------------------------
-[ Alert validate ]*/
+/*[ Alert validate ]*/
 
 .validate-input {
   position: relative;
