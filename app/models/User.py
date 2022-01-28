@@ -22,10 +22,16 @@ class User(db.Model):
 
     # テーブルのカラムを設計
     id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True) # 主キー
-    name = db.Column(db.String(20), nullable=False, unique=True)
+    name = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(50), nullable=False, unique=True)
     passwd = db.Column(db.String(30), nullable=False)
-    admin = db.Column(db.Boolean, default='0')
+    admin = db.Column(db.Boolean, default=False)
     # 外部キーとして連携されるテーブルの設定
     reserve = db.relationship('Reserve')
-    
+
+    # autoincrementであるid以外の値を引数として設定
+    def __init__(self, name, email, passwd, admin):
+      self.name = name
+      self.email = email
+      self.passwd = passwd
+      self.admin = admin
