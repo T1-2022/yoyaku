@@ -2,7 +2,7 @@ import os
 
 from flask import render_template, request, Blueprint, Flask
 
-from models import User
+from models.User import User
 from models.database import db
 
 login_bp = Blueprint('login', __name__, url_prefix='/login')
@@ -14,12 +14,11 @@ def login():
 
             attempted_username = request.form['username']
             attempted_password = request.form['password']
-            print(1)
-            print(db.session.query(User).filter_by(name='shinoda').first())
+            user = db.session.query(User).filter_by(name=attempted_username).first()
 
-
-
-            if attempted_username == 'admin' and attempted_password == 'aaa':
+            if user != None and attempted_password == user.__dict__['passwd']:
+                    if user.__dict__['admin'] == 1:
+                        return render_template('admin.html')
 
                     return render_template('main.html')
 
