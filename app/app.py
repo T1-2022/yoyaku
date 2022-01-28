@@ -3,8 +3,10 @@ from models import database
 
 app = Flask(__name__)
 
-app.config.from_pyfile('config.py')
+# config を設定ファイルから読み込む
+app.config.from_object('config.DevelopmentConfig')
 
+# データベースの初期化
 database.init_db(app)
 
 @app.route("/")

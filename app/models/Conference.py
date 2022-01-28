@@ -29,4 +29,11 @@ class Conference(db.Model):
     remarks = db.Column(db.String(100))
 
     # 予約テーブルとのリレーションを作成
-    reserve = db.relationship("Reserve")
+    reserve = db.relationship("Reserve", uselist=True)
+
+    def __init__(self, name, capacity, equipment, fhoto_id, remarks):
+        self.name = name
+        self.capacity = capacity
+        self.equipment = equipment
+        self.fhoto_id = fhoto_id
+        self.remarks = remarks
