@@ -1,8 +1,9 @@
 from flask import Flask, render_template
-
+from mainview import main_view
 
 app = Flask(__name__)
 
+app.register_blueprint(main_view)
 
 @app.route("/")
 def home():

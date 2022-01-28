@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>予約システム</title>
+</head>
+<body>
+    <header class="top">
+        <p>会議室予約システム</p>
+        <p>「{{name}}」としてログイン中</p>
+    </header>
+    <div class="content">
+        <div class="band_area">
+            <button type="button" class="band" onclick="location.href='./book_info'">予約情報</button>
+            <button type="button" class="band" onclick="location.href='./booking'">予約する</button>
+            <button type="button" class="band" onclick="location.href='./room'">会議室詳細</button>
+            <button type="button" class="band" onclick="location.href='./help'">オンラインヘルプ</button>
+            <button type="button" class="band" onclick="location.href='./user_info'">ユーザー情報</button>
+            <button type="button" class="band">ログアウト</button>
+        </div>
+        <div class="main">
+            <p>予約画面</p>
+            <p>　</p>
+            <p>予約登録（仮）</p>
+            <form action="/book_info" method="POST">
+                <p>
+                    利用者名：
+                    <input type="text" name="name">
+                </p>
+                <p>
+                    利用目的：
+                    <input type="text" name="mokuteki">
+                </p>
+                <p>
+                    利用メアド：
+                    <input type="text" name="mail">
+                </p>
+                <p>
+                    <input type="submit" value="予約登録" onclick="location.href='./book_info'">
+                </p>
+            </form>
+
+        </div>
+    </div>
+</body>
