@@ -9,7 +9,7 @@ created by Shinoda Hiroki.
   * capacity      : int       
   * equipment     : string(30)
   * fhoto_id      : int
-  * remakes       : String(100)
+  * remarks       : String(100)
 
   * reserve is relation to "Reserve"
 '''

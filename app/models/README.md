@@ -21,7 +21,7 @@
 * capacity      : 許容人数（整数）
 * equipment     : 備品（文字列，30文字上限）
 * fhoto_id      : 写真番号（整数）
-* remakes       : 備考（文字列，100文字上限）
+* remarks       : 備考（文字列，100文字上限）
 
 * reserve : 会議室と紐づく予約一覧
 
@@ -37,7 +37,7 @@
 * user_name     : 利用者名（文字列，20文字上限）
 * user_email    : 利用者メールアドレス（文字列，50文字上限）
 * purpose       : 目的（文字列，100文字上限）
-* remakes       : 備考（文字列，100文字上限）
+* remarks       : 備考（文字列，100文字上限）
 
 * user : 1名のユーザと紐づく
 * conference : 1つの会議室と紐づく
@@ -49,7 +49,7 @@
 
 詳細については、SQLAlchemyを参照していただきたい．
 
-また、例としてユーザーテーブルの操作を挙げているが、他のテーブル名に置き換えていただければ動作する．
+また、例としてユーザーテーブルの操作を挙げているが、他のテーブル名に置き換えれば動作する．
 
 ### Create （データの追加）
 ```
@@ -78,9 +78,9 @@ user = db.session.query(User).filter_by(name='tarou').first()
 ```
 # 予約の取得
 reserve = db.session.query(Reserve).filter(Reserve.id==1).first()
-# リレーションを張ったユーザーが取得できる
+# リレーションを張ったユーザー（1名）が取得できる
 user = reserve.user
-# リレーションを張ったユーザーが取得できる
+# リレーションを張った会議（1部屋）が取得できる
 conference = reserve.conference
 ```
 
