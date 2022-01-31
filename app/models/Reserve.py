@@ -36,8 +36,8 @@ class Reserve(db.Model):
     remarks = db.Column(db.String(100))
 
     # 他テーブルとのリレーションを設定
-    user = db.relationship("User")
-    conference = db.relationship("Conference")
+    #user = db.relationship("User")
+    #conference = db.relationship("Conference")
 
     def __init__(self, user_id, conference_id, date, time, user_name, user_email, purpose, remarks):
       self.user_id = user_id
