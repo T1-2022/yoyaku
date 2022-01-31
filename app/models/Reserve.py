@@ -26,8 +26,8 @@ class Reserve(db.Model):
 
     # テーブルのカラムを設定
     id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True) # 主キー
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"),  nullable=False) # 外部キー
-    conference_id = db.Column(db.Integer, db.ForeignKey("conferences.id"), nullable=False) # 外部キー
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id", onupdate='CASCADE', ondelete='CASCADE'),  nullable=False) # 外部キー
+    conference_id = db.Column(db.Integer, db.ForeignKey("conferences.id", onupdate='CASCADE', ondelete='CASCADE'), nullable=False) # 外部キー
     date = db.Column(db.String(30), nullable=False)
     time = db.Column(db.String(30), nullable=False)
     user_name = db.Column(db.String(20))
