@@ -12,7 +12,7 @@ created by Shinoda Hiroki.
   * user_name     : String(20)
   * user_email    : String(50)
   * purpose       : String(100)
-  * remakes       : String(100)
+  * remarks       : String(100)
 
   * user is relation to "User"
   * conference is relation to "Conference"
