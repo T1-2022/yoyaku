@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会議室予約システム</title>
+</head>
+<body>
+    <header class="top">
+        <p>会議室予約システム</p>
+        <p>「{{name}}」としてログイン中</p>
+    </header>
+    <div class="content">
+        <div class="band_area">
+            <button type="button" class="band" onclick="location.href='./book_info'">予約情報</button>
+            <button type="button" class="band" onclick="location.href='./booking'">予約する</button>
+            <button type="button" class="band" onclick="location.href='./room'">会議室詳細</button>
+            <button type="button" class="band" onclick="location.href='./help'">オンラインヘルプ</button>
+            <button type="button" class="band" onclick="location.href='./user_info'">ユーザー情報</button>
+            <button type="button" class="band">ログアウト</button>
+        </div>
+        <div class="main">
+            <p>予約情報画面</p>
+            <p>　</p>
+            <p>登録内容（仮）</p>
+            {% for reserve in reserves %}
+            <p>-----予約内容-----</p>
+            <p>ユーザーid：{{reserve.user_id}}</p>
+            <p>会議室番号：{{reserve.conference_id}}</p>
+            <p>日付：{{reserve.date}}</p>
+            <p>時間：{{reserve.time}}</p>
+            <p>利用者名：{{reserve.user_name}}</p>
+            <p>利用者メールアドレス：{{reserve.user_email}}</p>
+            <p>利用目的：{{reserve.purpose}}</p>
+            <p>備考：{{reserve.remarks}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>

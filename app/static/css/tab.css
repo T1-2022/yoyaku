@@ -1,0 +1,21 @@
+input[name="btn"] {
+    display: none;
+}
+.panel {
+    display: none;
+}
+
+.tab_label {
+    background: #242424;
+    color: #fff;
+    padding: 15px;
+}
+
+#tab1:checked ~ .panel_area #panel1,
+#tab2:checked ~ .panel_area #panel2,
+#tab3:checked ~ .panel_area #panel3,
+#tab4:checked ~ .panel_area #panel4,
+#tab5:checked ~ .panel_area #panel5,
+#tab6:checked ~ .panel_area #panel6 {
+    display: block;
+}
