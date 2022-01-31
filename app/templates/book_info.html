@@ -22,9 +22,17 @@
             <p>予約情報画面</p>
             <p>　</p>
             <p>登録内容（仮）</p>
-            <p>利用者名：{{name}}</p>
-            <p>利用目的：{{mokuteki}}</p>
-            <p>利用者メアド：{{mail}}</p>
+            {% for reserve in reserves %}
+            <p>-----予約内容-----</p>
+            <p>ユーザーid：{{reserve.user_id}}</p>
+            <p>会議室番号：{{reserve.conference_id}}</p>
+            <p>日付：{{reserve.date}}</p>
+            <p>時間：{{reserve.time}}</p>
+            <p>利用者名：{{reserve.user_name}}</p>
+            <p>利用者メールアドレス：{{reserve.user_email}}</p>
+            <p>利用目的：{{reserve.purpose}}</p>
+            <p>備考：{{reserve.remarks}}</p>
+            {% endfor %}
         </div>
     </div>
 </body>

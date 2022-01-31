@@ -23,18 +23,13 @@
             <p>　</p>
             <p>予約登録（仮）</p>
             <form action="/book_info" method="POST">
-                <p>
-                    利用者名：
-                    <input type="text" name="name">
-                </p>
-                <p>
-                    利用目的：
-                    <input type="text" name="mokuteki">
-                </p>
-                <p>
-                    利用メアド：
-                    <input type="text" name="mail">
-                </p>
+                <p>会議室番号：<input type="text" name="conference_id"></p>
+                <p>日付：<input type="text" name="date"></p>
+                <p>時間：<input type="text" name="time"></p>
+                <p>利用者名：<input type="text" name="user_name"></p>
+                <p>利用者メールアドレス：<input type="text" name="user_email"></p>
+                <p>利用目的：<input type="text" name="purpose"></p>
+                <p>備考：<input type="text" name="remarks"></p>
                 <p>
                     <input type="submit" value="予約登録" onclick="location.href='./book_info'">
                 </p>
