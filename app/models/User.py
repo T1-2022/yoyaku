@@ -28,7 +28,7 @@ class User(db.Model):
     passwd = db.Column(db.String(30), nullable=False)
     admin = db.Column(db.Boolean, default=False)
     # 外部キーとして連携されるテーブルの設定
-    reserve = db.relationship('Reserve', uselist=True)
+    reserve = db.relationship('Reserve', uselist=True, backref='users',cascade='all, delete-orphan')
 
     # autoincrementであるid以外の値を引数として設定
     def __init__(self, name, email, passwd, admin):

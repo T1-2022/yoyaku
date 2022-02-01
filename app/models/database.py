@@ -21,7 +21,7 @@ def init_db(app):
     db.init_app(app)
     # データベースをマイグレーションで管理
     # データベースとアプリケーションをマイグレーションと連携
-    Migrate(app, db)
+    migrate = Migrate(app, db, render_as_batch=True)
 
 # 作成したテーブル（クラス）を読み込み
 from models import User,Conference,Reserve

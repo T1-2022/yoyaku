@@ -13,12 +13,13 @@ def login():
     try:
         if request.method == "POST":
 
-            attempted_username = request.form['username']
+            attempted_email = request.form['email']
             attempted_password = request.form['password']
-            user_db = db.session.query(User).filter_by(name=attempted_username).first()
-            session["user"] = attempted_username#セッションでユーザー名を格納
+            user_db = db.session.query(User).filter_by(email=attempted_email).first()
+            print(session["user"])
 
             if user_db != None and attempted_password == user_db.__dict__['passwd']:
+                session["user"] = user_db.__dict__['name']  # セッションでユーザー名を格納
                 if user_db.__dict__['admin'] == 1:
                     return render_template('admin.html')#管理者画面への移行
 

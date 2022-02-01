@@ -9,7 +9,7 @@ created by Shinoda Hiroki.
   * capacity      : int       
   * equipment     : string(30)
   * fhoto_id      : int
-  * remakes       : String(100)
+  * remarks       : String(100)
 
   * reserve is relation to "Reserve"
 '''
@@ -29,7 +29,7 @@ class Conference(db.Model):
     remarks = db.Column(db.String(100))
 
     # 予約テーブルとのリレーションを作成
-    reserve = db.relationship("Reserve", uselist=True)
+    reserve = db.relationship("Reserve", uselist=True, backref='conferences',cascade='all, delete-orphan')
 
     def __init__(self, name, capacity, equipment, fhoto_id, remarks):
         self.name = name
