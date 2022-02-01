@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<title>メイン画面</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link href='../static/css/main_tab.css' rel='stylesheet' />
+<!--===============================================================================================-->
+    <link href='../static/css/calender.css' rel='stylesheet' />
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <h1>
+        会議室予約システム
+    </h1>
+    <h2>
+        『{{name}}』としてログイン中
+    </h2>
+
+
+    <div class="tabs">
+        <input id="reserve_info" type="radio" name="tab_item" checked>
+        <label class="tab_item" for="reserve_info">予約情報</label>
+        <input id="reserve" type="radio" name="tab_item">
+        <label class="tab_item" for="reserve">予約する</label>
+        <input id="room_info" type="radio" name="tab_item">
+        <label class="tab_item" for="room_info">会議室詳細</label>
+        <input id="help" type="radio" name="tab_item">
+        <label class="tab_item" for="help">オンラインヘルプ</label>
+        <input id="user_info" type="radio" name="tab_item">
+        <label class="tab_item" for="user_info">ユーザー情報</label>
+        <input id="logout" type="radio" name="tab_item">
+        <label class="tab_item" for="logout">ログアウト</label>
+        <a href="" class="logout_btn">ログアウト</a>
+        <!--このタブでカレンダーを表示-->
+        <div class="tab_content" id="reserve_info_content">
+            <div class="tab_content_description">
+                <div class="c-txtsp">
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        </div>
+        <!--タブその2-->
+        <div class="tab_content" id="reserve_content">
+            <div class="tab_content_description">
+                <p class="c-txtsp">予約するの内容がここに入ります</p>
+            </div>
+        </div>
+        <!--タブその3-->
+        <div class="tab_content" id="room_content">
+            <div class="tab_content_description">
+                <p class="c-txtsp">会議室の内容がここに入ります</p>
+            </div>
+        </div>
+        <!--タブその4-->
+        <div class="tab_content" id="help_content">
+            <div class="tab_content_description">
+                <p class="c-txtsp">オンラインの内容がここに入ります</p>
+            </div>
+        </div>
+        <!--タブその5-->
+        <div class="tab_content" id="user_content">
+            <div class="tab_content_description">
+                <p class="c-txtsp">ユーザーの内容がここに入ります</p>
+            </div>
+        </div>
+        <!--タブその6-->
+        <div class="tab_content" id="logout_content">
+            <div class="tab_content_description">
+                <p class="c-txtsp">ログアウトの内容がここに入ります</p>
+            </div>
+        </div>
+    </div>
+
+<!--===============================================================================================-->
+<script src='../static/js/calendar_main.js'></script>
+    <script src='../static/js/calender_option.js'></script>
+<!--===============================================================================================-->
+
+
+</body>
+</html>

@@ -1,7 +1,9 @@
-from flask import Flask, render_template, redirect
-
+from flask import Flask
+from flask import render_template
+from flask import redirect
 from models import database
 from login import login_bp
+from main_tab import main_bp
 
 app = Flask(__name__)
 
@@ -10,6 +12,9 @@ app.config.from_object('config.DevelopmentConfig')
 
 # データベースの初期化
 database.init_db(app)
+
+# ブループリント定義
+app.register_blueprint(main_bp)
 app.register_blueprint(login_bp)
 
 @app.route("/")
