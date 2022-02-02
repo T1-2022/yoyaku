@@ -25,8 +25,8 @@
 						<input class="input100" type="password" name="password" value="{{ request.form.password }}">
 						<span class="focus-input100" data-placeholder="パスワード"></span>
 					</div>
-                    <div class="wrap-input100 validate-input">
-						<input class="input100" type="checkbox" name="admin" value="{{ request.form.admin }}">
+                    <div class="wrap-input100">
+						<input class="input100" type="checkbox" name="admin" checked="{{ request.form.admin }}">
 						<span class="focus-input100" data-placeholder="管理権限"></span>
 					</div>
 					<div class="container-login100-form-btn">
