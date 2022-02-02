@@ -18,9 +18,9 @@ def login():
 
             if user != None and attempted_password == user.__dict__['passwd']:
                     session['user'] = user.__dict__['name']
-                    print(session['user'])
+
                     if user.__dict__['admin'] == 1:
-                        return render_template('admin.html')
+                        return redirect(url_for('admin_main.admin_main'))
 
                     return redirect(url_for('main_tab.main_tab', user_id=session['user']))
 
