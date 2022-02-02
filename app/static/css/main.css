@@ -4,22 +4,22 @@
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+  src: url('../fonts/poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+  src: url('../fonts/poppins/Poppins-Medium.ttf');
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+  src: url('../fonts/poppins/Poppins-Bold.ttf');
 }
 
 @font-face {
   font-family: Poppins-SemiBold;
-  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+  src: url('../fonts/poppins/Poppins-SemiBold.ttf');
 }
 
 
@@ -28,8 +28,8 @@
 /*[ RESTYLE TAG ]*/
 
 * {
-	margin: 0px; 
-	padding: 0px; 
+	margin: 0px;
+	padding: 0px;
 	box-sizing: border-box;
 }
 
@@ -141,7 +141,7 @@ iframe {
 }
 
 .container-login100 {
-  width: 100%;  
+  width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -152,7 +152,7 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #f2f2f2;  
+  background: #f2f2f2;
 }
 
 .wrap-login100 {
@@ -210,7 +210,7 @@ iframe {
   padding: 0 5px;
 }
 
-/*---------------------------------------------*/ 
+/*---------------------------------------------*/
 .focus-input100 {
   position: absolute;
   display: block;
@@ -236,10 +236,10 @@ iframe {
   transition: all 0.4s;
 
   background: #cb3333;
-  background: -webkit-linear-gradient(left, #26547C, #bc1b21);
-  background: -o-linear-gradient(left, #26547C, #bc1b21);
-  background: -moz-linear-gradient(left, #26547C, #bc1b21);
-  background: linear-gradient(left, #26547C, #bc1b21);
+  background: -webkit-linear-gradient(left, #808080, #bc1b21);
+  background: -o-linear-gradient(left, #808080, #bc1b21);
+  background: -moz-linear-gradient(left, #808080, #bc1b21);
+  background: linear-gradient(left, #808080, #bc1b21);
 }
 
 .focus-input100::after {
@@ -279,6 +279,64 @@ iframe {
 }
 
 /*---------------------------------------------*/
+.focus-input100-static {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.focus-input100-static::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 0;
+  height: 2px;
+
+  background: #cb3333;
+  background: -webkit-linear-gradient(left, #808080, #bc1b21);
+  background: -o-linear-gradient(left, #808080, #bc1b21);
+  background: -moz-linear-gradient(left, #808080, #bc1b21);
+  background: linear-gradient(left, #808080, #bc1b21);
+}
+
+.focus-input100-static::after {
+  font-family: Poppins-Regular;
+  font-size: 15px;
+  color: #999999;
+  line-height: 1.2;
+
+  content: attr(data-placeholder);
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 16px;
+  left: 0px;
+  padding-left: 5px;
+}
+
+.input100-static:focus + .focus-input100-static::after {
+  top: -15px;
+}
+
+.input100-static:focus + .focus-input100-static::before {
+  width: 100%;
+}
+
+.has-val.input100-static + .focus-input100-static::after {
+  top: -15px;
+}
+
+.has-val.input100-static + .focus-input100-static::before {
+  width: 100%;
+}
+
+/*---------------------------------------------*/
 .btn-show-pass {
   font-size: 15px;
   color: #999999;
@@ -303,18 +361,18 @@ iframe {
 
 .btn-show-pass:hover {
   color: #cb3333;
-  color: -webkit-linear-gradient(left, #26547C, #bc1b21);
-  color: -o-linear-gradient(left, #26547C, #bc1b21);
-  color: -moz-linear-gradient(left, #26547C, #bc1b21);
-  color: linear-gradient(left, #26547C, #bc1b21);
+  color: -webkit-linear-gradient(left, #808080, #bc1b21);
+  color: -o-linear-gradient(left, #808080, #bc1b21);
+  color: -moz-linear-gradient(left, #808080, #bc1b21);
+  color: linear-gradient(left, #808080, #bc1b21);
 }
 
 .btn-show-pass.active {
   color: #cb3333;
-  color: -webkit-linear-gradient(left, #26547C, #bc1b21);
-  color: -o-linear-gradient(left, #26547C, #bc1b21);
-  color: -moz-linear-gradient(left, #26547C, #bc1b21);
-  color: linear-gradient(left, #26547C, #bc1b21);
+  color: -webkit-linear-gradient(left, #808080, #bc1b21);
+  color: -o-linear-gradient(left, #808080, #bc1b21);
+  color: -moz-linear-gradient(left, #808080, #bc1b21);
+  color: linear-gradient(left, #808080, #bc1b21);
 }
 
 
@@ -348,10 +406,10 @@ iframe {
   width: 300%;
   height: 100%;
   background: #1c1c1c;
-  background: -webkit-linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
-  background: -o-linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
-  background: -moz-linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
-  background: linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
+  background: -webkit-linear-gradient(right, #a2a2a2, #bc1b21, #a2a2a2, #bc1b21);
+  background: -o-linear-gradient(right, #b3c1ff, #bc1b21, #a2a2a2, #bc1b21);
+  background: -moz-linear-gradient(right, #a2a2a2, #bc1b21, #a2a2a2, #bc1b21);
+  background: linear-gradient(right, #a2a2a2, #bc1b21, #a2a2a2, #bc1b21);
   top: 0;
   left: -100%;
 

@@ -15,8 +15,6 @@
             }
         })    
     })
-  
-  
     /*==================================================================
     [ Validate ]*/
     var input = $('.validate-input .input100');
@@ -82,7 +80,6 @@
             $(this).find('i').removeClass('zmdi-eye-off');
             showPass = 0;
         }
-        
     });
 
 })(jQuery);
