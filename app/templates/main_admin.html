@@ -1,20 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Typical Climate</title>
-</head>
-<body>
-    <div id="element2">
-        <ul>
-                <li><a href="{{ url_for(('admin_user_add.admin_user_add')) }}">
-                    新規登録 </a></li>
+{% extends "template.html" %}
+{% block content %}
 
-        </ul>
-
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+                <span class="login100-form-title p-b-26">
+						管理
+                </span>
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                            <a type="button" class="login100-form-btn" href="{{ url_for(('admin_user_add.admin_user_add')) }}">
+								ユーザー登録
+							</a>
+                        </div>
+                    <span></span>
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                            <a type="button" class="login100-form-btn" href="{{ url_for(('admin_user_add.admin_user_add')) }}">
+                                ユーザー情報
+							</a>
+                    </div>
+			</div>
+		</div>
+	</div>
 
     </div>
-
-
-</body>
-</html>
+{% endblock %}

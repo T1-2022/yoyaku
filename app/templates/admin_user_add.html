@@ -8,9 +8,9 @@
 					<span class="login100-form-title p-b-26">
 						新規登録
 					</span>
-                    <div class="wrap-input100 validate-input" data-validate = "Invalid Email">
-						<input class="input100" type="text" name="name" value="{{ request.form.username }}">
-						<span class="focus-input100" data-placeholder="name"></span>
+                    <div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="Name" value="{{ request.form.username }}">
+						<span class="focus-input100" data-placeholder="Name"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Invalid Email">
@@ -25,7 +25,10 @@
 						<input class="input100" type="password" name="password" value="{{ request.form.password }}">
 						<span class="focus-input100" data-placeholder="パスワード"></span>
 					</div>
-
+                    <div class="wrap-input100 validate-input">
+						<input class="input100" type="checkbox" name="admin" value="{{ request.form.admin }}">
+						<span class="focus-input100" data-placeholder="管理権限"></span>
+					</div>
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
