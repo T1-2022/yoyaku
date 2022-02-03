@@ -7,6 +7,34 @@
                 <span class="login100-form-title p-b-26">
 						管理
                 </span>
+
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">氏名</th>
+                            <th scope="col">メール</th>
+                            <th scope="col">パスワード</th>
+                            <th scope="col">管理者権限</th>
+                            <th scope="col">削除</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <th>{{ user.__dict__['id'] }}</th>
+                            <td>{{ user.__dict__['name'] }}</td>
+                            <td>{{ user.__dict__['email'] }}</td>
+                            <td>{{ user.__dict__['passwd'] }}</td>
+                            <td>{{ user.__dict__['admin'] }}</td>
+                            <td><a href="{{ url_for('user_delete.user_delete',user_name=user.__dict__['name']) }}">削除</a></td>
+                        </tr>
+                        {% endfor %}
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">
                         <div class="login100-form-bgbtn"></div>
@@ -15,28 +43,14 @@
 							</a>
                         </div>
                 </div>
-                 <div class="container-login100-form-btn">
+                <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">
                         <div class="login100-form-bgbtn"></div>
-                            <a type="button" class="login100-form-btn" href="{{ url_for(('admin_user_add.admin_user_add')) }}">
-                                ユーザー情報
+                            <a type="button" class="login100-form-btn" href="/">
+								ログアウト
 							</a>
-                    </div>
-			</div>
-
-             <div class="container-login100-form-btn">
-                    {% for user in users %}
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                            <a type="button" class="login100-form-btn" href="{{ url_for('user_delete.user_delete',user_name=user.__dict__['name']) }}">
-                                {{ user.__dict__['name'] }}
-							</a>
-                    </div>
-                    {% endfor %}
-			</div>
-
+                        </div>
 	</div>
-
     </div>
 
     </div>
