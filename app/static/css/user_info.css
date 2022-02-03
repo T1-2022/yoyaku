@@ -1,0 +1,5 @@
+#user_infomation{
+    display: grid;
+    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-columns: 50% 50%;
+}

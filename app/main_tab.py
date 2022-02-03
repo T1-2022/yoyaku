@@ -21,7 +21,6 @@ def main_tab(user_id):
     reserves = Reserve.query.all()        
     return render_template("main_tab.html", name=name, reserves=reserves)
 
-
 #ログアウト
 #@main_view.route('/')
 #@login_required
