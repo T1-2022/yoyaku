@@ -23,9 +23,21 @@
 							</a>
                     </div>
 			</div>
-		</div>
+
+             <div class="container-login100-form-btn">
+                    {% for user in users %}
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                            <a type="button" class="login100-form-btn" href="{{ url_for('user_delete.user_delete',user_name=user.__dict__['name']) }}">
+                                {{ user.__dict__['name'] }}
+							</a>
+                    </div>
+                    {% endfor %}
+			</div>
+
 	</div>
 
     </div>
+
     </div>
 {% endblock %}
