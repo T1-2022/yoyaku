@@ -1,5 +1,72 @@
-#user_infomation{
+#user_content .tab_content_description{
+    height: 100%;
+    width: 100%;
+}
+
+#user_information{
+    height: fit-content;
+    width:  fit-content;
     display: grid;
-    grid-template-rows: 25% 25% 25% 25%;
-    grid-template-columns: 50% 50%;
+    margin: auto auto;
+    grid-template-rows: 45px 45px 45px 45px;
+    grid-template-columns: 200px 300px 70px;
+    grid-template-areas: 
+                "name_heading   name_item   change_name_btn"
+                "mail_heading   mail_item   change_mail_btn"
+                "passwd_heading passwd_item change_passwd_btn"
+                "logout_btn     logout_btn  logout_btn";
+    
+}
+
+#user_information *{
+    font-size: 18px;
+    margin: auto 0;
+}
+
+#change_user_name_btn, #change_user_mail_btn, #change_user_passwd_btn, #logout_btn{
+    margin: auto auto;
+}
+
+#user_information button{
+    font-size: 16px;
+}
+
+#user_name_heading{
+    grid-area: name_heading;
+}
+
+#user_name_item{
+    grid-area: name_item;
+}
+
+#change_user_name_btn{
+    grid-area: change_name_btn;
+}
+
+#user_mail_heading{
+    grid-area: mail_heading;
+}
+
+#user_mail_item{
+    grid-area: mail_item;
+}
+
+#change_user_mail_btn{
+    grid-area: change_mail_btn;
+}
+
+#user_passwd_heading{
+    grid-area: passwd_heading;
+}
+
+#user_passwd_item{
+    grid-area: passwd_item;
+}
+
+#change_user_passwd_btn{
+    grid-area: change_passwd_btn;
+}
+
+#logout_btn{
+    grid-area: logout_btn;
 }

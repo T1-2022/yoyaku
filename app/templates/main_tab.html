@@ -65,13 +65,32 @@
         <!--このタブでユーザー情報を表示する-->
         <div class="tab_content" id="user_content">
             <div class="tab_content_description">
+                <!--ユーザー情報が表示される部分-->
                 <div id='user_information'>
+                    <!--ユーザー名表示-->
                     <div id="user_name_heading">名前</div>
                     <div id="user_name_item">{{name}}</div>
+                    <!--ユーザー名変更ボタン-->
+                    <div id="change_user_name_btn">
+                        <button type="button">変更</button>
+                    </div>
+                    <!--メールアドレス表示-->
                     <div id="user_mail_heading">メールアドレス</div>
                     <div id="user_mail_item">{{email}}</div>
+                    <!--メールアドレス変更ボタン-->
+                    <div id="change_user_mail_btn">
+                        <button type="button">変更</button>
+                    </div>
+                    <!--パスワード表示-->
                     <div id="user_passwd_heading">パスワード</div>
                     <div id="user_passwd_item">{{passwd}}</div>
+                    <!--パスワード変更ボタン-->
+                    <div id="change_user_passwd_btn">
+                        <button type="button">変更</button>
+                    </div>
+                    <div id="logout_btn">
+                        <button type="button">ログアウト</button>
+                    </div>
                 </div>
             </div>
         </div>
