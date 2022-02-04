@@ -19,10 +19,9 @@ def login():
             if user != None and attempted_password == user.__dict__['passwd']:
                     session['user'] = user.__dict__['name']
                     print(session['user'])
-<<<<<<< Updated upstream
-=======
+
                     session['flag'] = True
->>>>>>> Stashed changes
+
                     if user.__dict__['admin'] == 1:
                         return render_template('admin.html')
 
@@ -44,4 +43,6 @@ def login_required():
     #flag = session.get("flag")
     #if flag == False or flag == None:
     if "flag" in session and session["flag"]:
-        return render_template('index.html')
+        return True
+    else:
+        return False
