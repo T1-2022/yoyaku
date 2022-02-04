@@ -20,11 +20,3 @@ def main_tab(user_id):
     name=user_id
     reserves = Reserve.query.all()
     return render_template("main_tab.html", name=name, reserves=reserves, email='tarou@example.com', passwd='passwd')
-
-#ログアウト
-#@main_view.route('/')
-#@login_required
-#def logout():
-#    logout_user()
-#    return redirect(url_for('.index'))
-
