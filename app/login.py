@@ -17,7 +17,7 @@ def login():
             user = db.session.query(User).filter_by(email=attempted_email).first()
 
             if user != None and attempted_password == user.__dict__['passwd']:
-                    session['user'] = user.__dict__['name']
+                    session['user'] = user.__dict__['email']
 
                     session['flag'] = True
 

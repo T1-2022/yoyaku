@@ -18,7 +18,7 @@
         会議室予約システム
     </h1>
     <h2>
-        『{{name}}』としてログイン中
+        『{{user_info.name}}』としてログイン中
     </h2>
 
 
@@ -69,21 +69,21 @@
                 <div id='user_information'>
                     <!--ユーザー名表示-->
                     <div id="user_name_heading">名前</div>
-                    <div id="user_name_item">{{name}}</div>
+                    <div id="user_name_item">{{user_info.name}}</div>
                     <!--ユーザー名変更ボタン-->
                     <div id="change_user_name_btn">
                         <button type="button">変更</button>
                     </div>
                     <!--メールアドレス表示-->
                     <div id="user_mail_heading">メールアドレス</div>
-                    <div id="user_mail_item">{{email}}</div>
+                    <div id="user_mail_item">{{user_info.email}}</div>
                     <!--メールアドレス変更ボタン-->
                     <div id="change_user_mail_btn">
                         <button type="button">変更</button>
                     </div>
                     <!--パスワード表示-->
                     <div id="user_passwd_heading">パスワード</div>
-                    <div id="user_passwd_item">{{passwd}}</div>
+                    <div id="user_passwd_item">{{user_info.passwd}}</div>
                     <!--パスワード変更ボタン-->
                     <div id="change_user_passwd_btn">
                         <button type="button">変更</button>
