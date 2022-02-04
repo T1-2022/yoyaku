@@ -1,6 +1,1 @@
-# ここに必要なライブラリを記述しておけば一括でインストールできるから便利
-flask
-Flask-SQLAlchemy
-Flask-Migrate
-pysqlite3
-Flask-Session
+# ここに�
