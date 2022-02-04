@@ -29,6 +29,6 @@ def main_tab(user_id):
         # 予約情報を全取得 <- 部分的に読み込むようにjsを書いた方がよいかも
         reserves = Reserve.query.all()
 
-        return render_template("main_tab.html", user=user_info, reserves=reserves)
+        return render_template("main_tab.html", user_info=user_info, reserves=reserves)
     else:
         return redirect(url_for('login.login'))
