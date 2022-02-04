@@ -7,7 +7,7 @@
     routing site to change user's informarion
 '''
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session, redirect, url_for
 
 # ブル-プリントをインスタンス化
 user_info_bp = Blueprint('user_info', __name__, url_prefix='/user_info')
@@ -26,3 +26,9 @@ def change_user_passwd():
 @user_info_bp.route('/change_mail', methods=['GET'])
 def change_user_mail():
     return render_template('change_user_info/change_user_mail.html')
+
+@user_info_bp.route('/logout', methods=["GET"])
+def logout():
+    session.pop('user', None)
+    session.pop('flag', None)
+    return redirect(url_for('login.login'))

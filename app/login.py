@@ -18,7 +18,6 @@ def login():
 
             if user != None and attempted_password == user.__dict__['passwd']:
                     session['user'] = user.__dict__['name']
-                    print(session['user'])
 
                     session['flag'] = True
 
@@ -36,12 +35,9 @@ def login():
     except Exception as e:
         return render_template('error.html')
 
-
 login_bp.secret_key = os.urandom(24)
 
 def login_required():
-    #flag = session.get("flag")
-    #if flag == False or flag == None:
     if "flag" in session and session["flag"]:
         return True
     else:
