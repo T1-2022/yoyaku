@@ -1,6 +1,6 @@
 import os
 
-from flask import render_template, request, redirect, url_for, Blueprint, Flask
+from flask import render_template, request, redirect, url_for, Blueprint, Flask, session
 
 from models.User import User
 from models.database import db
@@ -12,22 +12,26 @@ def login():
     try:
         if request.method == "POST":
 
-            attempted_username = request.form['username']
+            attempted_email = request.form['email']
             attempted_password = request.form['password']
-            user = db.session.query(User).filter_by(name=attempted_username).first()
+            user = db.session.query(User).filter_by(email=attempted_email).first()
 
             if user != None and attempted_password == user.__dict__['passwd']:
+                    session['user'] = user.__dict__['name']
+                    print(session['user'])
+
+                    session['flag'] = True
+
                     if user.__dict__['admin'] == 1:
                         return render_template('admin.html')
 
-                    return redirect(url_for('main_tab.main_tab', user_id=attempted_username))
+                    return redirect(url_for('main_tab.main_tab', user_id=session['user']))
 
             else:
                 print('invalid credentials')
+                session['flag'] = False
 
         return render_template('index.html')
-
-
 
     except Exception as e:
         return render_template('error.html')
@@ -35,3 +39,10 @@ def login():
 
 login_bp.secret_key = os.urandom(24)
 
+def login_required():
+    #flag = session.get("flag")
+    #if flag == False or flag == None:
+    if "flag" in session and session["flag"]:
+        return True
+    else:
+        return False
