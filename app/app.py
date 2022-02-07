@@ -6,6 +6,7 @@ from flask import redirect
 from models import database
 from login import login_bp
 from main_tab import main_bp
+from user_info import user_info_bp
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ database.init_db(app)
 # ブループリント定義
 app.register_blueprint(main_bp)
 app.register_blueprint(login_bp)
+app.register_blueprint(user_info_bp)
 
 app.secret_key = 'user'
 app.permanent_session_lifetime = timedelta(minutes=5)

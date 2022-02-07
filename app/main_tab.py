@@ -4,6 +4,7 @@ from flask import request
 from flask import redirect
 from flask import url_for
 from flask import Blueprint
+from flask import session
 from models.database import db
 from models.User import User
 from models.Reserve import Reserve
@@ -13,21 +14,21 @@ from login import login_required
 # ブループリント設定
 main_bp = Blueprint('main_tab', __name__, url_prefix='/main')
 
-
 # メイン画面
-@main_bp.route("/<user_id>", methods=["GET", "POST"])
-def main_tab(user_id):
+@main_bp.route("/", methods=["GET"])
+def main_tab():
     if login_required():
-    # user_idからユーザー名を取得予定
-        name=user_id
+        # データベースからユーザー情報を取得
+        user = db.session.query(User).filter_by(email=session['user']).first()
+        # ユーザー情報を格納
+        user_info = {}
+        user_info['name'] = user.name # ユーザーネームを格納
+        user_info['email'] = user.email # メールアドレスを格納
+        user_info['passwd'] = user.passwd # パスワードを格納
+
+        # 予約情報を全取得 <- 部分的に読み込むようにjsを書いた方がよいかも
         reserves = Reserve.query.all()
-        return render_template("main_tab.html", name=name, reserves=reserves)
+
+        return render_template("main_tab.html", user_info=user_info, reserves=reserves)
     else:
         return redirect(url_for('login.login'))
-
-#ログアウト
-#@main_view.route('/')
-#@login_required
-#def logout():
-#    logout_user()
-#    return redirect(url_for('.index'))
