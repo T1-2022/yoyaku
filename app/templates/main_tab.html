@@ -1,30 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<<<<<<< HEAD
-	<title>メイン画面</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link href='../static/css/main_tab.css' rel='stylesheet' />
-<!--===============================================================================================-->
-    <link href='../static/css/calender.css' rel='stylesheet' />
-<!--===============================================================================================-->
-    <link href='../static/css/user_info.css' rel='stylesheet' />
-<!--===============================================================================================-->
-=======
     <title>メイン画面</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='../static/css/main_tab.css' rel='stylesheet' />
     <link href='../static/css/calendar_week.css' rel='stylesheet' />
-
-    <script type='text/javascript'>
-        var dbReserve = {{reserves}};
-    </script>
-    <script type='text/javascript' src='../static/js/calendar_week.js'></script>
     <script src='../static/js/calendar_week.js'></script>
->>>>>>> 4e583caa7a96dbeb6a107cc79d27751c5394aba7
 </head>
 <body>
     <h1>
@@ -54,40 +36,21 @@
             <div class="content">
                 <p>　</p>
                 <div class="calendars">
-                    <input id="month" type="radio" name="calendar_item" checked>
-                    <label class="calendar_item" for="month">月</label>
-                    <input id="week" type="radio" name="calendar_item">
-                    <label class="calendar_item" for="week">週</label>
+                    <input id="week" type="radio" name="calendar_item" checked>
+                    <label class="calendar_item" for="week">週表示</label>
+                    <input id="day" type="radio" name="calendar_item">
+                    <label class="calendar_item" for="day">日表示</label>
                     <input id="simple" type="radio" name="calendar_item">
-                    <label class="calendar_item" for="simple">簡易</label>
+                    <label class="calendar_item" for="simple">簡易表示</label>
 
-                    <div class="calendar_type" id="month_type">
-                        <div class="calendar">
-                            <div class="wrapper">
-                                <!-- xxxx年xx月を表示 -->
-                                <h1 id="header"></h1>
-
-                                <!-- ボタンクリックで月移動 -->
-                                <div id="next-prev-button">
-                                    <button id="next" onclick="next()">次の週→</button>
-                                    <button id="current" onclick="current()">今日</button>
-                                    <button id="prev" onclick="prev()">←前の週</button>
-                                </div>
-
-                                <!-- カレンダー -->
-                                <div id="calendar"></div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="calendar_type" id="week_type">
-                        <div class="calendar">
-                            <p>aaa</p>
-                        </div>
+                        <iframe src="week" width="100%" height="100%"></iframe>
+                    </div>
+                    <div class="calendar_type" id="day_type">
+                        <iframe src="day" width="100%" height="100%"></iframe>
                     </div>
                     <div class="calendar_type" id="simple_type">
-                        <div class="calendar">
-                            <p>aaa</p>
-                        </div>
+                        <iframe src="simple" width="100%" height="100%"></iframe>
                     </div>
                 </div>
             </div>
@@ -119,7 +82,6 @@
         <!--このタブでユーザー情報を表示する-->
         <div class="tab_content" id="user_content">
             <div class="tab_content_description">
-<<<<<<< HEAD
                 <!--ユーザー情報が表示される部分-->
                 <div id='user_information'>
                     <!--ユーザー名表示-->
@@ -147,10 +109,6 @@
                     <div id="logout_btn">
                         <button type="button">ログアウト</button>
                     </div>
-=======
-                <div class="c-txtsp">
-                    <p>ユーザーの内容がここに入ります</p>
->>>>>>> 4e583caa7a96dbeb6a107cc79d27751c5394aba7
                 </div>
             </div>
         </div>

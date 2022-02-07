@@ -10,8 +10,9 @@ var rateOther = 100; // 先月、翌月の日に乗算
 let yoyaku = [
     // id, user_id, conf_id, date, time, user_name, user_email, purpose, remarks
     [0, 0, 0, "2020/2/10", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"],
+    [0, 0, 0, "2020/2/10", "14:00-16:00", "○○先生", "test@email.com", "利用目的", "備考"],
     [0, 0, 1, "2020/2/11", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"],
-    [0, 0, 2, "2020/2/11", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"],
+    [0, 0, 2, "2020/2/9", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"],
     [0, 0, 3, "2020/2/11", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"],
     [0, 0, 4, "2020/2/11", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"]
 ];
@@ -57,10 +58,7 @@ function showProcess(date) {
     var calendar = createProcess(year, month);
     
     document.querySelector('#calendar').innerHTML = calendar;
-    document.querySelector('#header').innerHTML = year + "年 " + (month + 1) + "月";
-
-    //var date = yoyaku[0][3].split("/");
-    //document.querySelector('#header').innerHTML = year + "年 " + (month + 1) + "月" + Number(date[1]) + "/" + yoyaku[0][2];
+    document.querySelector('#date').innerHTML = year + "年 " + (month + 1) + "月";
 }
 
 // カレンダー作成
@@ -123,8 +121,7 @@ function createProcess(year, month) {
                 if (i == yoyaku[k][2]
                     && currentMonth == Number(date[1])
                     && currentDate == Number(date[2])) {
-                    var text = "<p>" + yoyaku[k][4] + "</p>";
-                    text += "<p>" + yoyaku[k][5] + "</p>";
+                    var text = yoyaku[k][4] + "<br>" + yoyaku[k][5];
 
                     //var detail = "　予約者名　：";// + yoyaku[k][0] + "\n";
                     //detail += "　予約時間　：" + yoyaku[k][4] + "\n";
