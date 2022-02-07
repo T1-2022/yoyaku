@@ -5,7 +5,6 @@ h1 {
     font-size: 30px;
     color:#565656;
 }
-
 h2 {
     font-size: 20px;
     color:#565656;
@@ -28,8 +27,8 @@ h2 {
     bottom: 50px;
 }
 
-  /*タブのスタイル*/
-  .tab_item {
+/*タブのスタイル*/
+.tab_item {
     width: calc(100%/6);
     height: 50px;
     border-bottom: 3px solid #5ab4bd;
@@ -43,12 +42,12 @@ h2 {
     text-align: center;
     font-weight: bold; /*文字の太さ：一般的な太字の太さ*/
     transition: all 0.2s ease; /*カーソルで色を変化させる*/
-  }
-  .tab_item:hover {
+}
+.tab_item:hover {
     opacity: 0.75; /*不透明度*/
-  }
+}
 
-  .logout_btn {
+.logout_btn {
     width: 233px;
     height: 50px;
     border-bottom: 3px solid #5ab4bd;
@@ -65,40 +64,103 @@ h2 {
     position: relative;
     bottom: 53px;
     left: 1167px;
-  }
+}
 
-  /*ラジオボタンを全て消す*/
-  input[name="tab_item"] {
+/*ラジオボタンを全て消す*/
+input[name="tab_item"] {
     display: none;
-  }
+}
 
-  /*タブ切り替えの中身のスタイル*/
-  .tab_content {
+/*タブ切り替えの中身のスタイル*/
+.tab_content {
     display: none;
     padding: 40px 40px 0;
     clear: both;
     overflow: hidden;
-    height: 640px;
-  }
-
-  .c-txtsp {
+    height: 1000px;
+}
+.content {
     position: relative;
     bottom: 50px;
-  }
+}
 
-  /*選択されたタブのコンテンツを表示する*/
-  #reserve_info:checked ~ #reserve_info_content,
-  #reserve:checked ~ #reserve_content,
-  #room_info:checked ~ #room_content,
-  #help:checked ~ #help_content,
-  #user_info:checked ~ #user_content,
-  #logout:checked ~ #logout_content {
+/*選択されたタブのコンテンツを表示する*/
+#reserve_info:checked ~ #reserve_info_content,
+#reserve:checked ~ #reserve_content,
+#room_info:checked ~ #room_content,
+#help:checked ~ #help_content,
+#user_info:checked ~ #user_content,
+#logout:checked ~ #logout_content {
     display: block;
-  }
+}
 
-  /*選択されているタブのスタイルを変える*/
-  .tabs input:checked + .tab_item {
+/*選択されているタブのスタイルを変える*/
+.tabs input:checked + .tab_item {
     background-color: #5ab4bd;
     color: #fff;
-  }
+}
 
+/*------------------------------------------------------------------
+[ カレンダータブ ]*/
+/*タブ切り替え全体のスタイル*/
+.calendars {
+    margin-top: 50px;
+    padding-bottom: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    bottom: 50px;
+}
+
+/*タブのスタイル*/
+.calendar_item {
+    width: calc(100%/3);
+    height: 50px;
+    border-bottom: 3px solid #5ab4bd;
+    background-color: #d9d9d9;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    color: #565656;
+    display: block;
+    float: left;
+    text-align: center;
+    font-weight: bold; /*文字の太さ：一般的な太字の太さ*/
+    transition: all 0.2s ease; /*カーソルで色を変化させる*/
+}
+.calendar_item:hover {
+    opacity: 0.75; /*不透明度*/
+}
+
+/*ラジオボタンを全て消す*/
+input[name="calendar_item"] {
+    display: none;
+}
+
+/*タブ切り替えの中身のスタイル*/
+.calendar_type {
+    display: none;
+    padding: 40px 40px 0;
+    clear: both;
+    overflow: hidden;
+    height: 800px;
+}
+.calendar {
+    position: relative;
+    bottom: 50px;
+}
+
+/*選択されたタブのコンテンツを表示する*/
+#month:checked ~ #month_type,
+#week:checked ~ #week_type,
+#simple:checked ~ #simple_type {
+    display: block;
+}
+
+/*選択されているタブのスタイルを変える*/
+.calendars input:checked + .calendar_item {
+    background-color: #5ab4bd;
+    color: #fff;
+}
