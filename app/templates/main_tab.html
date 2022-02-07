@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-	<title>メイン画面</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link href='../static/css/main_tab.css' rel='stylesheet' />
-<!--===============================================================================================-->
-    <link href='../static/css/calender.css' rel='stylesheet' />
-    <!--===============================================================================================-->
+    <title>メイン画面</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='../static/css/main_tab.css' rel='stylesheet' />
+    <link href='../static/css/calendar_week.css' rel='stylesheet' />
+
+    <script type='text/javascript'>
+        var dbReserve = {{reserves}};
+    </script>
+    <script type='text/javascript' src='../static/js/calendar_week.js'></script>
+    <script src='../static/js/calendar_week.js'></script>
 </head>
 <body>
-
     <h1>
         会議室予約システム
     </h1>
     <h2>
         『{{name}}』としてログイン中
     </h2>
-
 
     <div class="tabs">
         <input id="reserve_info" type="radio" name="tab_item" checked>
@@ -34,51 +35,90 @@
         <input id="logout" type="radio" name="tab_item">
         <label class="tab_item" for="logout">ログアウト</label>
         <a href="" class="logout_btn">ログアウト</a>
+
         <!--このタブでカレンダーを表示-->
         <div class="tab_content" id="reserve_info_content">
-            <div class="tab_content_description">
-                <div class="c-txtsp">
-                    <div id='calendar'></div>
+            <div class="content">
+                <p>　</p>
+                <div class="calendars">
+                    <input id="month" type="radio" name="calendar_item" checked>
+                    <label class="calendar_item" for="month">月</label>
+                    <input id="week" type="radio" name="calendar_item">
+                    <label class="calendar_item" for="week">週</label>
+                    <input id="simple" type="radio" name="calendar_item">
+                    <label class="calendar_item" for="simple">簡易</label>
+
+                    <div class="calendar_type" id="month_type">
+                        <div class="calendar">
+                            <div class="wrapper">
+                                <!-- xxxx年xx月を表示 -->
+                                <h1 id="header"></h1>
+
+                                <!-- ボタンクリックで月移動 -->
+                                <div id="next-prev-button">
+                                    <button id="next" onclick="next()">次の週→</button>
+                                    <button id="current" onclick="current()">今日</button>
+                                    <button id="prev" onclick="prev()">←前の週</button>
+                                </div>
+
+                                <!-- カレンダー -->
+                                <div id="calendar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calendar_type" id="week_type">
+                        <div class="calendar">
+                            <p>aaa</p>
+                        </div>
+                    </div>
+                    <div class="calendar_type" id="simple_type">
+                        <div class="calendar">
+                            <p>aaa</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <!--タブその2-->
         <div class="tab_content" id="reserve_content">
             <div class="tab_content_description">
-                <p class="c-txtsp">予約するの内容がここに入ります</p>
+                <div class="c-txtsp">
+                    <p>予約するの内容がここに入ります</p>
+                </div>
             </div>
         </div>
         <!--タブその3-->
         <div class="tab_content" id="room_content">
             <div class="tab_content_description">
-                <p class="c-txtsp">会議室の内容がここに入ります</p>
+                <div class="c-txtsp">
+                    <p>会議室の内容がここに入ります</p>
+                </div>
             </div>
         </div>
         <!--タブその4-->
         <div class="tab_content" id="help_content">
             <div class="tab_content_description">
-                <p class="c-txtsp">オンラインの内容がここに入ります</p>
+                <div class="c-txtsp">
+                    <p>オンラインの内容がここに入ります</p>
+                </div>
             </div>
         </div>
         <!--タブその5-->
         <div class="tab_content" id="user_content">
             <div class="tab_content_description">
-                <p class="c-txtsp">ユーザーの内容がここに入ります</p>
+                <div class="c-txtsp">
+                    <p>ユーザーの内容がここに入ります</p>
+                </div>
             </div>
         </div>
         <!--タブその6-->
         <div class="tab_content" id="logout_content">
             <div class="tab_content_description">
-                <p class="c-txtsp">ログアウトの内容がここに入ります</p>
+                <p class="c-txtsp">
+                    ログアウトの内容がここに入ります
+                </p>
             </div>
         </div>
     </div>
-
-<!--===============================================================================================-->
-<script src='../static/js/calendar_main.js'></script>
-    <script src='../static/js/calender_option.js'></script>
-<!--===============================================================================================-->
-
-
 </body>
 </html>
