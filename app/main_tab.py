@@ -15,8 +15,8 @@ from login import login_required
 main_bp = Blueprint('main_tab', __name__, url_prefix='/main')
 
 # メイン画面
-@main_bp.route("/<user_id>", methods=["GET", "POST"])
-def main_tab(user_id):
+@main_bp.route("/", methods=["GET"])
+def main_tab():
     if login_required():
         # データベースからユーザー情報を取得
         user = db.session.query(User).filter_by(email=session['user']).first()

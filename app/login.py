@@ -24,7 +24,7 @@ def login():
                     if user.__dict__['admin'] == 1:
                         return render_template('admin.html')
 
-                    return redirect(url_for('main_tab.main_tab', user_id=session['user']))
+                    return redirect(url_for('main_tab.main_tab'))
 
             else:
                 print('invalid credentials')
