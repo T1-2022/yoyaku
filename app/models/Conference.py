@@ -7,7 +7,6 @@ created by Shinoda Hiroki.
   * id            : int       , nullable=False, primary_key, autoincrement
   * name          : string(20), nullable=False, unique
   * capacity      : int       
-  * equipment     : string(30)
   * fhoto_id      : int
   * remarks       : String(100)
 
@@ -17,23 +16,26 @@ created by Shinoda Hiroki.
 from models.database import db
 
 class Conference(db.Model):
-    # テーブルの名前を設定
-    __tablename__ = 'conferences'
-    
-    # テーブルのカラムを設定
-    id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(20), nullable=False, unique=True)
-    capacity = db.Column(db.Integer)
-    equipment = db.Column(db.String(30))
-    fhoto_id = db.Column(db.Integer, unique=True)
-    remarks = db.Column(db.String(100))
+  # テーブルの名前を設定
+  __tablename__ = 'conferences'
 
-    # 予約テーブルとのリレーションを作成
-    reserve = db.relationship("Reserve", uselist=True, backref='conferences',cascade='all, delete-orphan')
+  # テーブルのカラムを設定
+  conference_id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True) # 主キー
+  name = db.Column(db.String(20), nullable=False, unique=True)
+  capacity = db.Column(db.Integer)
+  fhoto_id = db.Column(db.Integer, unique=True)
+  remarks = db.Column(db.String(100))
 
-    def __init__(self, name, capacity, equipment, fhoto_id, remarks):
-        self.name = name
-        self.capacity = capacity
-        self.equipment = equipment
-        self.fhoto_id = fhoto_id
-        self.remarks = remarks
+  equipments = db.relationship("Equipment", 
+                                secondary='conference_equipments',
+                                uselist=True,
+                                back_populates='conferences',
+                                order_by='Equipment.equipment_id',
+                                cascade='all, delete')
+  reserves = db.relationship("Reserve", uselist=True, back_populates='conferences', cascade='all, delete-orphan')
+
+  def __init__(self, name, capacity, fhoto_id, remarks):
+      self.name = name
+      self.capacity = capacity
+      self.fhoto_id = fhoto_id
+      self.remarks = remarks
