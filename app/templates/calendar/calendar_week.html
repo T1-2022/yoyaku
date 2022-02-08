@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link href='../static/css/calendar_week.css' rel='stylesheet' />
+    <script src='../static/js/calendar_week.js'></script>
+</head>
+<body>
+    <div class="wrapper">
+
+        <!-- ヘッダー -->
+        <div id="header">
+            <label id="date"></label>
+            <button id="next" onclick="next()">次の週→</button>
+            <button id="current" onclick="current()">今日</button>
+            <button id="prev" onclick="prev()">←前の週</button>
+        </div>
+
+        <!-- カレンダー -->
+        <div id="calendar"></div>
+
+    </div>
+</body>
+</html>

@@ -32,3 +32,18 @@ def main_tab():
         return render_template("main_tab.html", user_info=user_info, reserves=reserves)
     else:
         return redirect(url_for('login.login'))
+
+# 週表示カレンダー
+@main_bp.route("/week")
+def calendar_week():
+    return render_template('calendar/calendar_week.html')
+
+# 日表示カレンダー
+@main_bp.route("/day")
+def calendar_day():
+    return render_template('calendar/calendar_day.html')
+
+# 簡易表示カレンダー
+@main_bp.route("/simple")
+def calendar_simple():
+    return render_template('calendar/calendar_simple.html')
