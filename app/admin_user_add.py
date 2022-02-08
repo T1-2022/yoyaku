@@ -22,9 +22,8 @@ def admin_user_add():
                 attempted_admin = True
 
             user_email = db.session.query(User).filter_by(email=attempted_email).first()
-            user_name = db.session.query(User).filter_by(name=attempted_name).first()
 
-            if user_email == None and user_name == None:
+            if user_email == None:
                 user = User(name=attempted_name, email=attempted_email, passwd=attempted_password, admin=attempted_admin)
                 db.session.add(user)
                 db.session.commit()

@@ -17,7 +17,7 @@
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\a8626\PycharmProjects\yoyaku\app\test.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\onher\PycharmProjects\yoyaku\app\test.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>
