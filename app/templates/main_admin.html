@@ -1,0 +1,78 @@
+{% extends "template.html" %}
+{% block content %}
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+                <span class="login100-form-title p-b-26">
+						管理
+                </span>
+
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">氏名</th>
+                            <th scope="col">メール</th>
+                            <th scope="col">パスワード</th>
+                            <th scope="col">管理者権限</th>
+                            <th scope="col">削除</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <th>{{ user.__dict__['id'] }}</th>
+                            <td>{{ user.__dict__['name'] }}</td>
+                            <td>{{ user.__dict__['email'] }}</td>
+                            <td>{{ user.__dict__['passwd'] }}</td>
+                            <td>{{ user.__dict__['admin'] }}</td>
+                            <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#myModal{{ user.__dict__['id'] }}">削除</button>
+                                <div class="modal fade" id="myModal{{ user.__dict__['id'] }}" tabindex="-1" aria-labelledby="delete-user-label" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered" id="{{ user.__dict__['id'] }}">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="delete-user-label">削除確認</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                            <div class="modal-body">
+                                                氏名:　{{ user.__dict__['name'] }}<br>
+                                                メール:　{{ user.__dict__['email'] }}<br>
+                                                を削除しますか？
+                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                                                <a type="button" class="btn btn-secondary" href="{{ url_for('user_delete.user_delete',user_name=user.__dict__['name']) }}">削除</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                        </tr>
+                        {% endfor %}
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                            <a type="button" class="login100-form-btn" href="{{ url_for(('admin_user_add.admin_user_add')) }}">
+								ユーザー登録
+							</a>
+                        </div>
+                </div>
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                            <a type="button" class="login100-form-btn" href="/">
+								ログアウト
+							</a>
+                        </div>
+	</div>
+    </div>
+        </div>
+    </div>
+{% endblock %}

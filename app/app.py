@@ -3,6 +3,11 @@ from datetime import timedelta
 from flask import Flask
 from flask import render_template,session
 from flask import redirect
+
+from admin_user_add import user_add_bp
+from admin_main import admin_main_bp
+from user_delete import user_delete_bp
+from models.User import User
 from models import database
 from login import login_bp
 from main_tab import main_bp
@@ -19,6 +24,9 @@ database.init_db(app)
 # ブループリント定義
 app.register_blueprint(main_bp)
 app.register_blueprint(login_bp)
+app.register_blueprint(user_add_bp)
+app.register_blueprint(admin_main_bp)
+app.register_blueprint(user_delete_bp)
 app.register_blueprint(user_info_bp)
 
 app.secret_key = 'user'
