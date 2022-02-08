@@ -43,7 +43,7 @@
                                                 </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                                                <a type="button" class="btn btn-secondary" href="{{ url_for('user_delete.user_delete',user_name=user.__dict__['name']) }}">削除</a>
+                                                <a type="button" class="btn btn-secondary" href="{{ url_for('user_delete.user_delete',user_email=user.__dict__['email']) }}">削除</a>
                                                 </div>
                                             </div>
                                         </div>

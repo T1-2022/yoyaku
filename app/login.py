@@ -22,7 +22,7 @@ def login():
                     session['user'] = user.__dict__['email']
 
                     session['flag'] = True
-
+                    session['login'] = True
                     if user.__dict__['admin'] == 1:
                         return redirect(url_for('admin_main.admin_main'))
 
