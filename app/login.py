@@ -17,23 +17,30 @@ def login():
             user = db.session.query(User).filter_by(email=attempted_email).first()
 
             if user != None and attempted_password == user.__dict__['passwd']:
+
                     session['user'] = user.__dict__['name']
+                    session['user'] = user.__dict__['email']
+
+                    session['flag'] = True
 
                     if user.__dict__['admin'] == 1:
                         return redirect(url_for('admin_main.admin_main'))
 
-                    return redirect(url_for('main_tab.main_tab', user_id=session['user']))
+                    return redirect(url_for('main_tab.main_tab'))
 
             else:
                 print('invalid credentials')
+                session['flag'] = False
 
         return render_template('index.html')
-
-
 
     except Exception as e:
         return render_template('error.html')
 
-
 login_bp.secret_key = os.urandom(24)
 
+def login_required():
+    if "flag" in session and session["flag"]:
+        return True
+    else:
+        return False

@@ -8,10 +8,10 @@ created by Shinoda Hiroki.
 
 # 開発環境でのセッティング（本番環境は別に作成する必要あり）
 class DevelopmentConfig(object):
-    # Flask
-    DEBUG = True
+  # Flask
+  DEBUG = True
 
-    # SQLAlchemy
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_ECHO = True
+  # SQLAlchemy
+  SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+  SQLALCHEMY_TRACK_MODIFICATIONS = False
+  SQLALCHEMY_ECHO = True

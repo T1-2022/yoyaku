@@ -11,6 +11,7 @@ from models.User import User
 from models import database
 from login import login_bp
 from main_tab import main_bp
+from user_info import user_info_bp
 
 app = Flask(__name__)
 
@@ -26,6 +27,8 @@ app.register_blueprint(login_bp)
 app.register_blueprint(user_add_bp)
 app.register_blueprint(admin_main_bp)
 app.register_blueprint(user_delete_bp)
+app.register_blueprint(user_info_bp)
+
 app.secret_key = 'user'
 app.permanent_session_lifetime = timedelta(minutes=5)
 
