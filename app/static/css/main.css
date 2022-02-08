@@ -1,27 +1,25 @@
 
 
-
-
 /*[ FONT ]*/
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+  src: url('../fonts/poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+  src: url('../fonts/poppins/Poppins-Medium.ttf');
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+  src: url('../fonts/poppins/Poppins-Bold.ttf');
 }
 
 @font-face {
   font-family: Poppins-SemiBold;
-  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+  src: url('../fonts/poppins/Poppins-SemiBold.ttf');
 }
 
 
@@ -30,8 +28,8 @@
 /*[ RESTYLE TAG ]*/
 
 * {
-	margin: 0px; 
-	padding: 0px; 
+	margin: 0px;
+	padding: 0px;
 	box-sizing: border-box;
 }
 
@@ -143,7 +141,7 @@ iframe {
 }
 
 .container-login100 {
-  width: 100%;  
+  width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -154,11 +152,11 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #f2f2f2;  
+  background: #f2f2f2;
 }
 
 .wrap-login100 {
-  width: 390px;
+  width: 800px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -170,7 +168,6 @@ iframe {
   -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
   -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
 }
-
 
 /*[ Form ]*/
 
@@ -212,7 +209,7 @@ iframe {
   padding: 0 5px;
 }
 
-/*---------------------------------------------*/ 
+/*---------------------------------------------*/
 .focus-input100 {
   position: absolute;
   display: block;
@@ -238,10 +235,10 @@ iframe {
   transition: all 0.4s;
 
   background: #cb3333;
-  background: -webkit-linear-gradient(left, #26547C, #bc1b21);
-  background: -o-linear-gradient(left, #26547C, #bc1b21);
-  background: -moz-linear-gradient(left, #26547C, #bc1b21);
-  background: linear-gradient(left, #26547C, #bc1b21);
+  background: -webkit-linear-gradient(left, #808080, #bc1b21);
+  background: -o-linear-gradient(left, #808080, #bc1b21);
+  background: -moz-linear-gradient(left, #808080, #bc1b21);
+  background: linear-gradient(left, #808080, #bc1b21);
 }
 
 .focus-input100::after {
@@ -281,6 +278,7 @@ iframe {
 }
 
 /*---------------------------------------------*/
+
 .btn-show-pass {
   font-size: 15px;
   color: #999999;
@@ -305,18 +303,18 @@ iframe {
 
 .btn-show-pass:hover {
   color: #cb3333;
-  color: -webkit-linear-gradient(left, #26547C, #bc1b21);
-  color: -o-linear-gradient(left, #26547C, #bc1b21);
-  color: -moz-linear-gradient(left, #26547C, #bc1b21);
-  color: linear-gradient(left, #26547C, #bc1b21);
+  color: -webkit-linear-gradient(left, #808080, #bc1b21);
+  color: -o-linear-gradient(left, #808080, #bc1b21);
+  color: -moz-linear-gradient(left, #808080, #bc1b21);
+  color: linear-gradient(left, #808080, #bc1b21);
 }
 
 .btn-show-pass.active {
   color: #cb3333;
-  color: -webkit-linear-gradient(left, #26547C, #bc1b21);
-  color: -o-linear-gradient(left, #26547C, #bc1b21);
-  color: -moz-linear-gradient(left, #26547C, #bc1b21);
-  color: linear-gradient(left, #26547C, #bc1b21);
+  color: -webkit-linear-gradient(left, #808080, #bc1b21);
+  color: -o-linear-gradient(left, #808080, #bc1b21);
+  color: -moz-linear-gradient(left, #808080, #bc1b21);
+  color: linear-gradient(left, #808080, #bc1b21);
 }
 
 
@@ -350,10 +348,10 @@ iframe {
   width: 300%;
   height: 100%;
   background: #1c1c1c;
-  background: -webkit-linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
-  background: -o-linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
-  background: -moz-linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
-  background: linear-gradient(right, #26547C, #bc1b21, #26547C, #bc1b21);
+  background: -webkit-linear-gradient(right, #a2a2a2, #bc1b21, #a2a2a2, #bc1b21);
+  background: -o-linear-gradient(right, #b3c1ff, #bc1b21, #a2a2a2, #bc1b21);
+  background: -moz-linear-gradient(right, #a2a2a2, #bc1b21, #a2a2a2, #bc1b21);
+  background: linear-gradient(right, #a2a2a2, #bc1b21, #a2a2a2, #bc1b21);
   top: 0;
   left: -100%;
 
@@ -386,10 +384,19 @@ iframe {
   left: 0;
 }
 
+/*[ Table ]*/
+.my-custom-scrollbar {
+position: relative;
+height: 200px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
 
 /*[ Responsive ]*/
 
-@media (max-width: 576px) {
+@media (max-width: 670px) {
   .wrap-login100 {
     padding: 77px 15px 33px 15px;
   }
