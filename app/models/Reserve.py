@@ -35,11 +35,12 @@ class Reserve(db.Model):
   purpose = db.Column(db.String(10), nullable=False)
   remarks = db.Column(db.String(100))
 
+  # 各テーブルへのリレーションを設定
   registers = db.relationship("Register", uselist=False, back_populates='reserves')
   conferences = db.relationship("Conference", uselist=False, back_populates='reserves')
   users = db.relationship("User", uselist=False, back_populates='reserves')
   
-  def __init__(self, register_id, conference_id, date, time, user_id, purpose, remarks):
+  def __init__(self, register_id, conference_id, date, time, purpose, remarks, user_id=None):
     self.register_id = register_id
     self.conference_id = conference_id
     self.date = date
