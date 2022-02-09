@@ -47,3 +47,17 @@ def calendar_day():
 @main_bp.route("/simple")
 def calendar_simple():
     return render_template('calendar/calendar_simple.html')
+
+# 簡易表示カレンダー
+@main_bp.route("/user_info")
+def user_info():
+    # データベースからユーザー情報を取得
+    user = db.session.query(User).filter_by(email=session['user']).first()
+    # ユーザー情報を格納
+    user_info = {}
+    user_info['name'] = user.name  # ユーザーネームを格納
+    user_info['email'] = user.email  # メールアドレスを格納
+    user_info['passwd'] = user.passwd  # パスワードを格納
+    # 予約情報を全取得 <- 部分的に読み込むようにjsを書いた方がよいかも
+    reserves = Reserve.query.all()
+    return render_template('user_info.html', user_info=user_info)
