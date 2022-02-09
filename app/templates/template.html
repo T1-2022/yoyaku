@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-	<title>予約システム</title>
+    {% block head %}
+    <title>{% block title %}{% endblock %} - 予約システム</title>
+    {% endblock %}
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->

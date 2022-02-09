@@ -1,4 +1,8 @@
 {% extends "template.html" %}
+{% block title %}ユーザー登録{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
 {% block content %}
 
 	<div class="limiter">
@@ -24,7 +28,7 @@
 						<span class="focus-input100" data-placeholder="パスワード"></span>
 					</div>
                     <div class="wrap-input100">
-						<input class="input100" type="checkbox" name="admin" checked="{{ request.form.admin }}">
+						<input class="input100" type="checkbox" name="admin" checked="{{ request.form.admin }}" >
 						<span class="focus-input100" data-placeholder="管理権限"></span>
 					</div>
 					<div class="container-login100-form-btn">

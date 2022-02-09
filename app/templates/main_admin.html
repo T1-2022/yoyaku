@@ -1,10 +1,15 @@
 {% extends "template.html" %}
+{% block title %}管理者{% endblock %}
+{% block head %}
+  {{ super() }}
+      	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_admin.css') }}">
+{% endblock %}
 {% block content %}
 
 	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-                <span class="login100-form-title p-b-26">
+		<div class="container-admin100">
+			<div class="wrap-admin100">
+                <span class="admin100-form-title p-b-26">
 						管理
                 </span>
 
@@ -56,18 +61,18 @@
                     </table>
 
                 </div>
-                <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                            <a type="button" class="login100-form-btn" href="{{ url_for(('admin_user_add.admin_user_add')) }}">
+                <div class="container-admin100-form-btn">
+                    <div class="wrap-admin100-form-btn">
+                        <div class="admin100-form-bgbtn"></div>
+                            <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_user_add.admin_user_add')) }}">
 								ユーザー登録
 							</a>
                         </div>
                 </div>
-                <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                            <a type="button" class="login100-form-btn" href="/">
+                <div class="container-admin100-form-btn">
+                    <div class="wrap-admin100-form-btn">
+                        <div class="admin100-form-bgbtn"></div>
+                            <a type="button" class="admin100-form-btn" href="/">
 								ログアウト
 							</a>
                         </div>
