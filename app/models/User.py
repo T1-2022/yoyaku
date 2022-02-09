@@ -1,17 +1,17 @@
 '''
 created at 2022/01/27.
+updated at 2022/02/09.
 created by Shinoda Hiroki.
 
 @ this file is ...
   * class named User is User table. 
   * table name : users
-  * id         : int       , nullable=False, primary_key, autoincrement
+  * user_id         : int       , nullable=False, primary_key, autoincrement
   * name       : string(20), nullable=False, unique
   * email      : string(50), nullable=False, unique
-  * passwd     : string(30), nullable=False 
-  * admin      : bool      , default='0'
 
-  * reserve is relation to "Reserve"
+  * reserves is relation to "Reserve"
+  * registers is relation to "Register"
 '''
 
 from models.database import db

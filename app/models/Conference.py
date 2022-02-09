@@ -1,5 +1,6 @@
 '''
 created at 2022/01/27.
+updated at 2022/02/09.
 created by Shinoda Hiroki.
 
 @ this file is ... 
@@ -10,7 +11,8 @@ created by Shinoda Hiroki.
   * fhoto_id      : int
   * remarks       : String(100)
 
-  * reserve is relation to "Reserve"
+  * reserves is relation to "Reserve"
+  * equipments is relation to "Equipment"
 '''
 
 from models.database import db
@@ -30,8 +32,7 @@ class Conference(db.Model):
                                 secondary='conference_equipments',
                                 uselist=True,
                                 back_populates='conferences',
-                                order_by='Equipment.equipment_id',
-                                cascade='all, delete')
+                                order_by='Equipment.equipment_id')
   reserves = db.relationship("Reserve", uselist=True, back_populates='conferences', cascade='all, delete-orphan')
 
   def __init__(self, name, capacity, fhoto_id, remarks):

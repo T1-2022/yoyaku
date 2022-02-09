@@ -1,20 +1,22 @@
 '''
 created at 2022/01/27.
+updated at 2022/02/09.
 created by Shinoda Hiroki.
 
 @ this file is ... 
   * table name    : reserves
   * reserve_id    : int       , nullable=False, primary_key, autoincrement
-  * register_id   : int       , nullable=False, foreignkey("registers.id")
-  * conference_id : int       , nullable=False, foreignkey("conferences.id")
+  * register_id   : int       , nullable=False, foreignkey("registers.register_id")
+  * conference_id : int       , nullable=False, foreignkey("conferences.conference_id")
   * date          : string(30), nullable=False 
   * time          : string(30), nullable=False
-  * user_id       : 
-  * purpose       : String(100)
+  * user_id       : int       , nullable=False, foreignkey("users.user_id")
+  * purpose       : String(10), nullable=False
   * remarks       : String(100)
 
-  * user is relation to "User"
-  * conference is relation to "Conference"
+  * registers is relation to "Register"
+  * users is relation to "User"
+  * conferences is relation to "Conference"
 '''
 
 from models.database import db
@@ -30,7 +32,7 @@ class Reserve(db.Model):
   date = db.Column(db.String(30), nullable=False)
   time = db.Column(db.String(30), nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey("users.user_id", onupdate='CASCADE', ondelete='CASCADE')) # 外部キー
-  purpose = db.Column(db.String(100))
+  purpose = db.Column(db.String(10), nullable=False)
   remarks = db.Column(db.String(100))
 
   registers = db.relationship("Register", uselist=False, back_populates='reserves')
