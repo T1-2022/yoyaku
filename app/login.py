@@ -2,6 +2,7 @@ import os
 
 from flask import render_template, request, redirect, url_for, Blueprint, Flask, session
 
+from models.Register import Register
 from models.User import User
 from models.database import db
 
@@ -14,17 +15,18 @@ def login():
 
             attempted_email = request.form['email']
             attempted_password = request.form['password']
+
+
             user = db.session.query(User).filter_by(email=attempted_email).first()
+            register = db.session.query(Register).filter_by(user_id=user.user_id).first()
 
-            if user != None and attempted_password == user.__dict__['passwd']:
-
-                    session['user'] = user.__dict__['name']
+            if user != None and attempted_password == register.__dict__['passwd']:
                     session['user'] = user.__dict__['email']
 
                     session['flag'] = True
-                    session['login'] = True
-                    if user.__dict__['admin'] == 1:
-                        return redirect(url_for('admin_main.admin_main'))
+
+                    if register.__dict__['admin'] == 1:
+                        return render_template('admin.html')
 
                     return redirect(url_for('main_tab.main_tab'))
 
