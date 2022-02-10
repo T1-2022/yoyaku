@@ -1,0 +1,8 @@
+
+.regular_menu {
+    opacity: 0;
+}
+
+#regular:checked ~ .regular_menu {
+    opacity: 1;
+}

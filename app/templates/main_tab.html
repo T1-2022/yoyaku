@@ -2,69 +2,67 @@
 {% block title %}メイン画面{% endblock %}
 {% block head %}
   {{ super() }}
-      	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_reserve.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_reserve.css') }}">
     <link href='../static/css/main_tab.css' rel='stylesheet' />
-    <link href='../static/css/calendar_week.css' rel='stylesheet' />
     <link href='../static/css/user_info.css' rel='stylesheet' />
 {% endblock %}
 {% block content %}
-	<div class="limiter">
-		<div class="container-reserve100">
-			<div class="wrap-reserve100">
-                  <div class="row align-items-start p-b">
-                      <div class="col reserve100-form-title p-b-20 text-left">
-                          会議室予約システム
-                          </div>
-                      <div class="col reserve100-form-title p-b-20 text-right">
-                          <small class="text-muted">『{{user_info.name}}』としてログイン中 </small>
-                      </div>
-                  </div>
-                <nav>
-                    <div class="nav nav-pills nav-fill p-b-10" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">予約情報</button>
-                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-reserve" type="button" role="tab" aria-controls="nav-reserve" aria-selected="false">予約する</button>
-                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-room" type="button" role="tab" aria-controls="nav-room" aria-selected="false">会議室詳細</button>
-                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-help" type="button" role="tab" aria-controls="nav-help" aria-selected="false">オンラインヘルプ</button>
-                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-user" type="button" role="tab" aria-controls="nav-user" aria-selected="false">ユーザー情報</button>
-                        <a class="nav-link" type="button" role="tab" aria-controls="nav-logout" aria-selected="false" href="/">ログアウト</a>
+<div class="limiter">
+	<div class="container-reserve100">
+		<div class="wrap-reserve100">
+            <div class="row align-items-start p-b">
+                <div class="col reserve100-form-title p-b-20 text-left">
+                    会議室予約システム
                     </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
-                        <nav>
-                            <div class="nav nav-tabs justify-content-end" id="nav-subtab" role="tablist">
-                                <button class="nav-link active" id="nav-week-tab" data-bs-toggle="tab" data-bs-target="#nav-week" type="button" role="tab" aria-controls="nav-week" aria-selected="true">週表示</button>
-                                <button class="nav-link" id="nav-day-tab" data-bs-toggle="tab" data-bs-target="#nav-day" type="button" role="tab" aria-controls="nav-day" aria-selected="false">日表示</button>
-                                <button class="nav-link" id="nav-simple-tab" data-bs-toggle="tab" data-bs-target="#nav-simple" type="button" role="tab" aria-controls="nav-simple" aria-selected="false">簡易表示</button>
-                            </div>
-                        </nav>
-                        <div class="tab-content " id="nav-subtabContent" >
-                            <div class="tab-pane fade show active" id="nav-week" role="tabpanel" aria-labelledby="nav-week-tab">
-                                <iframe scrolling="no" src="week" width="100%"></iframe>
-                            </div>
-                            <div class="tab-pane fade" id="nav-day" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <iframe scrolling="no" src="day" width="100%" ></iframe>
-                            </div>
-                            <div class="tab-pane fade" id="nav-simple" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                <iframe scrolling="no" src="simple" width="100%" ></iframe>
-                            </div>
+                <div class="col reserve100-form-title p-b-20 text-right">
+                    <small class="text-muted">『{{user_info.name}}』としてログイン中 </small>
+                </div>
+            </div>
+            <nav>
+                <div class="nav nav-pills nav-fill p-b-10" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">予約情報</button>
+                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-reserve" type="button" role="tab" aria-controls="nav-reserve" aria-selected="false">予約する</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-room" type="button" role="tab" aria-controls="nav-room" aria-selected="false">会議室詳細</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-help" type="button" role="tab" aria-controls="nav-help" aria-selected="false">オンラインヘルプ</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-user" type="button" role="tab" aria-controls="nav-user" aria-selected="false">ユーザー情報</button>
+                    <a class="nav-link" type="button" role="tab" aria-controls="nav-logout" aria-selected="false" href="/">ログアウト</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                    <nav>
+                        <div class="nav nav-tabs justify-content-end" id="nav-subtab" role="tablist">
+                            <button class="nav-link active" id="nav-week-tab" data-bs-toggle="tab" data-bs-target="#nav-week" type="button" role="tab" aria-controls="nav-week" aria-selected="true">週表示</button>
+                            <button class="nav-link" id="nav-day-tab" data-bs-toggle="tab" data-bs-target="#nav-day" type="button" role="tab" aria-controls="nav-day" aria-selected="false">日表示</button>
+                            <button class="nav-link" id="nav-simple-tab" data-bs-toggle="tab" data-bs-target="#nav-simple" type="button" role="tab" aria-controls="nav-simple" aria-selected="false">簡易表示</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content " id="nav-subtabContent" >
+                        <div class="tab-pane fade show active" id="nav-week" role="tabpanel" aria-labelledby="nav-week-tab">
+                            <iframe scrolling="no" src="week" width="100%"></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="nav-day" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <iframe scrolling="no" src="day" width="100%" ></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="nav-simple" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            <iframe scrolling="no" src="simple" width="100%" ></iframe>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-reserve" role="tabpanel" aria-labelledby="nav-reserve-tab">
-                        <p>予約するの内容がここに入ります</p>
-                    </div>
-                    <div class="tab-pane fade" id="nav-room" role="tabpanel" aria-labelledby="nav-room-tab">
-                        <p>会議室の内容がここに入ります</p>
-                    </div>
-                    <div class="tab-pane fade" id="nav-help" role="tabpanel" aria-labelledby="nav-help-tab">
-                        <p>オンラインの内容がここに入ります</p>
-                    </div>
-                    <div class="tab-pane fade" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
-                        <iframe scrolling="no" src="user_info" width="100%"></iframe>
                 </div>
+                <div class="tab-pane fade" id="nav-reserve" role="tabpanel" aria-labelledby="nav-reserve-tab">
+                    <iframe scrolling="no" src="reserve" width="100%"></iframe>
+                </div>
+                <div class="tab-pane fade" id="nav-room" role="tabpanel" aria-labelledby="nav-room-tab">
+                    <p>会議室の内容がここに入ります</p>
+                </div>
+                <div class="tab-pane fade" id="nav-help" role="tabpanel" aria-labelledby="nav-help-tab">
+                    <p>オンラインの内容がここに入ります</p>
+                </div>
+                <div class="tab-pane fade" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+                    <iframe scrolling="no" src="user_info" width="100%"></iframe>
                 </div>
             </div>
         </div>
     </div>
-        <script src='../static/js/calendar_week.js'></script>
+</div>
 {% endblock %}

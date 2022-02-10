@@ -48,7 +48,12 @@ def calendar_day():
 def calendar_simple():
     return render_template('calendar/calendar_simple.html')
 
-# 簡易表示カレンダー
+# 予約ページ
+@main_bp.route("/reserve")
+def reserve_page():
+    return render_template('reserve.html')
+
+# ユーザー情報
 @main_bp.route("/user_info")
 def user_info():
     # データベースからユーザー情報を取得
