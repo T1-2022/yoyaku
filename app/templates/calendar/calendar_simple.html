@@ -1,23 +1,44 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
+{% extends "template.html" %}
+{% block title %}管理者{% endblock %}
+{% block head %}
+  {{ super() }}
+      	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/calendar_simple.css') }}">
+{% endblock %}
+{% block content %}
 
-</head>
- 行を追加します<input type="button" value="行を追加" id="coladd" onclick="coladd()">
-    <table id="table" width="80%" border="1">
-    <tr>
-        <td>
-            日付
-        </td>
-        <td>
-            時間帯
-        </td>
-        <td>
-            会議室
-        </td>
-        <td>
-            利用者
-        </td>
-    </tr>
-    </table>
-<script src='../static/js/simple.js'></script>
+	<div class="limiter">
+		<div class="container-simple">
+			<div class="wrap-simple">
+                <span class="simple-form-title p-b-26">
+						簡易版
+                </span>
+
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">日付</th>
+                            <th scope="col">時間帯</th>
+                            <th scope="col">会議室</th>
+                            <th scope="col">利用者</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{% for user in users %}
+                        <tr>
+                            <th>日付データ</th>
+                            <td>時間帯データ</td>
+                            <td>会議室データ</td>
+                            <td>利用者データ</td>
+
+                        </tr>
+                        {% endfor %}-->
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>>
+    </div>
+{% endblock %}
