@@ -5,6 +5,7 @@ var numberWeek = 0; // 一ヶ月の週数
 var currentWeek = 1; // 当月の何週目か
 var todayWeek = 0;
 var rateOther = 100; // 先月、翌月の日に乗算
+var startDay = ""; //HTMLに送信する最初の日付
 
 // 仮予約データ
 let yoyaku = [
@@ -59,6 +60,7 @@ function showProcess(date) {
     
     document.querySelector('#calendar').innerHTML = calendar;
     document.querySelector('#date').innerHTML = year + "年 " + (month + 1) + "月";
+    document.querySelector('#start_day').innerHTML = startDay;
 }
 
 // カレンダー作成
@@ -69,32 +71,38 @@ function createProcess(year, month) {
     // 日付
     calendar += "<th>" + " " + "</th>";
     for (var i = 0; i < week.length; i++) {
-        // 今日
+        // 曜日
         if (today.getFullYear() == year
             && today.getMonth() == month
-            && today.getDate() == dataMonth[currentWeek - 1][i]) {
-            calendar += "<th class='today'>" + (month + 1) + "/" + dataMonth[currentWeek - 1][i];
-        }
-        else {
-            // 曜日
-            if (i == 0) calendar += "<th class='sunday'>";
-            else if (i == 6) calendar += "<th class='saturday'>";
-            else calendar += "<th>";
+            && today.getDate() == dataMonth[currentWeek - 1][i]) calendar += "<th class='today'>"
+        else if (i == 0) calendar += "<th class='sunday'>";
+        else if (i == 6) calendar += "<th class='saturday'>";
+        else calendar += "<th>";
 
-            // 先月
-            if (dataMonth[currentWeek - 1][i] >= rateOther * 10) {
-                calendar += ((month + 11) % 12 + 1) + "/" + dataMonth[currentWeek - 1][i] / rateOther;
-            }
-            // 翌月
-            else if (dataMonth[currentWeek - 1][i] >= rateOther) {
-                calendar += ((month + 1) % 12 + 1) + "/" + dataMonth[currentWeek - 1][i] / rateOther;
-            }
-            // 当月
-            else {
-                calendar += (month + 1) + "/" + dataMonth[currentWeek - 1][i];
-            }
+        // 先月
+        if (dataMonth[currentWeek - 1][i] >= rateOther * 10) {
+            if (month + 1 == 1) var Y = year - 1;
+            else Y = year;
+            var M = ((month + 11) % 12 + 1);
+            var D = dataMonth[currentWeek - 1][i] / rateOther;
         }
-        calendar += week[i] + "</th>";
+        // 翌月
+        else if (dataMonth[currentWeek - 1][i] >= rateOther) {
+            if (month + 1 == 12) var Y = year + 1;
+            else Y = year;
+            var M = ((month + 1) % 12 + 1);
+            var D = dataMonth[currentWeek - 1][i] / rateOther;
+        }
+        // 当月
+        else {
+            var Y = year
+            var M = (month + 1);
+            var D = dataMonth[currentWeek - 1][i];
+        }
+        calendar += M + "/" + D + week[i] + "</th>";
+
+        // HTMLに送る日付設定
+        if (i == 0) startDay = Y + "/" + M + "/" + D;
     }
     calendar += "</tr>";
 
