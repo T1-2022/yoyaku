@@ -16,17 +16,14 @@ def login():
             attempted_email = request.form['email']
             attempted_password = request.form['password']
 
+            register = db.session.query(Register).join(User).filter_by(email=attempted_email).first()
 
-            user = db.session.query(User).filter_by(email=attempted_email).first()
-            register = db.session.query(Register).filter_by(user_id=user.user_id).first()
-
-            if user != None and attempted_password == register.__dict__['passwd']:
-                    session['user'] = user.__dict__['email']
-
+            if register != None and attempted_password == register.__dict__['passwd']:
+                    session['user'] = register.users.__dict__['email']
                     session['flag'] = True
 
                     if register.__dict__['admin'] == 1:
-                        return render_template('admin.html')
+                        return redirect(url_for('admin_main.admin_main'))
 
                     return redirect(url_for('main_tab.main_tab'))
 
