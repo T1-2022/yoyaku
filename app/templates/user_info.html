@@ -1,0 +1,100 @@
+{% extends "template.html" %}
+{% block title %}ユーザー情報{% endblock %}
+{% block head %}
+  {{ super() }}
+      	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_reserve.css') }}">
+    <link href='../static/css/main_tab.css' rel='stylesheet' />
+    <link href='../static/css/calendar_week.css' rel='stylesheet' />
+{% endblock %}
+{% block content %}
+	<div class="limiter">
+		<div class="container-user100">
+        <div class="row row-cols-3 align-items-center vcenter-item">
+            <div class="col text-right  p-b-10"><label>名前</label></div>
+            <div class="col text-center  p-b-10">{{user_info.name}}</div>
+            <div class="col  p-b-10"><button class="btn btn-secondary" type="button"  data-bs-toggle="modal" data-bs-target="#changeNameModal">変更</button></div>
+            <div class="col text-right  p-b-10"><label>メールアドレス</label></div>
+            <div class="col text-center  p-b-10" >{{ user_info.email}}</div>
+            <div class="col  p-b-10"><button class="btn btn-secondary" type="button"  data-bs-toggle="modal" data-bs-target="#changeEmailModal">変更</button></div>
+            <div class="co text-right  p-b-10"><label>パスワード</label></div>
+            <div class="col text-center  p-b-10">
+                <div class="wrap-freeinput">
+                <i class="btn-show-pass zmdi zmdi-eye"></i>
+                <input class="text-center align-bottom bg-transparent" type="password" placeholder="新しいパスワード" aria-label="password" name="lbpassword" value="{{ user_info.passwd}}" disabled>
+                </div>
+                </div>
+            <div class="col  p-b-10"><button class="btn btn-secondary" type="button"  data-bs-toggle="modal" data-bs-target="#changePassModal">変更</button></div>
+        </div>
+
+            <div class="modal fade" id="changeNameModal" tabindex="-1" aria-labelledby="change-name-label" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" id="1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                   l         <h5 class="modal-title" id="change-name-label">氏名更新確認</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{user_info.name}}を　
+                            <div class="wrap-changeinput validate-input"  data-validate = "Introduce Name">
+                                <input class="input100" type="text" placeholder="新しい氏名" name="Name" value="{{ request.form.username }}">
+                            </div>
+                            に変更しますか？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                            <a type="button" class="btn btn-secondary" href="ChangeName">更新</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="changeEmailModal" tabindex="-1" aria-labelledby="change-email-label" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" id="1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="change-email-label">メール更新確認</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{user_info.email}}を　
+                            <div class="wrap-changeinput validate-input" data-validate = "Invalid Email">
+                                <input class="input100" type="text" placeholder="新しいメール" name="email" value="{{ request.form.email }}">
+                            </div>
+                            に変更しますか？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                            <a type="button" class="btn btn-secondary" href="ChangeEmail">更新</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="changePassModal" tabindex="-1" aria-labelledby="change-pass-label" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" id="1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="change-pass-label">パスワード確認</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            パスワードを　
+                            <div class="wrap-changeinput validate-input" data-validate="Enter password">
+                                <span class="btn-show-pass">
+                                    <i class="zmdi zmdi-eye"></i>
+                                </span>
+                                <input class="input100" type="password" placeholder="新しいパスワード" aria-label="password" name="password" value="{{ request.form.password }}">
+                            </div>
+                            に変更しますか？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                            <a type="button" class="btn btn-secondary" href="ChangePass">更新</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
