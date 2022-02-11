@@ -3,18 +3,17 @@
 {% block head %}
 {{ super() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_reserve.css') }}">
-    <link href='../static/css/main_tab.css' rel='stylesheet' />
-    <link href='../static/css/reserve.css' rel='stylesheet' />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_tab.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/reserve.css') }}">
 {% endblock %}
 
 {% block content %}
 <div class="limiter">
-    <div class="container">
+    <div class="container-user100">
         <!-- 会議室選択 -->
-        <p>　</p>
         <div class="row justify-content-start align-items-center">
-            <div class="col-1 text-center"><label>会議室</label></div>
-            <div class="col-auto">
+            <div class="col text-center"><label>会議室</label></div>
+            <div class="col">
                 <select class="form-select" id="conference">
                     <option selected>A-000</option>
                     <option value="1">A-001</option>
@@ -23,7 +22,6 @@
                 </select>
             </div>
         </div>
-
         <!-- 日付選択 -->
         <div class="row justify-content-start align-items-center">
             <div class="col-1 text-center">日付</div>
@@ -40,7 +38,6 @@
                 <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#changePassModal">カレンダー表示</button>
             </div>
         </div>
-
         <!-- 時間選択 -->
         <div class="row justify-content-start align-items-center">
             <div class="col-1 text-center">時間</div>
@@ -53,10 +50,7 @@
                 <select class="form-select" id="select_end_hour"></select>：
                 <select class="form-select" id="select_end_minute"></select>
             </div>
-
         </div>
-
-        <p>　</p>
         <div class="row">
             <div class="col-md-5">
                 <!-- 利用者名 -->
@@ -97,7 +91,6 @@
                 <label class="form-check-label" for="regular">定期予約する</label>
 
                 <!-- 定期予約メニュー -->
-                <p>　</p>
                 <div class="regular_menu">
                     <!-- 繰り返し -->
                     <div class="row justify-content-start align-items-center">
@@ -162,7 +155,6 @@
         </div>
 
         <!-- 登録ボタン -->
-        <p>　</p>
         <div class="row">
             <div class="col-auto mx-auto">
                 <button class="btn btn-secondary" type="button">予約登録</button>
@@ -170,6 +162,6 @@
         </div>
     </div>
 </div>
-<script src='../static/js/reserve.js'></script>
+    <script src="{{ url_for('static',filename='js/reserve.js') }}"></script>
 {% endblock %}
 
