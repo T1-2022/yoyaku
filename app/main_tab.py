@@ -36,7 +36,11 @@ def main_tab():
 # 週表示カレンダー
 @main_bp.route("/week")
 def calendar_week():
-    return render_template('calendar/calendar_week.html')
+    reserves = Reserve.query.all()
+    reserve_lists=[]
+    for reserve in reserves:
+        reserve_lists.append(reserve_list(reserve))
+    return render_template('calendar/calendar_week.html',reserves=reserve_lists)
 
 # 日表示カレンダー
 @main_bp.route("/day")
@@ -66,3 +70,12 @@ def user_info():
     # 予約情報を全取得 <- 部分的に読み込むようにjsを書いた方がよいかも
     reserves = Reserve.query.all()
     return render_template('user_info.html', user_info=user_info)
+
+# 予約情報リスト定義
+def reserve_list(reserve):
+    reserve_data = [reserve.__dict__['id'], reserve.__dict__['user_id'], reserve.__dict__['conference_id'],
+                         reserve.__dict__['date'], reserve.__dict__['time'], reserve.__dict__['user_name'],
+                         reserve.__dict__['user_email'], reserve.__dict__['purpose'],
+                         reserve.__dict__['remarks']]
+
+    return reserve_data

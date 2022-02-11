@@ -4,6 +4,9 @@
 {{ super() }}
 <link href='../static/css/calendar_week.css' rel='stylesheet' />
 <script src='../static/js/calendar_week.js'></script>
+<script type="text/javascript">
+    let yoyaku = {{ reserves | tojson }}
+</script>
 {% endblock %}
 
 {% block content %}
