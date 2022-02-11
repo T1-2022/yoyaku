@@ -26,29 +26,29 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for register in registers %}
+                        {% for user in users %}
                         <tr>
-                            <th>{{ register.users.__dict__['user_id'] }}</th>
-                            <td>{{ register.users.__dict__['name'] }}</td>
-                            <td>{{ register.users.__dict__['email'] }}</td>
-                            <td>{{ register.__dict__['passwd'] }}</td>
-                            <td>{{ register.__dict__['admin'] }}</td>
-                            <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#myModal{{ register.users.__dict__['user_id'] }}">削除</button>
-                                <div class="modal fade" id="myModal{{ register.users.__dict__['user_id'] }}" tabindex="-1" aria-labelledby="delete-user-label" aria-hidden="true">
-                                    <div class="modal-dialog modal-sm modal-dialog-centered" id="{{ register.users.__dict__['user_id'] }}">
+                            <th>{{ user.__dict__['id'] }}</th>
+                            <td>{{ user.__dict__['name'] }}</td>
+                            <td>{{ user.__dict__['email'] }}</td>
+                            <td>{{ user.__dict__['passwd'] }}</td>
+                            <td>{{ user.__dict__['admin'] }}</td>
+                            <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#myModal{{ user.__dict__['id'] }}">削除</button>
+                                <div class="modal fade" id="myModal{{ user.__dict__['id'] }}" tabindex="-1" aria-labelledby="delete-user-label" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered" id="{{ user.__dict__['id'] }}">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="delete-user-label">削除確認</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                             <div class="modal-body">
-                                                氏名:　{{ register.users.__dict__['name'] }}<br>
-                                                メール:　{{ register.users.__dict__['email'] }}<br>
+                                                氏名:　{{ user.__dict__['name'] }}<br>
+                                                メール:　{{ user.__dict__['email'] }}<br>
                                                 を削除しますか？
                                                 </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                                                <a type="button" class="btn btn-secondary" href="{{ url_for('user_delete.user_delete',user_email=register.users.__dict__['email']) }}">削除</a>
+                                                <a type="button" class="btn btn-secondary" href="{{ url_for('user_delete.user_delete',user_name=user.__dict__['name']) }}">削除</a>
                                                 </div>
                                             </div>
                                         </div>
