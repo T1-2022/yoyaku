@@ -2,6 +2,7 @@ import os
 
 from flask import render_template, request, redirect, url_for, Blueprint, Flask, session
 
+from models.Register import Register
 from models.User import User
 from models.database import db
 
@@ -21,16 +22,26 @@ def admin_user_add():
             else:
                 attempted_admin = True
 
-            user_email = db.session.query(User).filter_by(email=attempted_email).first()
+            user = db.session.query(User).filter_by(email=attempted_email).first()
+            register = None
 
-            if user_email == None:
-                user = User(name=attempted_name, email=attempted_email, passwd=attempted_password, admin=attempted_admin)
-                db.session.add(user)
+            if user != None:
+                register = db.session.query(Register).filter_by(user_id=user.user_id).first()
+                if register == None:
+                    add_register = Register(user_id=user.user_id, passwd=attempted_password, admin=attempted_admin)
+                    db.session.add(add_register)
+                    db.session.commit()
+                    return redirect(url_for('admin_main.admin_main'))
+
+            else:
+                add_register = Register(passwd=attempted_password, admin=attempted_admin)
+                add_register.users = User(name=attempted_name, email=attempted_email, )
+                db.session.add(add_register)
                 db.session.commit()
                 return redirect(url_for('admin_main.admin_main'))
 
-            else:
-                print('invalid credentials')
+
+
 
         return render_template('admin_user_add.html')
 

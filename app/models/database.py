@@ -24,4 +24,4 @@ def init_db(app):
     migrate = Migrate(app, db, render_as_batch=True)
 
 # 作成したテーブル（クラス）を読み込み
-from models import User,Conference,Reserve
+from models import User,Conference,Reserve,Register,Equipment,ConferenceEquipment
