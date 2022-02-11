@@ -1,74 +1,15 @@
-/*全体*/
-.wrapper {
-    width: 100%;
-    margin: 0 auto;
-    color: #666;
-}
-
-/*ヘッダー*/
-#header {
-    position: relative;
-}
-#header button {
-        cursor: pointer;
-        background: #B78D4A;
-        color: #fff;
-        border: 1px solid #B78D4A;
-        border-radius: 4px;
-        font-size: 1rem;
-        padding: 0.5rem 2rem;
-        margin: 1rem 0;
-    }
-#header button:hover {
-            background-color: #D4BB92;
-            border-color: #D4BB92;
-        }
-#prev {
-    float: right;
-}
-#current {
-    float: right;
-}
-#next {
-    float: right;
-}
-#date {
-    text-align: left;
-    font-size: 36px;
-    width: 100%;
-    margin: 1rem 0 0;
-}
 
 /*カレンダー*/
-#calendar {
-    text-align: center;
-    width: 100%;
-}
-table {
-    outline: 2px solid #ddd;
-    border-collapse: collapse;
-    width: 100%;
-}
-th {
-    color: #000;
-}
 th, td {
-    outline: 1px solid #ddd;
     text-align: center;
     width: 12.5%;
 }
 
 /*日*/
-th.today {
-    background-color: aqua;
-    color: white;
-}
 th.sunday {
-    background-color: white;
     color: red;
 }
 th.saturday {
-    background-color: white;
     color: blue;
 }
 

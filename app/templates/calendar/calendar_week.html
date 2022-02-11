@@ -1,25 +1,40 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <link href='../static/css/calendar_week.css' rel='stylesheet' />
-    <script src='../static/js/calendar_week.js'></script>
-</head>
-<body>
-    <div class="wrapper">
+{% extends "template.html" %}
+{% block title %}ユーザー情報{% endblock %}
+{% block head %}
+{{ super() }}
+<link href='../static/css/calendar_week.css' rel='stylesheet' />
+<script src='../static/js/calendar_week.js'></script>
+{% endblock %}
 
+{% block content %}
+<div class="limiter">
+    <div class="container">
         <!-- ヘッダー -->
-        <div id="header">
-            <label id="date"></label>
-            <label id="start_day"></label>
-            <button id="next" onclick="next()">次の週→</button>
-            <button id="current" onclick="current()">今日</button>
-            <button id="prev" onclick="prev()">←前の週</button>
+        <p>　</p>
+        <div class="row justify-content-between align-items-center vcenter-item">
+            <div class="col-md-4 text-left p-b-20 lead font-large"><label id="date"></label></div>
+
+            <div class="col-md-6 text-center">
+                <div class="row justify-content-end">
+                    <div class="col-auto p-b-20">
+                        <button class="btn btn-secondary" type="button" id="prev" onclick="prev()">←前の週</button>
+                    </div>
+                    <div class="col-auto p-b-20">
+                        <button class="btn btn-secondary" type="button" id="current" onclick="current()">今日</button>
+                    </div>
+                    <div class="col-auto p-b-20">
+                        <button class="btn btn-secondary" type="button" id="next" onclick="next()">次の週→</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- カレンダー -->
-        <div id="calendar"></div>
-
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div id="calendar"></div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
