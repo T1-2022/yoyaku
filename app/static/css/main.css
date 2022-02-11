@@ -156,7 +156,7 @@ iframe {
 }
 
 .wrap-login100 {
-  width: 800px;
+  width: 390px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -349,7 +349,7 @@ iframe {
   height: 100%;
   background: #1c1c1c;
   background: -webkit-linear-gradient(right, #a2a2a2, #bc1b21, #a2a2a2, #bc1b21);
-  background: -o-linear-gradient(right, #b3c1ff, #bc1b21, #a2a2a2, #bc1b21);
+  background: -o-linear-gradient(right, #a2a2a2, #bc1b21, #a2a2a2, #bc1b21);
   background: -moz-linear-gradient(right, #a2a2a2, #bc1b21, #a2a2a2, #bc1b21);
   background: linear-gradient(right, #a2a2a2, #bc1b21, #a2a2a2, #bc1b21);
   top: 0;
@@ -384,19 +384,12 @@ iframe {
   left: 0;
 }
 
-/*[ Table ]*/
-.my-custom-scrollbar {
-position: relative;
-height: 200px;
-overflow: auto;
-}
-.table-wrapper-scroll-y {
-display: block;
-}
+/*[ Checkbox ]*/
+
 
 /*[ Responsive ]*/
 
-@media (max-width: 670px) {
+@media (max-width: 576px) {
   .wrap-login100 {
     padding: 77px 15px 33px 15px;
   }
