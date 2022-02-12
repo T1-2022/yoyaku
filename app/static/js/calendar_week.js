@@ -7,6 +7,17 @@ var todayWeek = 0;
 var rateOther = 100; // 先月、翌月の日に乗算
 var startDay = ""; //HTMLに送信する最初の日付
 
+// 仮予約データ
+let yoyaku = [
+    // id, user_id, conf_id, date, time, user_name, user_email, purpose, remarks
+    [0, 0, 0, "2020/2/10", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"],
+    [0, 0, 0, "2020/2/10", "14:00-16:00", "○○先生", "test@email.com", "利用目的", "備考"],
+    [0, 0, 1, "2020/2/11", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"],
+    [0, 0, 2, "2020/2/9", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"],
+    [0, 0, 3, "2020/2/11", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"],
+    [0, 0, 4, "2020/2/11", "10:00-12:00", "○○先生", "test@email.com", "利用目的", "備考"]
+];
+
 // 初期表示
 window.onload = function () {
     showProcess(today, calendar);

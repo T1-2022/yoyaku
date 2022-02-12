@@ -30,9 +30,7 @@ def main_tab():
         user_info['passwd'] = register.passwd # パスワードを格納
 
         # 予約情報を全取得 <- 部分的に読み込むようにjsを書いた方がよいかも
-        reserves = Reserve.query.all()
-        print("main_tab")
-        return render_template("main_tab.html", user_info=user_info, reserves=reserves)
+        return render_template("main_tab.html", user_info=user_info)
     else:
         return redirect(url_for('login.login'))
 
@@ -41,10 +39,11 @@ def main_tab():
 def calendar_week():
     reserves = Reserve.query.all()
     reserve_lists=[]
+
     for reserve in reserves:
         reserve_lists.append(reserve_list(reserve))
 
-    return render_template('calendar/calendar_week.html',reserves=reserve_lists)
+    return render_template('calendar/calendar_week.html')
 
 # 日表示カレンダー
 @main_bp.route("/day")
@@ -59,12 +58,11 @@ def calendar_simple():
 # 予約ページ
 @main_bp.route("/reserve")
 def reserve_page():
-    return render_template('reserve.html')
+    return redirect(url_for('reserves.reserves'))
 
 def reserve_list(reserve):
-    reserve_data = [reserve.__dict__['id'], reserve.__dict__['user_id'], reserve.__dict__['conference_id'],
-                         reserve.__dict__['date'], reserve.__dict__['time'], reserve.__dict__['user_name'],
-                         reserve.__dict__['user_email'], reserve.__dict__['purpose'],
-                         reserve.__dict__['remarks']]
+    reserve_data = [reserve.__dict__['id'], reserve.__dict__['register_id'], reserve.__dict__['conference_id'],
+                         reserve.__dict__['date'], reserve.__dict__['time'], reserve.__dict__['user_id'],
+                         reserve.__dict__['purpose'],reserve.__dict__['remarks']]
 
     return reserve_data
