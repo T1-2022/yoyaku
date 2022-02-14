@@ -34,13 +34,20 @@ def main_tab():
         return redirect(url_for('login.login'))
 
 # 週表示カレンダー
-@main_bp.route("/week")
+@main_bp.route("/week", methods=["GET", "POST"])
 def calendar_week():
+    if request.method == "POST":
+        reserveID = request.form['reserveID']
+    else:
+        reserveID = "null"
+
     reserves = Reserve.query.all()
     reserve_lists=[]
     for reserve in reserves:
-        reserve_lists.append(reserve_list(reserve))
-    return render_template('calendar/calendar_week.html',reserves=reserve_lists)
+        reserve_lists.append(reserve_list(reserve))    
+
+    conference_lists = ["A-000", "A-001", "A-002"]
+    return render_template('calendar/calendar_week.html',reserves=reserve_lists, conferences=conference_lists, test=reserveID)
 
 # 日表示カレンダー
 @main_bp.route("/day")
