@@ -61,23 +61,25 @@ def reserves():
         user_remarks = request.form['remarks']
 
         user = db.session.query(User).filter_by(email=user_email).first()
-
+        add_reserve = Reserve(register.register_id, conference.conference_id, str(reserve_date),
+                              str(start_time), str(end_time), user_purpose, user_remarks)
         if user != None:
-            add_reserve = Reserve(register.register_id, conference.conference_id, str(reserve_date), str(start_time),
-                                 user_purpose, user_remarks, user.user_id)
-            db.session.add(add_reserve)
-            db.session.commit()
+
+            add_reserve.users = user
 
         else:
-            add_reserve = Reserve(register.register_id,conference.conference_id,str(reserve_date),str(start_time),user_purpose,user_remarks)
+            print("既存")
             add_reserve.users = User(user_name,user_email)
 
-            db.session.add(add_reserve)
-            db.session.commit()
+
+        db.session.add(add_reserve)
+        db.session.commit()
+
+        print("既存")
 
         print(user_remarks)
 
-        return redirect(url_for('main_tab.main_tab'))
+        #return redirect(url_for('main_tab.main_tab'))
 
     conferences = Conference.query.all()
     return render_template('reserve.html',conferences = conferences)

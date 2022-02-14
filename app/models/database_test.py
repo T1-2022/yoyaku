@@ -328,6 +328,26 @@ def get_reserve():
     finally:
         db.session.close()
 
+# reserve 日付の処理テスト
+def get_reserve():
+    db.session.begin()
+    try:
+        reserve = db.session.query(Reserve).filter((Reserve.conference_id == '1') & (Reserve.date == '2022/02/08') & ('12:00' < Reserve.endtime) & ('13:00' > Reserve.starttime)).all()
+        print(reserve)
+        reserve = db.session.query(Reserve).filter((Reserve.conference_id == '1') & (Reserve.date == '2022/02/08') & ('12:00' < Reserve.endtime) & ('14:00' > Reserve.starttime)).all()
+        print(reserve)
+        reserve = db.session.query(Reserve).filter((Reserve.conference_id == '1') & (Reserve.date == '2022/02/08') & ('14:00' < Reserve.endtime) & ('15:00' > Reserve.starttime)).all()
+        print(reserve)
+        reserve = db.session.query(Reserve).filter((Reserve.conference_id == '1') & (Reserve.date == '2022/02/08') & ('13:30' < Reserve.endtime) & ('14:00' > Reserve.starttime)).all()
+        print(reserve)
+        reserve = db.session.query(Reserve).filter((Reserve.conference_id == '1') & (Reserve.date == '2022/02/08') & ('12:00' < Reserve.endtime) & ('15:00' > Reserve.starttime)).all()
+        print(reserve)
+    except Exception as e:
+        db.session.rollback()
+        print(e)
+    finally:
+        db.session.close()
+
 '''
 単体テスト
 

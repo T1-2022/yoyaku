@@ -79,18 +79,10 @@ def user_info():
 
 def reserve_list(reserve):
     # id, user_id, conf_id, date, time, user_name, user_email, purpose, remarks
-    print(1,reserve.reserve_id)
-    print(2,reserve.user_id)
-    print(3,reserve.conference_id)
-    print(4,reserve.date)
-    print(5,reserve.time)
-    print(6,reserve.users.name)
-    print(7,reserve.users.email)
-    print(8,reserve.purpose)
-    print(9,reserve.remarks)
+
 
     reserve_data = [reserve.reserve_id, reserve.user_id, reserve.conference_id,
-                    reserve.date, reserve.time, reserve.users.name,
+                    reserve.date, reserve.starttime, reserve.users.name,
                     reserve.users.email,reserve.purpose,reserve.remarks]
 
     print("予約：",reserve_data)
