@@ -33,11 +33,12 @@
                         yoyaku[0]={"1","2","3","4"}
                         var tableEle = document.getElementById('data-table');
                         for (var i = 0; i < yoyaku.length; i++) {
-                            // テーブルの行を追加する
+                            // テーブルの行を追加する(予約データの数だけ)
                             var tr = document.createElement('tr');
                             for (var j = 0; j < 4; j++) {
-                                // テーブルの列を追加する
+                                // テーブルの列を追加する(項目数が4つなので4)
                                 var td = document.createElement('td');
+                                //ここに予約データを記述する
                                 td.innerHTML =  yoyaku[i][j] ;
                                 tr.appendChild(td);
                             }
