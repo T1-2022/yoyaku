@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -70,6 +72,11 @@ def calendar_simple():
     reserve_lists_simple = []
     for reserve in reserves:
         reserve_lists_simple.append(reserve_list(reserve))
+
+    reserve_lists_simple=sorted(reserve_lists_simple,key=lambda x: (x[4],x[5]))
+    #sorted(reserve_lists_simple, key=lambda x: x[5])
+    for i in reserve_lists_simple:
+        print(i)
 
     return render_template('calendar/calendar_simple.html', reserves=reserve_lists_simple)
 
