@@ -11,6 +11,7 @@ from models.Reserve import Reserve
 from models.Conference import Conference
 from login import login_required
 
+
 # ブループリント設定
 main_bp = Blueprint('main_tab', __name__, url_prefix='/main')
 
@@ -50,7 +51,11 @@ def calendar_day():
 # 簡易表示カレンダー
 @main_bp.route("/simple")
 def calendar_simple():
-    return render_template('calendar/calendar_simple.html')
+    reserves = Reserve.query.all()
+    reserve_lists_simple = []
+    for reserve in reserves:
+        reserve_lists_simple.append(reserve_list(reserve))
+    return render_template('calendar/calendar_simple.html',reserves=reserve_lists_simple)
 
 # 予約ページ
 @main_bp.route("/reserve")

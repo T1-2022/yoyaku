@@ -1,44 +1,82 @@
 {% extends "template.html" %}
 {% block title %}簡易版{% endblock %}
 {% block head %}
-  {{ super() }}
-      	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/calendar_simple.css') }}">
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/calendar_simple.css') }}">
 {% endblock %}
+<script type="text/javascript">
+    let yoyaku =
+    {{ reserves | tojson }}
+</script>
 {% block content %}
 
-	<div class="limiter">
-		<div class="container-simple">
-			<div class="wrap-simple">
+    </script>
+    <div class="limiter">
+        <div class="container-simple">
+            <div class="wrap-simple">
                 <span class="simple-form-title p-b-26">
 						簡易版
                 </span>
 
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                    <table class="table table-bordered table-striped mb-0">
+                    <table class="table" id='data-table'>
+                        <thead>
+                        <tr>
+                            <th>日付</th>
+                            <th>時間帯</th>
+                            <th>会議室</th>
+                            <th>利用者</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <!--予約データ追加をここに記述-->
+                    <script>
+                        yoyaku[0]={"1","2","3","4"}
+                        var tableEle = document.getElementById('data-table');
+                        for (var i = 0; i < yoyaku.length; i++) {
+                            // テーブルの行を追加する
+                            var tr = document.createElement('tr');
+                            for (var j = 0; j < 4; j++) {
+                                // テーブルの列を追加する
+                                var td = document.createElement('td');
+                                td.innerHTML =  yoyaku[i][j] ;
+                                tr.appendChild(td);
+                            }
+                            tableEle.appendChild(tr);
+                        }
+                    </script>
+                    <!--<table class="table table-bordered table-striped mb-0" id = "data-table">
                         <thead>
                         <tr>
                             <th scope="col">日付</th>
                             <th scope="col">時間帯</th>
                             <th scope="col">会議室</th>
-                            <th scope="col">利用者</th>
+                            <th scope="col">利用</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <!--{% for user in users %}
-                        <tr>
-                            <th>日付データ</th>
-                            <td>時間帯データ</td>
-                            <td>会議室データ</td>
-                            <td>利用者データ</td>
-
-                        </tr>
-                        {% endfor %}-->
-                        </tr>
+                        <tbody id="tbodyID">
+                            <script>
+                                for(i=0;i<3;i++){
+                                    var tr = document.createElement('tr');
+                                   //列(td)用のループ
+                                    for (j = 0; j < 5; j++){
+                                        //tdエレメントをを生成
+                                        var td = document.createElement('td');
+                                        //tdの中に入れたいモノをセット
+                                        td.innerHTML = 'こんにちは' + j;
+                                        //生成したtdをtrにセット
+                                        tbody.appendChild(td);
+                                    }//列用のループ閉じ
+                                    // tr エレメントをtbody内に追加(ここではじめて表示される)
+                                tbody.appendChild(tr);
+                                }//行用のループ閉じ
+                            </script>
                         </tbody>
-                    </table>
+                    </table>-->
 
                 </div>
             </div>
-        </div>>
+        </div>
+        >
     </div>
 {% endblock %}
