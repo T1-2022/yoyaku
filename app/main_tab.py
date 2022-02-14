@@ -41,7 +41,6 @@ def calendar_week():
     reserves = Reserve.query.all()
     reserve_lists=[]
 
-    print("週表示")
     for reserve in reserves:
         reserve_lists.append(reserve_list(reserve))
 
@@ -85,5 +84,4 @@ def reserve_list(reserve):
                     reserve.date, reserve.starttime, reserve.users.name,
                     reserve.users.email,reserve.purpose,reserve.remarks]
 
-    print("予約：",reserve_data)
     return reserve_data
