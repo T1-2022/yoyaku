@@ -10,6 +10,11 @@
     let yoyaku = {{ reserves | tojson }}
 
 </script>
+    <div id="div0"></div>
+<script>
+    var doc0= document.getElementById("div0");
+    doc0.innerHTML= yoyaku[0][2];
+</script>
     <div class="limiter">
         <div class="container-simple">
             <div class="wrap-simple">
@@ -60,7 +65,15 @@
                                 }
                                 //会議室
                                 else if(j==2){
-                                    td.innerHTML = "会議室"+yoyaku[i][2];
+                                    if(yoyaku[i][2]==1){
+                                        td.innerHTML = "A-101";
+                                    }
+                                    else if(yoyaku[i][2]==2){
+                                        td.innerHTML = "A-201";
+                                    }
+                                    else if(yoyaku[i][2]==3){
+                                        td.innerHTML = "A-301";
+                                    }
                                 }
                                 //利用者
                                 else if(j==3){
