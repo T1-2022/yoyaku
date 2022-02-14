@@ -3,101 +3,79 @@
 {% block head %}
 {{ super() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_reserve.css') }}">
-    <link href='../static/css/main_tab.css' rel='stylesheet' />
-    <link href='../static/css/reserve.css' rel='stylesheet' />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_tab.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/reserve.css') }}">
 {% endblock %}
+
 {% block content %}
-
-	<div class="limiter">
-		<div class="container">
-				<form class="row justify-content-start align-items-center" method="post">
-					<span class="login100-form-title p-b-26">
-						予約
-					</span>
-                    <div class="row justify-content-start align-items-center">
-                        <div class="col-1 text-center"><label>会議室</label></div>
-                        <div class="col-auto">
-                            <select class="form-select" name="conference">
-                                <option selected>会議室</option>
-                                {% for conference in conferences%}
-                                    <option value={{ conference.__dict__['name'] }}>{{ conference.__dict__['name'] }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- 日付選択 -->
-                    <div class="row justify-content-start align-items-center">
-                        <div class="col-1 text-center">日付</div>
-                        <div class="col-auto flex-row align-items-center">
-                            <select class="form-select" id="select_year" name="select_year"></select>年
-                        </div>
-                        <div class="col-auto flex-row align-items-center">
-                            <select class="form-select" id="select_month" name="select_month"></select>月
-                        </div>
-                        <div class="col-auto flex-row align-items-center">
-                            <select class="form-select" id="select_day" name="select_day"></select>日
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-start align-items-center">
-                        <div class="col-1 text-center">時間</div>
-                        <div class="col-auto flex-row align-items-center">
-                            <select class="form-select" id="select_start_hour" name="select_start_hour"></select>：
-                            <select class="form-select" id="select_start_minute" name="select_start_minute"></select>
-                        </div>
-                        <div class="col-auto">～</div>
-                        <div class="col-auto flex-row align-items-center">
-                            <select class="form-select" id="select_end_hour" name="select_end_hour"></select>：
-                            <select class="form-select" id="select_end_minute" name="select_end_minute"></select>
+<div class="limiter">
+    <div class="container-user100">
+    <div class="wrap-user100">
+        <form class="login100-form validate-form" method="post">
+            <div class="row row-cols-2 align-items-center">
+                <div class="col-2 colreserve">
+                    <label>会議室</label>
                 </div>
-
+                <div class="col-4 p-b-10">
+                    <select class="form-select" id="conference">
+                        {% for conference in conferences %}
+                            <option value="{{ conference.__dict__['id'] }}">{{ conference.__dict__['name'] }}></option>
+                        {% endfor %}
+                    </select>
                 </div>
-                   <div class="row">
-                        <div class="col-md-5">
-                            <!-- 利用者名 -->
-                            <div class="row justify-content-start align-items-center">
-                                <div class="col-md-5 text-center">利用者名</div>
-                                <div class="col-md-6"><input class="form-control" name="Name" placeholder="name"></div>
-                            </div>
-
-                            <div class="row justify-content-start align-items-center">
-                                <div class="col-md-5 text-center">利用者<br>メールアドレス</div>
-                                <div class="col-md-6"><input type="email" class="form-control" name="email" placeholder="email"></div>
-                            </div>
-
-                            <!-- 利用目的 -->
-                            <div class="row justify-content-start align-items-center">
-                                <div class="col-md-5 text-center">利用目的</div>
-                                <div class="col-auto">
-                                    <select class="form-select" name="purpose">
-                                        <option selected>利用目的</option>
-                                        <option value="授業">授業</option>
-                                        <option value="会議">会議</option>
-                                        <option value="入試">入試</option>
-                                        <option value="その他">その他</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- 備考 -->
-                            <div class="row justify-content-start align-items-center">
-                                <div class="col-md-5 text-center">備考</div>
-                                <div class="col-md-6"><input class="form-control" name="remarks" placeholder="remarks"></div>
-                            </div>
-
-                        </div>
-                   </div>
-
-					<div class="row">
-                        <div class="col-auto mx-auto">
-                            <button class="btn btn-secondary" >予約登録</button>
-                        </div>
-                    </div>
-
-				</form>
-		</div>
-	</div>
-
-    <script src='../static/js/reserve.js'></script>
+                <div class="col-2 colreserve">
+                    <label>日付</label>
+                </div>
+                <div class="col-4 p-b-10">
+                    <input id="date" class="form-control" type="date" />
+                </div>
+                <div class="col-2 colreserve">
+                    <label>開始時間</label>
+                </div>
+                <div class="col-4 p-b-10">
+                    <input id="starttime" class="form-control" type="time" />
+                </div>
+                <div class="col-2 colreserve">
+                    <label>終了時間</label>
+                </div>
+                <div class="col-4">
+                    <input id="endtime" class="form-control" type="time" />
+                </div>
+                <div class="col-4 colreserve">
+                    <label>利用者名</label>
+                </div>
+                <div class="col-8 p-b-10">
+                    <input class="form-control" id="name" placeholder="利用者名">
+                </div>
+                <div class="col-4 colreserve">
+                    <label>利用目的</label>
+                </div>
+                <div class="col-8 p-b-10">
+                    <select class="form-select" id="purpose">
+                        <option value="授業">授業</option>
+                    <option value="会議">会議</option>
+                    <option value="入試">入試</option>
+                    <option value="その他">その他</option>
+                </select>
+            </div>
+            <div class="col-4 colreserve">
+                <label>利用者メール</label>
+            </div>
+            <div class="col-8 p-b-10">
+                <input type="email" class="form-control" id="email" placeholder="メール">
+            </div>
+            <div class="col-4 colreserve">
+                <label>備考</label>
+            </div>
+            <div class="col-8 p-b-10">
+                <input class="form-control" id="remarks" placeholder="参考">
+            </div>
+                <div class="col-12 p-b-10 text-center"><button class="btn btn-secondary btn-lg" type="button">予約登録</button></div>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+    <script src="{{ url_for('static',filename='js/reserve.js') }}"></script>
 {% endblock %}
+
