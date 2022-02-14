@@ -38,13 +38,26 @@ def main_tab():
 # 週表示カレンダー
 @main_bp.route("/week")
 def calendar_week():
+    if request.method == "POST":
+        reserveID = request.form['reserveID']
+    else:
+        reserveID = "null"
+
+    print("週間")
     reserves = Reserve.query.all()
     reserve_lists=[]
+    conferences = Conference.query.all()
+    conference_lists=[]
+
+    for conference in conferences:
+        conference_lists.append(conference.name)
+
+    print(conference_lists)
 
     for reserve in reserves:
         reserve_lists.append(reserve_list(reserve))
 
-    return render_template('calendar/calendar_week.html',reserves=reserve_lists)
+    return render_template('calendar/calendar_week.html',reserves=reserve_lists,conferences=conference_lists, test=reserveID)
 
 # 日表示カレンダー
 @main_bp.route("/day")
@@ -79,9 +92,9 @@ def user_info():
 def reserve_list(reserve):
     # id, user_id, conf_id, date, time, user_name, user_email, purpose, remarks
 
-
     reserve_data = [reserve.reserve_id, reserve.user_id, reserve.conference_id,
-                    reserve.date, reserve.starttime, reserve.users.name,
+                    reserve.registers.users.name,reserve.date,
+                    reserve.starttime, reserve.endtime,reserve.users.name,
                     reserve.users.email,reserve.purpose,reserve.remarks]
 
     return reserve_data

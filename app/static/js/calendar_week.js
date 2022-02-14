@@ -1,192 +1,185 @@
 const week = ["(日)", "(月)", "(火)", "(水)", "(木)", "(金)", "(土)"];
 const today = new Date();
 var showDate = new Date(today.getFullYear(), today.getMonth(), 1);
-var numberWeek = 0; // 一ヶ月の週数
-var currentWeek = 1; // 当月の何週目か
-var todayWeek = 0;
-var rateOther = 100; // 先月、翌月の日に乗算
-var startDay = ""; //HTMLに送信する最初の日付
+var startDay = "";
+var reserveID = -1; // 予約ID
+
 
 // 初期表示
 window.onload = function () {
-    showProcess(today, calendar);
-    currentWeek = todayWeek;
-    showProcess(today, calendar);
+    createCalendar();
+    current();
 };
 
 // 前の週へ
 function prev() {
-    currentWeek--;
-    if (currentWeek < 1) {
-        currentWeek = 0;
-        showDate.setMonth(showDate.getMonth() - 1);
-    }
-    showProcess(showDate);
+    startDay = changeDate(startDay, -7);
+    createCalendar();
 }
 
 // 今の週へ
 function current() {
-    currentWeek = todayWeek;
-    showDate.setMonth(today.getMonth());
-    showProcess(showDate);
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
+    var date = today.getDate();
+    var currentDay = year + "/" + month + "/" + date;
+    startDay = changeDate(currentDay, -today.getDay());
+    createCalendar();
 }
 
 // 次の週へ
 function next() {
-    currentWeek++;
-    if (currentWeek > numberWeek) {
-        currentWeek = 9;
-        showDate.setMonth(showDate.getMonth() + 1);
-    }
-    showProcess(showDate);
-}
-
-// カレンダー表示
-function showProcess(date) {
-    var year = date.getFullYear();
-    var month = date.getMonth();
-    var calendar = createProcess(year, month);
-    
-    document.querySelector('#calendar').innerHTML = calendar;
-    document.querySelector('#date').innerHTML = year + "年 " + (month + 1) + "月";
-    document.querySelector('#start_day').innerHTML = startDay;
+    startDay = changeDate(startDay, 7);
+    createCalendar();
 }
 
 // カレンダー作成
-function createProcess(year, month) {
-    var dataMonth = createCalendar(year, month);
-    var calendar = "<table><tr class='dayOfWeek'>";
+function createCalendar() {
+    var start = startDay.split("/");
+    var year = Number(start[0]);
+    var month = Number(start[1]);
+    var date = Number(start[2]);
 
-    // 日付
-    calendar += "<th>" + " " + "</th>";
+    var calendar = "<table class='table table-bordered'>";
+    calendar += createDate();
+    calendar += createReserve();
+    calendar += "</table>";
+
+    document.querySelector('#date').innerHTML = year + "年 " + month + "月" + date + "日～";
+    document.querySelector('#calendar').innerHTML = calendar;
+    document.querySelector('#test').innerHTML = test;
+}
+
+// カレンダー日にち部分作成
+function createDate() {
+    var calendar = "<thead><tr><th scope='col'>　</th>";
+
     for (var i = 0; i < week.length; i++) {
+        // 日加算
+        var day = changeDate(startDay, i).split("/");
+        var year = Number(day[0]);
+        var month = Number(day[1]);
+        var date = Number(day[2]);
+
         // 曜日
         if (today.getFullYear() == year
-            && today.getMonth() == month
-            && today.getDate() == dataMonth[currentWeek - 1][i]) calendar += "<th class='today'>"
-        else if (i == 0) calendar += "<th class='sunday'>";
-        else if (i == 6) calendar += "<th class='saturday'>";
-        else calendar += "<th>";
+            && today.getMonth() == month - 1
+            && today.getDate() == date) calendar += "<th scope='col' class='table-primary'>";
+        else if (i == 0) calendar += "<th scope='col' class='sunday'>";
+        else if (i == 6) calendar += "<th scope='col' class='saturday'>";
+        else calendar += "<th scope='col'>";
 
-        // 先月
-        if (dataMonth[currentWeek - 1][i] >= rateOther * 10) {
-            if (month + 1 == 1) var Y = year - 1;
-            else Y = year;
-            var M = ((month + 11) % 12 + 1);
-            var D = dataMonth[currentWeek - 1][i] / rateOther;
-        }
-        // 翌月
-        else if (dataMonth[currentWeek - 1][i] >= rateOther) {
-            if (month + 1 == 12) var Y = year + 1;
-            else Y = year;
-            var M = ((month + 1) % 12 + 1);
-            var D = dataMonth[currentWeek - 1][i] / rateOther;
-        }
-        // 当月
-        else {
-            var Y = year
-            var M = (month + 1);
-            var D = dataMonth[currentWeek - 1][i];
-        }
-        calendar += M + "/" + D + week[i] + "</th>";
-
-        // HTMLに送る日付設定
-        if (i == 0) startDay = Y + "/" + M + "/" + D;
+        // 変数代入
+        calendar += month + "/" + date + week[i] + "</th>";
     }
-    calendar += "</tr>";
+    calendar += "</tr><thead>";
 
-    // 予約情報
-    for (var i = 0; i < 6; i++) {
-        calendar += "<tr><td>" + "会議室" + (i + 1)  + "</td>";
+    return calendar;
+}
+
+// カレンダー予約部分作成
+function createReserve() {
+    var calendar = "<tbody>";
+
+    for (var i = 0; i < conferences.length; i++) {
+        calendar += "<tr><th scope='row'>" + conferences[i] + "</th>";
         for (var j = 0; j < week.length; j++) {
-            // 日付計算
-            if (dataMonth[currentWeek - 1][j] >= rateOther * 10) {
-                var currentMonth = (month + 11) % 12 + 1;
-                var currentDate = dataMonth[currentWeek - 1][j] / rateOther;
-            } else if (dataMonth[currentWeek - 1][j] >= rateOther) {
-                var currentMonth = (month + 1) % 12 + 1;
-                var currentDate = dataMonth[currentWeek - 1][j] / rateOther;
-            } else {
-                var currentMonth = month + 1;
-                var currentDate = dataMonth[currentWeek - 1][j];
-            }
+            // 日加算
+            var day = changeDate(startDay, j).split("/");
+            var year = Number(day[0]);
+            var month = Number(day[1]);
+            var date = Number(day[2]);
 
             // 予約検索
             calendar += "<td>";
-            for (k = 0; k < yoyaku.length; k++) {
-                var date = yoyaku[k][3].split("/");
-                if (i == yoyaku[k][2]
-                    && currentMonth == Number(date[1])
-                    && currentDate == Number(date[2])) {
-                    var text = yoyaku[k][4] + "<br>" + yoyaku[k][5];
+            for (k = 0; k < reserves.length; k++) {
+                var reserveDay = reserves[k][4].split("/");
+                if (i == reserves[k][2] - 1
+                    && year == Number(reserveDay[0])
+                    && month == Number(reserveDay[1])
+                    && date == Number(reserveDay[2])) {
 
-                    //var detail = "　予約者名　：";// + yoyaku[k][0] + "\n";
-                    //detail += "　予約時間　：" + yoyaku[k][4] + "\n";
-                    //detail += "　　目的　　：" + yoyaku[k][7] + "\n";
-                    //detail += "　利用者名　：" + yoyaku[k][5] + "\n";
-                    //detail += "利用者連絡先：" + yoyaku[k][6] + "\n";
-                    //detail += "　　備考　　：" + yoyaku[k][8];
+                    // ボタン内容定義
+                    var id = reserves[k][0];
+                    var time = reserves[k][5] + "~" + reserves[k][6]
+                    var text = time + "<br>" + reserves[k][7];
 
-                    calendar += "<button class='reserve' type='button'>" + text + "</button>";
-                    //calendar += "<button class='reserve' type='button' onClick='confirm(" + detail + ");'>" + text + "</button>";
+                    // 予約詳細定義
+                    var detail = "　　　　　　予約者名　　：" + reserves[k][3] + "<br>";
+                    detail += "　　　　　　予約時間　　：" + time + "<br>";
+                    detail += "　　　　　　　目的　　　：" + reserves[k][9] + "<br>";
+                    detail += "　　　　　　利用者名　　：" + reserves[k][7] + "<br>";
+                    detail += "　　　　　利用者連絡先　：" + reserves[k][8] + "<br>";
+                    detail += "　　　　　　　備考　　　：" + reserves[k][10];
+
+                    // ボタン設定
+                    calendar += "<button class='btn btn-secondary font-small' type='button' data-bs-toggle='modal' data-bs-target='#reserve" + id + "' ";
+                    calendar += "onclick = 'setReserve(" + id + ")'>" + text + "</button>";
+
+                    calendar += "<div class='modal fade' id='reserve";
+                    calendar += reserves[k][0] + "' tabindex=' - 1' aria-hidden='true'>";
+                    calendar += "<div class='modal-dialog'>";
+                    calendar += "<div class='modal-content'>";
+
+                    // ポップアップ中身
+                    calendar += "<div class='modal-header'>";
+                    calendar += "   <h5 class='modal-title'>予約詳細</h5>";
+                    calendar += "   <button class='btn-close' type='button' data-bs-dismiss='modal' aria-label='Close'></button>";
+                    calendar += "</div>";
+                    calendar += "<div class='modal-body'>";
+                    calendar += "   <p class='text-left'>" + detail + "</p>";
+                    calendar += "</div>";
+                    calendar += "<div class='modal-footer'>";
+                    calendar += "   <form name='reserveForm' method='post'>"
+                    calendar += "       <input hidden type='text'  name='reserveID' id='reserveID" + id + "'>";
+                    //calendar += "       <button class='btn btn-secondary' type='submit' data-bs-dismiss='modal'>変更</button>";
+                    calendar += "       <button class='btn btn-secondary' type='submit' data-bs-dismiss='modal'>削除</button>";
+                    calendar += "   </form>";
+                    calendar += "</div>";
+
+                    calendar += "</div>";
+                    calendar += "</div>";
+                    calendar += "</div>";
+                    calendar += "</div>";
                 }
             }
             calendar += "</td>";
         }
         calendar += "</tr>";
     }
+    calendar += "</tbody>";
 
     return calendar;
 }
 
-// 一ヶ月カレンダー作成
-function createCalendar(year, month) {
-    var startDayOfWeek = new Date(year, month, 1).getDay();
-    var endDate = new Date(year, month + 1, 0).getDate();
-    var lastMonthEndDate = new Date(year, month, 0).getDate();
-    var row = Math.ceil((startDayOfWeek + endDate) / week.length);
-    var count = 0;
-    var overlapFlag = 0;
-    var dataMonth = [];
-    var dataWeek = [];
+// 日にち変更計算
+function changeDate(day, num) {
+    day = day.split("/");
+    var year = Number(day[0]);
+    var month = Number(day[1]);
+    var date = Number(day[2]);
+    var endDate = new Date(year, month, 0).getDate();
 
-    // 日付計算
-    for (var i = 0; i < row; i++) {
-        dataWeek = [];
-        for (var j = 0; j < week.length; j++) {
-            // 先月
-            if (i == 0 && j < startDayOfWeek) {
-                dataWeek.push((lastMonthEndDate - startDayOfWeek + j + 1) * rateOther);
-                overlapFlag = overlapFlag | 1;
-            }
-            // 翌月
-            else if (count >= endDate) {
-                count++;
-                dataWeek.push((count - endDate) * rateOther);
-                overlapFlag = overlapFlag | 2;
-            }
-            // 当月
-            else {
-                count++;
-                dataWeek.push(count);
-                if (today.getFullYear() == year
-                    && today.getMonth() == month
-                    && today.getDate() == count) {
-                    todayWeek = i + 1;
-                }
-            }
-        }
-        dataMonth.push(dataWeek);
+    date += num;
+    if (date > endDate) {
+        month = month % 12 + 1;
+        date = date % endDate;
+        if (month == 1) year++;
+    }
+    if (date < 1) {
+        month = (month + 10) % 12 + 1;
+        date = new Date(year, month, 0).getDate() + date;
+        if (month == 12) year--;
     }
 
-    // 月変化時の週番号計算
-    numberWeek = row;
-    if (currentWeek == 0) {
-        currentWeek = numberWeek - (overlapFlag & 2) / 2;
-    }
-    if (currentWeek == 9) {
-        currentWeek = 1 + (overlapFlag & 1);
-    }
+    var result = year + "/" + month + "/" + date;
+    return result;
+}
 
-    return dataMonth;
+// 予約内容取得
+function setReserve(num) {
+    reserveID = num;
+    
+    var formName = "reserveID" + num;
+    document.querySelector('input[id="' + formName + '"]').value = num;
 }
