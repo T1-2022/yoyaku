@@ -9,6 +9,7 @@ th, td {
 th.sunday {
     color: red;
 }
+
 th.saturday {
     color: blue;
 }
