@@ -10,156 +10,70 @@
 {% block content %}
 <div class="limiter">
     <div class="container-user100">
-        <!-- 会議室選択 -->
-        <div class="row justify-content-start align-items-center">
-            <div class="col text-center"><label>会議室</label></div>
-            <div class="col">
-                <select class="form-select" id="conference">
-                    <option selected>A-000</option>
-                    <option value="1">A-001</option>
-                    <option value="2">A-002</option>
-                    <option value="3">A-003</option>
+    <div class="wrap-user100">
+        <form class="login100-form validate-form" method="post">
+            <div class="row row-cols-2 align-items-center">
+                <div class="col-2 colreserve">
+                    <label>会議室</label>
+                </div>
+                <div class="col-4 p-b-10">
+                    <select class="form-select" id="conference">
+                        {% for conference in conferences %}
+                            <option value="{{ conference.__dict__['id'] }}">{{ conference.__dict__['name'] }}></option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-2 colreserve">
+                    <label>日付</label>
+                </div>
+                <div class="col-4 p-b-10">
+                    <input id="date" class="form-control" type="date" />
+                </div>
+                <div class="col-2 colreserve">
+                    <label>開始時間</label>
+                </div>
+                <div class="col-4 p-b-10">
+                    <input id="starttime" class="form-control" type="time" />
+                </div>
+                <div class="col-2 colreserve">
+                    <label>終了時間</label>
+                </div>
+                <div class="col-4">
+                    <input id="endtime" class="form-control" type="time" />
+                </div>
+                <div class="col-4 colreserve">
+                    <label>利用者名</label>
+                </div>
+                <div class="col-8 p-b-10">
+                    <input class="form-control" id="name" placeholder="利用者名">
+                </div>
+                <div class="col-4 colreserve">
+                    <label>利用目的</label>
+                </div>
+                <div class="col-8 p-b-10">
+                    <select class="form-select" id="purpose">
+                        <option value="授業">授業</option>
+                    <option value="会議">会議</option>
+                    <option value="入試">入試</option>
+                    <option value="その他">その他</option>
                 </select>
             </div>
-        </div>
-        <!-- 日付選択 -->
-        <div class="row justify-content-start align-items-center">
-            <div class="col-1 text-center">日付</div>
-            <div class="col-auto flex-row align-items-center">
-                <select class="form-select" id="select_year"></select>年
+            <div class="col-4 colreserve">
+                <label>利用者メール</label>
             </div>
-            <div class="col-auto flex-row align-items-center">
-                <select class="form-select" id="select_month"></select>月
+            <div class="col-8 p-b-10">
+                <input type="email" class="form-control" id="email" placeholder="メール">
             </div>
-            <div class="col-auto flex-row align-items-center">
-                <select class="form-select" id="select_day"></select>日
+            <div class="col-4 colreserve">
+                <label>備考</label>
             </div>
-            <div class="col-auto">
-                <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#changePassModal">カレンダー表示</button>
+            <div class="col-8 p-b-10">
+                <input class="form-control" id="remarks" placeholder="参考">
             </div>
-        </div>
-        <!-- 時間選択 -->
-        <div class="row justify-content-start align-items-center">
-            <div class="col-1 text-center">時間</div>
-            <div class="col-auto flex-row align-items-center">
-                <select class="form-select" id="select_start_hour"></select>：
-                <select class="form-select" id="select_start_minute"></select>
+                <div class="col-12 p-b-10 text-center"><button class="btn btn-secondary btn-lg" type="button">予約登録</button></div>
             </div>
-            <div class="col-auto">～</div>
-            <div class="col-auto flex-row align-items-center">
-                <select class="form-select" id="select_end_hour"></select>：
-                <select class="form-select" id="select_end_minute"></select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5">
-                <!-- 利用者名 -->
-                <div class="row justify-content-start align-items-center">
-                    <div class="col-md-5 text-center">利用者名</div>
-                    <div class="col-md-6"><input class="form-control" id="name" placeholder="name"></div>
-                </div>
-
-                <!-- 利用目的 -->
-                <div class="row justify-content-start align-items-center">
-                    <div class="col-md-5 text-center">利用目的</div>
-                    <div class="col-auto">
-                        <select class="form-select" id="purpose">
-                            <option selected>授業</option>
-                            <option value="1">会議</option>
-                            <option value="2">入試</option>
-                            <option value="3">その他</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- 利用者メールアドレス -->
-                <div class="row justify-content-start align-items-center">
-                    <div class="col-md-5 text-center">利用者<br>メールアドレス</div>
-                    <div class="col-md-6"><input type="email" class="form-control" id="email" placeholder="email"></div>
-                </div>
-
-                <!-- 備考 -->
-                <div class="row justify-content-start align-items-center">
-                    <div class="col-md-5 text-center">備考</div>
-                    <div class="col-md-6"><input class="form-control" id="remarks" placeholder="remarks"></div>
-                </div>
-            </div>
-
-            <div class="col-md-7">
-                <!-- 定期予約チェックボックス -->
-                <input class="form-check-input" type="checkbox" id="regular">
-                <label class="form-check-label" for="regular">定期予約する</label>
-
-                <!-- 定期予約メニュー -->
-                <div class="regular_menu">
-                    <!-- 繰り返し -->
-                    <div class="row justify-content-start align-items-center">
-                        <div class="col-2 text-center">繰り返し</div>
-                        <div class="col-auto">
-                            <select class="form-select" id="purpose">
-                                <option selected>毎日</option>
-                                <option value="1">毎週</option>
-                                <option value="2">毎月</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- 曜日 -->
-                    <div class="row justify-content-start align-items-center">
-                        <div class="col-2 text-center">曜日</div>
-                        <div class="col-auto">
-                            <input class="form-check-input" type="checkbox" id="sunday">
-                            <label class="form-check-label" for="sunday">日</label>
-                        </div>
-                        <div class="col-auto">
-                            <input class="form-check-input" type="checkbox" id="monday">
-                            <label class="form-check-label" for="monday">月</label>
-                        </div>
-                        <div class="col-auto">
-                            <input class="form-check-input" type="checkbox" id="tuesday">
-                            <label class="form-check-label" for="tuesday">火</label>
-                        </div>
-                        <div class="col-auto">
-                            <input class="form-check-input" type="checkbox" id="wednesday">
-                            <label class="form-check-label" for="wednesday">水</label>
-                        </div>
-                        <div class="col-auto">
-                            <input class="form-check-input" type="checkbox" id="thursday">
-                            <label class="form-check-label" for="thursday">木</label>
-                        </div>
-                        <div class="col-auto">
-                            <input class="form-check-input" type="checkbox" id="friday">
-                            <label class="form-check-label" for="friday">金</label>
-                        </div>
-                        <div class="col-auto">
-                            <input class="form-check-input" type="checkbox" id="saturday">
-                            <label class="form-check-label" for="saturday">土</label>
-                        </div>
-                    </div>
-
-                    <!-- 終了日 -->
-                    <div class="row justify-content-start align-items-center">
-                        <div class="col-2 text-center">日付</div>
-                        <div class="col-auto flex-row align-items-center">
-                            <select class="form-select" id="regular_year"></select>年
-                        </div>
-                        <div class="col-auto flex-row align-items-center">
-                            <select class="form-select" id="regular_month"></select>月
-                        </div>
-                        <div class="col-auto flex-row align-items-center">
-                            <select class="form-select" id="regular_day"></select>日
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 登録ボタン -->
-        <div class="row">
-            <div class="col-auto mx-auto">
-                <button class="btn btn-secondary" type="button">予約登録</button>
-            </div>
-        </div>
+        </form>
+    </div>
     </div>
 </div>
     <script src="{{ url_for('static',filename='js/reserve.js') }}"></script>
