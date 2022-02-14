@@ -34,8 +34,6 @@ def reserves():
 
 
         user_conference = request.form.get('conference')
-        print(1)
-        print(user_conference)
         reserve_date = datetime.strptime(request.form['date'],'%Y-%m-%d').date()
 
         reserve_date = "{0:%Y/%m/%d}".format(reserve_date)
@@ -43,28 +41,48 @@ def reserves():
         user_purpose = request.form.get('purpose')
         user_remarks = request.form['remarks']
 
-        reserve = db.session.query(Reserve).filter(
-            (Reserve.conference_id == user_conference) & (Reserve.date == reserve_date) & (end_time < Reserve.endtime) & (
-                        start_time > Reserve.starttime)).all()
+        print("チェック")
 
-        if reserve != None:
+        #既存開始時間＜=追加開始時間＜=既存終了時間
+        reserve1 = db.session.query(Reserve).filter(
+            (Reserve.conference_id == user_conference) & (Reserve.date == reserve_date)
+            & (start_time >= Reserve.starttime)
+            & (start_time <= Reserve.endtime)).all()
+
+        # 既存開始時間＜=追加終了時間＜=既存終了時間
+        reserve2 = db.session.query(Reserve).filter(
+            (Reserve.conference_id == user_conference) & (Reserve.date == reserve_date)
+            & (end_time >= Reserve.starttime)
+            & (end_time <= Reserve.endtime)).all()
+
+        # 追加終了時間＞既存終了時間,既存開始時間>追加開始時間
+        reserve3 = db.session.query(Reserve).filter(
+            (Reserve.conference_id == user_conference) & (Reserve.date == reserve_date)
+            & (start_time < Reserve.starttime)
+            & (end_time > Reserve.endtime)).all()
+
+        print(reserve1,reserve2,reserve3)
+
+        if reserve1 == [] and reserve2 == [] and reserve3 == []:
+            user = db.session.query(User).filter_by(email=user_email).first()
+            add_reserve = Reserve(register.register_id, user_conference, str(reserve_date),
+                                  str(start_time), str(end_time), user_purpose, user_remarks)
+            if user != None:
+                add_reserve.users = user
+
+            else:
+                add_reserve.users = User(user_name, user_email)
+
+            db.session.add(add_reserve)
+            db.session.commit()
+
+
+        else:
             conferences = Conference.query.all()
+            print("aaa")
             return render_template('reserve.html', conferences=conferences)
 
 
-        user = db.session.query(User).filter_by(email=user_email).first()
-        add_reserve = Reserve(register.register_id, user_conference, str(reserve_date),
-                              str(start_time), str(end_time), user_purpose, user_remarks)
-        if user != None:
-
-            add_reserve.users = user
-
-        else:
-            add_reserve.users = User(user_name,user_email)
-
-
-        db.session.add(add_reserve)
-        db.session.commit()
 
         #return redirect(url_for('main_tab.main_tab'))
 
