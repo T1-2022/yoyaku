@@ -36,14 +36,13 @@ def main_tab():
         return redirect(url_for('login.login'))
 
 # 週表示カレンダー
-@main_bp.route("/week")
+@main_bp.route("/week", methods=["GET", "POST"])
 def calendar_week():
     if request.method == "POST":
         reserveID = request.form['reserveID']
     else:
         reserveID = "null"
 
-    print("週間")
     reserves = Reserve.query.all()
     reserve_lists=[]
     conferences = Conference.query.all()
@@ -53,7 +52,7 @@ def calendar_week():
         conference_lists.append(conference.name)
 
     print(conference_lists)
-
+    #print(1,request.form['test'])
     for reserve in reserves:
         reserve_lists.append(reserve_list(reserve))
 
@@ -67,7 +66,12 @@ def calendar_day():
 # 簡易表示カレンダー
 @main_bp.route("/simple")
 def calendar_simple():
-    return render_template('calendar/calendar_simple.html')
+    reserves = Reserve.query.all()
+    reserve_lists_simple = []
+    for reserve in reserves:
+        reserve_lists_simple.append(reserve_list(reserve))
+
+    return render_template('calendar/calendar_simple.html', reserves=reserve_lists_simple)
 
 # 予約ページ
 @main_bp.route("/reserve")
@@ -87,10 +91,11 @@ def user_info():
     user_info['passwd'] = register.passwd  # パスワードを格納
     # 予約情報を全取得 <- 部分的に読み込むようにjsを書いた方がよいかも
     reserves = Reserve.query.all()
+
     return render_template('user_info.html', user_info=user_info)
 
 def reserve_list(reserve):
-    # id, user_id, conf_id, date, time, user_name, user_email, purpose, remarks
+    # id, user_id, conf_id, register_name, date, starttime, endtime, user_name, user_email, purpose, remarks
 
     reserve_data = [reserve.reserve_id, reserve.user_id, reserve.conference_id,
                     reserve.registers.users.name,reserve.date,

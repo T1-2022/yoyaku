@@ -61,7 +61,6 @@ def reserves():
             & (start_time < Reserve.starttime)
             & (end_time > Reserve.endtime)).all()
 
-        print(reserve1,reserve2,reserve3)
 
         if reserve1 == [] and reserve2 == [] and reserve3 == []:
             user = db.session.query(User).filter_by(email=user_email).first()
