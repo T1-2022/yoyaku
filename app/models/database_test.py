@@ -254,7 +254,7 @@ def add_reserve():
         user = db.session.query(User).filter_by(email='tarou@example.com').first()
         register = db.session.query(Register).filter_by(user_id=user.user_id).first()
         conference = db.session.query(Conference).filter_by(name='会議室A').first()
-        reserve = Reserve(register.register_id, conference.conference_id, '2022/02/08 13:00', '1:30', user.user_id, '授業', '特になし')
+        reserve = Reserve(register.register_id, conference.conference_id, '2022/02/08', '13:00', '16:00', '授業', '特になし', user.user_id)
         db.session.add(reserve)
         db.session.flush()
         db.session.commit()
@@ -268,7 +268,7 @@ def add_reserve():
 def read_reserve():
     db.session.begin()
     try:
-        reserve = db.session.query(Reserve).filter_by(date='2022/02/08 13:00').first()
+        reserve = db.session.query(Reserve).filter_by(date='2022/02/08').first()
         print("[debug] : {}".format(reserve.registers))
         print("[debug] : {}".format(reserve.conferences))
         print("[debug] : {}".format(reserve.users))
@@ -282,7 +282,7 @@ def read_reserve():
 def delete_reserve():
     db.session.begin()
     try:
-        reserve = db.session.query(Reserve).filter_by(date='2022/02/08 13:00').first()
+        reserve = db.session.query(Reserve).filter_by(date='2022/02/08').first()
         db.session.delete(reserve)
         db.session.flush()
         db.session.commit()
@@ -296,11 +296,32 @@ def delete_reserve():
 def update_reserve():
     db.session.begin()
     try:
-        reserve = db.session.query(Reserve).filter_by(date='2022/02/08 13:00').first()
-        reserve.time = '2:40'
+        reserve = db.session.query(Reserve).filter((Reserve.date=='2022/02/08') & (Reserve.starttime=='13:00')).first()
+        #reserve.starttime = '13:00'
+        reserve.endtime = '14:40'
         db.session.add(reserve)
         db.session.flush()
         db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(e)
+    finally:
+        db.session.close()
+
+# reserve 日付の処理テスト
+def get_reserve():
+    db.session.begin()
+    try:
+        reserve = db.session.query(Reserve).filter((Reserve.conference_id == '1') & (Reserve.date == '2022/02/08') & ('12:00' < Reserve.endtime) & ('13:00' > Reserve.starttime)).all()
+        print(reserve)
+        reserve = db.session.query(Reserve).filter((Reserve.conference_id == '1') & (Reserve.date == '2022/02/08') & ('12:00' < Reserve.endtime) & ('14:00' > Reserve.starttime)).all()
+        print(reserve)
+        reserve = db.session.query(Reserve).filter((Reserve.conference_id == '1') & (Reserve.date == '2022/02/08') & ('14:00' < Reserve.endtime) & ('15:00' > Reserve.starttime)).all()
+        print(reserve)
+        reserve = db.session.query(Reserve).filter((Reserve.conference_id == '1') & (Reserve.date == '2022/02/08') & ('13:30' < Reserve.endtime) & ('14:00' > Reserve.starttime)).all()
+        print(reserve)
+        reserve = db.session.query(Reserve).filter((Reserve.conference_id == '1') & (Reserve.date == '2022/02/08') & ('12:00' < Reserve.endtime) & ('15:00' > Reserve.starttime)).all()
+        print(reserve)
     except Exception as e:
         db.session.rollback()
         print(e)
