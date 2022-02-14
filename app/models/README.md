@@ -51,7 +51,8 @@
   * regiser_id    : 予約者id（整数，外部キー）
   * conference_id : 会議室id（整数，外部キー）
   * date          : 日付（文字列，30文字上限） 
-  * time          : 時間(コマ数)（文字列，30文字上限）
+  * starttime     : 予約開始時間（文字列，30文字上限）
+  * starttime     : 予約終了時間（文字列，30文字上限）
   * user_id       : ユーザーid（整数，外部キー）
   * purpose       : 目的（文字列，10文字上限）
   * remarks       : 備考（文字列，100文字上限）
@@ -61,7 +62,7 @@
   * users       : 1名の利用者(User)と紐づく
   * conferences : 1つの会議室と紐づく
 
-* コンストラクタ：Reserve(register_id, conference_id, date, time, purpose, remarks, user_id=None)
+* コンストラクタ：Reserve(register_id, conference_id, date, starttime, endtime, purpose, remarks, user_id=None)
 
 ### Equipment
 * table name    : equipments

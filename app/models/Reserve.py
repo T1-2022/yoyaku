@@ -1,6 +1,6 @@
 '''
 created at 2022/01/27.
-updated at 2022/02/09.
+updated at 2022/02/14.
 created by Shinoda Hiroki.
 
 @ this file is ... 
@@ -9,7 +9,8 @@ created by Shinoda Hiroki.
   * register_id   : int       , nullable=False, foreignkey("registers.register_id")
   * conference_id : int       , nullable=False, foreignkey("conferences.conference_id")
   * date          : string(30), nullable=False 
-  * time          : string(30), nullable=False
+  * starttime     : string(30), nullable=False
+  * endtime       : string(30), nullable=False
   * user_id       : int       , nullable=False, foreignkey("users.user_id")
   * purpose       : String(10), nullable=False
   * remarks       : String(100)
@@ -30,7 +31,8 @@ class Reserve(db.Model):
   register_id = db.Column(db.Integer, db.ForeignKey("registers.register_id", onupdate='CASCADE', ondelete='CASCADE'),  nullable=False) # 外部キー
   conference_id = db.Column(db.Integer, db.ForeignKey("conferences.conference_id", onupdate='CASCADE', ondelete='CASCADE'), nullable=False) # 外部キー
   date = db.Column(db.String(30), nullable=False)
-  time = db.Column(db.String(30), nullable=False)
+  starttime = db.Column(db.String(30), nullable=False)
+  endtime = db.Column(db.String(30), nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey("users.user_id", onupdate='CASCADE', ondelete='CASCADE')) # 外部キー
   purpose = db.Column(db.String(10), nullable=False)
   remarks = db.Column(db.String(100))
@@ -40,11 +42,12 @@ class Reserve(db.Model):
   conferences = db.relationship("Conference", uselist=False, back_populates='reserves')
   users = db.relationship("User", uselist=False, back_populates='reserves')
   
-  def __init__(self, register_id, conference_id, date, time, purpose, remarks, user_id=None):
+  def __init__(self, register_id, conference_id, date, starttime, endtime, purpose, remarks, user_id=None):
     self.register_id = register_id
     self.conference_id = conference_id
     self.date = date
-    self.time = time
+    self.starttime = starttime
+    self.endtime = endtime
     self.user_id = user_id
     self.purpose = purpose
     self.remarks = remarks
