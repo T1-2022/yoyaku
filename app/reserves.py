@@ -28,6 +28,7 @@ def reserves():
         select_end_minute = request.form.get('select_end_minute')
 
         if select_end_hour < select_start_hour:
+            conferences = Conference.query.all()
             return render_template('reserve.html',conferences = conferences)
 
         register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
@@ -45,6 +46,8 @@ def reserves():
         reserve_date = datetime.strptime(
             select_year + "-" + select_month + "-" + select_day,
             '%Y-%m-%d').date()
+
+        reserve_date = "{0:%Y/%m/%d}".format(reserve_date)
 
         start_time = datetime.strptime(
             str(select_start_hour) + ":" + str(select_start_minute),
@@ -73,6 +76,8 @@ def reserves():
             db.session.commit()
 
         print(user_remarks)
+
+        return redirect(url_for('main_tab.main_tab'))
 
     conferences = Conference.query.all()
     return render_template('reserve.html',conferences = conferences)

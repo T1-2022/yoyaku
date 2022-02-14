@@ -31,6 +31,7 @@ def main_tab():
 
         # 予約情報を全取得 <- 部分的に読み込むようにjsを書いた方がよいかも
         return render_template("main_tab.html", user_info=user_info)
+
     else:
         return redirect(url_for('login.login'))
 
@@ -40,10 +41,11 @@ def calendar_week():
     reserves = Reserve.query.all()
     reserve_lists=[]
 
+    print("週表示")
     for reserve in reserves:
         reserve_lists.append(reserve_list(reserve))
 
-    return render_template('calendar/calendar_week.html')
+    return render_template('calendar/calendar_week.html',reserves=reserve_lists)
 
 # 日表示カレンダー
 @main_bp.route("/day")
@@ -60,9 +62,36 @@ def calendar_simple():
 def reserve_page():
     return redirect(url_for('reserves.reserves'))
 
-def reserve_list(reserve):
-    reserve_data = [reserve.__dict__['id'], reserve.__dict__['register_id'], reserve.__dict__['conference_id'],
-                         reserve.__dict__['date'], reserve.__dict__['time'], reserve.__dict__['user_id'],
-                         reserve.__dict__['purpose'],reserve.__dict__['remarks']]
+# ユーザー情報
+@main_bp.route("/user_info")
+def user_info():
+    # データベースからユーザー情報を取得
+    register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
 
+    # ユーザー情報を格納
+    user_info = {}
+    user_info['name'] = register.users.name  # ユーザーネームを格納
+    user_info['email'] = register.users.email  # メールアドレスを格納
+    user_info['passwd'] = register.passwd  # パスワードを格納
+    # 予約情報を全取得 <- 部分的に読み込むようにjsを書いた方がよいかも
+    reserves = Reserve.query.all()
+    return render_template('user_info.html', user_info=user_info)
+
+def reserve_list(reserve):
+    # id, user_id, conf_id, date, time, user_name, user_email, purpose, remarks
+    print(1,reserve.reserve_id)
+    print(2,reserve.user_id)
+    print(3,reserve.conference_id)
+    print(4,reserve.date)
+    print(5,reserve.time)
+    print(6,reserve.users.name)
+    print(7,reserve.users.email)
+    print(8,reserve.purpose)
+    print(9,reserve.remarks)
+
+    reserve_data = [reserve.reserve_id, reserve.user_id, reserve.conference_id,
+                    reserve.date, reserve.time, reserve.users.name,
+                    reserve.users.email,reserve.purpose,reserve.remarks]
+
+    print("予約：",reserve_data)
     return reserve_data

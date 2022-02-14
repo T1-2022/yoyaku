@@ -7,7 +7,8 @@
     <link href='../static/css/user_info.css' rel='stylesheet' />
 {% endblock %}
 {% block content %}
-<div class="limiter">
+
+    <div class="limiter">
 	<div class="container-reserve100">
 		<div class="wrap-reserve100">
             <div class="row align-items-start p-b">
@@ -18,6 +19,8 @@
                     <small class="text-muted">『{{user_info.name}}』としてログイン中 </small>
                 </div>
             </div>
+
+
             <nav>
                 <div class="nav nav-pills nav-fill p-b-10" id="nav-tab" role="tablist">
                     <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">予約情報</button>
