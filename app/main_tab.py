@@ -15,6 +15,7 @@ from models.Reserve import Reserve
 from models.Conference import Conference
 from login import login_required
 
+
 # ブループリント設定
 main_bp = Blueprint('main_tab', __name__, url_prefix='/main')
 
@@ -42,6 +43,7 @@ def main_tab():
 def calendar_week():
     if request.method == "POST":
         reserveID = request.form['reserveID']
+        return redirect(url_for('reserve_delete.reserve_delete',reserve_id=reserveID))
     else:
         reserveID = "null"
 
