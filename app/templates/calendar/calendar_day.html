@@ -1,169 +1,28 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <title>メイン画面</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    <link href='../static/css/main.css' rel='stylesheet' />
-    <!--===============================================================================================-->
-    <script src='../static/js/main.js'></script>
-    <!--===============================================================================================-->
-    <link href='../static/css/calendar_day.css' rel='stylesheet' />
-    <script src='../static/js/calendar_day.js'></script>
+{% extends "template.html" %}
+{% block title %}日表示{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/calendar_day.css') }}">
+  <script src="{{ url_for('static',filename='js/calendar_day.js') }}"></script>
+  <script type="text/javascript">
+    let reserves = {{ reserves | tojson }}
+    let conferences = {{ conferences | tojson }}
+  </script>
+{% endblock %}
+{% block content %}
 
-
-</head>
-<body>
-    <div class="wrapper">
-    
-        <!-- ボタンクリックで月移動 -->
-        <div id="next-prev-button">
-            <button id="prev" onclick="prev()">‹</button>
-            <!-- xxxx年xx月を表示 -->
-            <h1 id="header"></h1>
-            <button id="today_btn" onclick="today_btn()">today</button>
-            <button id="next" onclick="next()">›</button>
+    <div class="row align-items-start p-b">
+        <!-- xxxx年xx月を表示 -->
+        <div class="col-lg-8 reserve100-form-title p-b " id="header"></div>
+        <!-- 前の日，今日，次の日を表示 -->
+        <div class="col-lg-4 reserve100-form-title p-b">
+            <button type="button" class="btn btn-primary" id="prev" onclick="prev()">← 前の日</button>
+            <button type="button" class="btn btn-primary" id="today_btn" onclick="today_btn()">今日</button>
+            <button type="button" class="btn btn-primary" id="next" onclick="next()">次の日 →</button>
         </div>
     </div>
 
-    <table border="1">
-        <tr>
-            <th></th>
-            <th>08:00</th>
-            <th>09:00</th>
-            <th>10:00</th>
-            <th>11:00</th>
-            <th>12:00</th>
-            <th>13:00</th>
-            <th>14:00</th>
-            <th>15:00</th>
-            <th>16:00</th>
-            <th>17:00</th>
-            <th>18:00</th>
-            <th>19:00</th>
+    <!-- カレンダー -->
+    <div class="calendar_disp" id="calendar"></div>
 
-        </tr>
-        <tr>
-            <td>会議室1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>会議室2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>会議室3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>会議室4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>会議室5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>会議室6</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>会議室7</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>会議室8</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-      </table>
-</body>
-</html>
+{% endblock %}

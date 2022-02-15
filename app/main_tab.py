@@ -63,7 +63,18 @@ def calendar_week():
 # 日表示カレンダー
 @main_bp.route("/day")
 def calendar_day():
-    return render_template('calendar/calendar_day.html')
+    if request.method == "POST":
+        reserveID = request.form['reserveID']
+    else:
+        reserveID = "null"
+
+    reserves = Reserve.query.all()
+    reserve_lists=[]
+    for reserve in reserves:
+        reserve_lists.append(reserve_list(reserve))
+
+    conference_lists = ["会議室1","会議室2","会議室3","会議室4","会議室5","会議室6","会議捨7","会議室8"]
+    return render_template('calendar/calendar_day.html',reserves=reserve_lists, conferences=conference_lists)
 
 # 簡易表示カレンダー
 @main_bp.route("/simple")

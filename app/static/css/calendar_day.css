@@ -6,11 +6,9 @@
     margin: 0 auto;
     color: #666;
 }
+
 #header {
-    text-align: center;
     font-size: 24px;
-    width: 100%;
-    margin: 1rem 0 0;
 }
 
 /*カレンダー*/
@@ -51,16 +49,4 @@ th, td {
 #next-prev-button button:hover{
     background-color: #5f9ea0;
     border-color: #5f9ea0;
-}
-#prev {
-    float: left;
-}
-#next {
-    float: right;
-}
-#today_btn {
-    position: relative;
-    right: 20px;
-    background: #000!important;
-    padding: 5px!important;
 }
