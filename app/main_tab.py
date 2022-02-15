@@ -18,6 +18,10 @@ from login import login_required
 # ブループリント設定
 main_bp = Blueprint('main_tab', __name__, url_prefix='/main')
 
+#非同期用グローバル変数
+week_day = None
+day_time = None
+
 # メイン画面
 @main_bp.route("/", methods=["GET"])
 def main_tab():
@@ -60,11 +64,23 @@ def calendar_week():
 
     return render_template('calendar/calendar_week.html',reserves=reserve_lists,conferences=conference_lists, test=reserveID)
 
-@main_bp.route('/week_Ajax', methods=['POST'])
-def week_Ajax():
+@main_bp.route('/week_Ajax_POST', methods=['POST'])
+def week_Ajax_POST():
     if request.method == "POST":
         data = request.json
         print(data)
+
+    return data
+
+@main_bp.route('/week_Ajax_GET', methods=['GET'])
+def week_Ajax_GET():
+
+    data = {'my_favorite':{
+        'animal':'gorilla',
+        'food':'apple',
+        'sport':'baseball'
+        }
+    }
     return data
 
 # 日表示カレンダー
@@ -84,7 +100,9 @@ def calendar_day():
     conference_lists = []
 
     for conference in conferences:
-        conference_lists.append(conference.conference_id,conference.name)
+        data = [conference.conference_id, conference.name]
+        conference_lists.append(data)
+
 
     return render_template('calendar/calendar_day.html',reserves=reserve_lists, conferences=conference_lists)
 
@@ -133,3 +151,4 @@ def reserve_list(reserve):
                     reserve.users.email,reserve.purpose,reserve.remarks]
 
     return reserve_data
+

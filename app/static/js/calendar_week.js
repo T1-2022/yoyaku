@@ -185,18 +185,50 @@ function setReserve(num) {
 }
 
 function calendar_week_ajax(){
-    data = {"hoge": "fuga"};
+    data={"aaa":"bbb"};
+
+    calendar_ajax_POST(data);
+
+    data = calendar_ajax_GET();
+
+
+}
+
+function calendar_ajax_GET() {
+    window.alert('GET開始');
+    $(function () {
+        $.ajax({
+            type: "GET",
+            url: "/main/week_Ajax_GET",
+            dataType: "json",
+        })
+            .done(function (data) {
+                window.alert(data['my_favorite']['animal']);
+                return data
+            })
+            //通信失敗時の処理
+            .fail(function () {
+                window.alert('データが取れていません');
+            })
+    })
+
+
+}
+
+function calendar_ajax_POST(data) {
     json = JSON.stringify(data);  // object型からJSON文字列(string型)に変換
+
     $.ajax({
         type: "POST",
-        url: "/main/week_Ajax",
+        url: "/main/week_Ajax_POST",
         data: json,
         contentType: "application/json",
-        success: function(msg) {
+        success: function (msg) {
             console.log(msg);
         },
-        error: function(msg) {
+        error: function (msg) {
             console.log("error");
         }
-    });
+    })
+    window.alert('POST完了');
 }
