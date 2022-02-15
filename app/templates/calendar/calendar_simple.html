@@ -4,17 +4,13 @@
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/calendar_simple.css') }}">
 {% endblock %}
-
-{% block content %}
 <script type="text/javascript">
-    let yoyaku = {{ reserves | tojson }}
+    let yoyaku =
+    {{ reserves | tojson }}
+</script>
+{% block content %}
 
-</script>
-    <div id="div0"></div>
-<script>
-    var doc0= document.getElementById("div0");
-    doc0.innerHTML= yoyaku[0][2];
-</script>
+    </script>
     <div class="limiter">
         <div class="container-simple">
             <div class="wrap-simple">
@@ -35,7 +31,6 @@
                     </table>
                     <!--予約データ追加をここに記述-->
                     <script>
-
                         var data = new Array(4);
                         var data2 = 0;
                         for (i = 0; i < data.length; i++) {
@@ -45,7 +40,6 @@
                                 data[i][j]=data2;
                             }
                         }
-
 
                         var tableEle = document.getElementById('data-table');
                         for (var i = 0; i < yoyaku.length; i++) {
@@ -65,19 +59,11 @@
                                 }
                                 //会議室
                                 else if(j==2){
-                                    if(yoyaku[i][2]==1){
-                                        td.innerHTML = "A-101";
-                                    }
-                                    else if(yoyaku[i][2]==2){
-                                        td.innerHTML = "A-201";
-                                    }
-                                    else if(yoyaku[i][2]==3){
-                                        td.innerHTML = "A-301";
-                                    }
+                                    td.innerHTML = "会議室"+data[i][2];
                                 }
                                 //利用者
                                 else if(j==3){
-                                    td.innerHTML = yoyaku[i][7];
+                                    td.innerHTML = data[i][7];
                                 }
 
                                 tr.appendChild(td);
