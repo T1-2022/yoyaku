@@ -77,7 +77,7 @@ def calendar_day():
     conference_lists = []
 
     for conference in conferences:
-        conference_lists.append(conference.name)
+        conference_lists.append(conference.conference_id,conference.name)
 
     return render_template('calendar/calendar_day.html',reserves=reserve_lists, conferences=conference_lists)
 
