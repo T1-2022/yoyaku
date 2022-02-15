@@ -60,6 +60,13 @@ def calendar_week():
 
     return render_template('calendar/calendar_week.html',reserves=reserve_lists,conferences=conference_lists, test=reserveID)
 
+@main_bp.route('/week_Ajax', methods=['POST'])
+def week_Ajax():
+    if request.method == "POST":
+        data = request.json
+        print(data)
+    return data
+
 # 日表示カレンダー
 @main_bp.route("/day",methods=["GET"])
 def calendar_day():

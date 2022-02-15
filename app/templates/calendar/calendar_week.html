@@ -25,7 +25,7 @@
                         <button class="btn btn-secondary" type="button" id="prev" onclick="prev()">←前の週</button>
                     </div>
                     <div class="col-auto p-b-20">
-                        <button class="btn btn-secondary" type="button" id="current" onclick="current()">今日</button>
+                        <button class="btn btn-secondary" type="button" id="current" onclick="current(),calendar_week_ajax()">今日</button>
                     </div>
                     <div class="col-auto p-b-20">
                         <button class="btn btn-secondary" type="button" id="next" onclick="next()">次の週→</button>
@@ -47,6 +47,7 @@
                 reserveID : <label id="test"></label>
             </div>
         </div>
+
     </div>
 </div>
 {% endblock %}
