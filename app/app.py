@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from flask import Flask, request
+from flask import Flask
 from flask import render_template,session
 from flask import redirect
 

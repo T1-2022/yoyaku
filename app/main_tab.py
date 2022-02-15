@@ -45,25 +45,25 @@ def main_tab():
 # 週表示カレンダー
 @main_bp.route("/week", methods=["GET", "POST"])
 def calendar_week():
+    # 予約を削除
     if request.method == "POST":
-        reserveID = request.form['reserveID']
-    else:
-        reserveID = "null"
+        reserve_delete(request.form['reserveID'])
+
+    # データベースからユーザー情報を取得
+    register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
+    registerID = register.users.user_id     # reserveListに追加した予約者idと比較する
+    adminFlag = register.admin              # ログイン者に管理者権限があるか比較
 
     reserves = Reserve.query.all()
     reserve_lists=[]
     conferences = Conference.query.all()
     conference_lists=[]
-
     for conference in conferences:
         conference_lists.append(conference.name)
-
-    print(conference_lists)
-    #print(1,request.form['test'])
     for reserve in reserves:
         reserve_lists.append(reserve_list(reserve))
 
-    return render_template('calendar/calendar_week.html',reserves=reserve_lists,conferences=conference_lists, test=reserveID)
+    return render_template('calendar/calendar_week.html',reserves=reserve_lists, conferences=conference_lists, registerID=registerID, adminFlag=adminFlag)
 
 @main_bp.route('/week_Ajax_POST', methods=['POST'])
 def week_Ajax_POST():
@@ -154,13 +154,23 @@ def user_info():
 
     return render_template('user_info.html', user_info=user_info)
 
+
+# 予約情報の削除
+def reserve_delete(reserve_id):
+    register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
+    reserve = db.session.query(Reserve).filter_by(reserve_id=reserve_id).first()
+    if register.admin or reserve.registers.users.email == session['user']:
+        db.session.delete(reserve)
+        db.session.commit()
+
+
 def reserve_list(reserve):
-    # id, user_id, conf_id, register_name, date, starttime, endtime, user_name, user_email, purpose, remarks
+    # id, user_id, conf_id, register_name, date, starttime, endtime, user_name, user_email, purpose, remarks, register_id
 
     reserve_data = [reserve.reserve_id, reserve.user_id, reserve.conference_id,
                     reserve.registers.users.name,reserve.date,
                     reserve.starttime, reserve.endtime,reserve.users.name,
-                    reserve.users.email,reserve.purpose,reserve.remarks]
+                    reserve.users.email,reserve.purpose,reserve.remarks,reserve.register_id,]
 
     return reserve_data
 
