@@ -3,18 +3,18 @@ const today = new Date();
 var showDate = new Date(today.getFullYear(), today.getMonth(), 1);
 var startDay = "";
 var reserveID = -1; // 予約ID
-
+let reserves = []
 
 // 初期表示
 window.onload = function () {
-    createCalendar();
     current();
+    calendar_week_ajax();
 };
 
 // 前の週へ
 function prev() {
     startDay = changeDate(startDay, -7);
-    createCalendar();
+    //createCalendar();
 }
 
 // 今の週へ
@@ -30,7 +30,7 @@ function current() {
 // 次の週へ
 function next() {
     startDay = changeDate(startDay, 7);
-    createCalendar();
+    //createCalendar();
 }
 
 // カレンダー作成
@@ -185,17 +185,12 @@ function setReserve(num) {
 }
 
 function calendar_week_ajax(){
-    data={"aaa":"bbb"};
-
-    calendar_ajax_POST(data);
-
-    data = calendar_ajax_GET();
-
-
+    calendar_ajax_POST(startDay);
+    calendar_ajax_GET();
 }
 
 function calendar_ajax_GET() {
-    window.alert('GET開始');
+    //window.alert('GET開始');
     $(function () {
         $.ajax({
             type: "GET",
@@ -203,12 +198,13 @@ function calendar_ajax_GET() {
             dataType: "json",
         })
             .done(function (data) {
-                window.alert(data['my_favorite']['animal']);
-                return data
+                reserves = data;
+                createCalendar();
             })
             //通信失敗時の処理
             .fail(function () {
                 window.alert('データが取れていません');
+                createCalendar();
             })
     })
 
@@ -230,5 +226,5 @@ function calendar_ajax_POST(data) {
             console.log("error");
         }
     })
-    window.alert('POST完了');
+    //window.alert('POST完了');
 }

@@ -1,4 +1,5 @@
-from datetime import datetime
+import json
+from datetime import datetime, timedelta
 
 from flask import Flask
 from flask import render_template
@@ -66,22 +67,33 @@ def calendar_week():
 
 @main_bp.route('/week_Ajax_POST', methods=['POST'])
 def week_Ajax_POST():
+    global week_day
     if request.method == "POST":
-        data = request.json
-        print(data)
+        week_day = request.json
 
-    return data
+    return week_day
 
 @main_bp.route('/week_Ajax_GET', methods=['GET'])
 def week_Ajax_GET():
+    global week_day
+    reserve_lists=[]
+    if(week_day != None):
+        Sunday = datetime.strptime(week_day,'%Y/%m/%d').date()
+        Saturday = Sunday+ timedelta(days=6)
+        Sunday="{0:%Y/%m/%d}".format(Sunday)
+        Saturday="{0:%Y/%m/%d}".format(Saturday)
 
-    data = {'my_favorite':{
-        'animal':'gorilla',
-        'food':'apple',
-        'sport':'baseball'
-        }
-    }
-    return data
+        print(Sunday)
+        reserves = db.session.query(Reserve).filter(
+            (str(Sunday) <= Reserve.date)
+            & (str(Saturday) >= Reserve.date)).all()
+
+        for reserve in reserves:
+            reserve_lists.append(reserve_list(reserve))
+
+        return json.dumps(reserve_lists)
+
+    return json.dumps(None)
 
 # 日表示カレンダー
 @main_bp.route("/day",methods=["GET"])
