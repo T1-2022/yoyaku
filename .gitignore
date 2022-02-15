@@ -3,4 +3,4 @@
 __pycache__/
 app/sqlite3.exe
 app/res_test.py
-test_delete.py
+app/test_delete.py
