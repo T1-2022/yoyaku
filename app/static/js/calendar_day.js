@@ -3,19 +3,6 @@ const today = new Date();
 var showDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getDay());
 var day_disp = "";
 
-let yoyaku = [
-    // id, user_id, conf_id, date, start_time, end_time, user_name, user_email, purpose, remarks
-    [0, 0, "会議室1", "2022/2/15", "10:00", "12:00", "○○先生", "test@email.com", "利用目的", "備考"],
-    [0, 0, "会議室1", "2022/2/10", "14:00", "16:00", "○○先生", "test@email.com", "利用目的", "備考"],
-    [0, 0, "会議室2", "2022/2/11", "10:00", "12:00", "○○先生", "test@email.com", "利用目的", "備考"],
-    [0, 0, "会議室3", "2022/2/9", "10:00", "12:00", "○○先生", "test@email.com", "利用目的", "備考"],
-    [0, 0, "会議室4", "2022/2/11", "10:00", "12:00", "○○先生", "test@email.com", "利用目的", "備考"],
-    [0, 0, "会議室5", "2022/2/11", "10:00", "12:00", "○○先生", "test@email.com", "利用目的", "備考"],
-    [0, 0, "会議室6", "2022/3/11", "10:00", "12:00", "○○先生", "test@email.com", "利用目的", "備考"]
-];
-
-let room = ["会議室1","会議室2","会議室3","会議室4","会議室5","会議室6","会議捨7","会議室8"];
-
 // 初期表示
 window.onload = function () {
     showProcess(today);
