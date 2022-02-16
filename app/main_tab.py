@@ -144,6 +144,11 @@ def calendar_simple():
 def reserve_page():
     return redirect(url_for('reserves.reserves'))
 
+# 会議室詳細ページ
+@main_bp.route("/room")
+def room_page():
+    return render_template('room.html')
+
 # ユーザー情報
 @main_bp.route("/user_info")
 def user_info():
