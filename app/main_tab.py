@@ -51,7 +51,7 @@ def calendar_week():
 
     # データベースからユーザー情報を取得
     register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
-    registerID = register.users.user_id     # reserveListに追加した予約者idと比較する
+    registerID = register.users.user_id     # reserveListに追加した予約者idと比較
     adminFlag = register.admin              # ログイン者に管理者権限があるか比較
 
     reserves = Reserve.query.all()
