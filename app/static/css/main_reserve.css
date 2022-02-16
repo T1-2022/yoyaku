@@ -37,7 +37,10 @@ iframe{
   width: 600px;
   overflow: hidden;
 }
-
+.wrap-room100 {
+  width: 950px;
+  overflow: hidden;
+}
 .colreserve{
   text-align: right;
   padding: 15px;
