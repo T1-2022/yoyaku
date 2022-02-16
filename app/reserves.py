@@ -26,7 +26,7 @@ def reserves():
 
         if end_time < start_time:
            conferences = Conference.query.all()
-           return render_template('reserve.html',conferences = conferences)
+           return render_template('reserve.html',conferences = conferences,error=True)
 
         register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
         user_name = request.form['name']
@@ -78,8 +78,7 @@ def reserves():
 
         else:
             conferences = Conference.query.all()
-            print("aaa")
-            return render_template('reserve.html', conferences=conferences)
+            return render_template('reserve.html', conferences=conferences,error=True)
 
 
 
@@ -87,4 +86,4 @@ def reserves():
 
     conferences = Conference.query.all()
 
-    return render_template('reserve.html',conferences = conferences)
+    return render_template('reserve.html',conferences = conferences,error=False)

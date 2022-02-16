@@ -135,7 +135,8 @@ def calendar_simple():
     conference_lists = []
 
     for conference in conferences:
-        conference_lists.append(conference.name)
+        data = [conference.conference_id, conference.name]
+        conference_lists.append(data)
 
     return render_template('calendar/calendar_simple.html', reserves=reserve_lists_simple,conferences=conference_lists)
 

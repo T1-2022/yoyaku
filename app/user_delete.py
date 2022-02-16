@@ -11,4 +11,5 @@ def user_delete(user_email):
         db.session.delete(user)
         db.session.commit()
 
+
     return redirect(url_for('admin_main.admin_main'))

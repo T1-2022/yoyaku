@@ -5,10 +5,18 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_reserve.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_tab.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/reserve.css') }}">
+
 {% endblock %}
 
 {% block content %}
 <div class="limiter">
+    <script>
+        if({{ error | tojson }}==true)
+        {
+            window.alert("予約出来ませんでした");
+        }
+    </script>
+
     <div class="container-user100">
     <div class="wrap-user100">
         <form class="login100-form validate-form" method="post">
