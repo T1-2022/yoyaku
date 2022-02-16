@@ -17,9 +17,9 @@
                     <label>会議室</label>
                 </div>
                 <div class="col-4 p-b-10">
-                    <select class="form-select" id="conference">
+                    <select class="form-select" name="conference">
                         {% for conference in conferences %}
-                            <option value="{{ conference.__dict__['id'] }}">{{ conference.__dict__['name'] }}></option>
+                            <option value="{{ conference.__dict__['conference_id'] }}">{{ conference.__dict__['name'] }}></option>
                         {% endfor %}
                     </select>
                 </div>
@@ -27,31 +27,31 @@
                     <label>日付</label>
                 </div>
                 <div class="col-4 p-b-10">
-                    <input id="date" class="form-control" type="date" />
+                    <input name="date" class="form-control" type="date" />
                 </div>
                 <div class="col-2 colreserve">
                     <label>開始時間</label>
                 </div>
                 <div class="col-4 p-b-10">
-                    <input id="starttime" class="form-control" type="time" />
+                    <input name="starttime" class="form-control" type="time" />
                 </div>
                 <div class="col-2 colreserve">
                     <label>終了時間</label>
                 </div>
                 <div class="col-4">
-                    <input id="endtime" class="form-control" type="time" />
+                    <input name="endtime" class="form-control" type="time" />
                 </div>
                 <div class="col-4 colreserve">
                     <label>利用者名</label>
                 </div>
                 <div class="col-8 p-b-10">
-                    <input class="form-control" id="name" placeholder="利用者名">
+                    <input class="form-control" name="name" placeholder="利用者名">
                 </div>
                 <div class="col-4 colreserve">
                     <label>利用目的</label>
                 </div>
                 <div class="col-8 p-b-10">
-                    <select class="form-select" id="purpose">
+                    <select class="form-select" name="purpose">
                         <option value="授業">授業</option>
                     <option value="会議">会議</option>
                     <option value="入試">入試</option>
@@ -62,15 +62,15 @@
                 <label>利用者メール</label>
             </div>
             <div class="col-8 p-b-10">
-                <input type="email" class="form-control" id="email" placeholder="メール">
+                <input type="email" class="form-control" name="email" placeholder="メール">
             </div>
             <div class="col-4 colreserve">
                 <label>備考</label>
             </div>
             <div class="col-8 p-b-10">
-                <input class="form-control" id="remarks" placeholder="参考">
+                <input class="form-control" name="remarks" placeholder="参考">
             </div>
-                <div class="col-12 p-b-10 text-center"><button class="btn btn-secondary btn-lg" type="button">予約登録</button></div>
+                <div class="col-12 p-b-10 text-center"><button class="btn btn-secondary " type="submit">予約登録</button></div>
             </div>
         </form>
     </div>

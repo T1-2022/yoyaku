@@ -5,9 +5,10 @@
 <link href='../static/css/calendar_week.css' rel='stylesheet' />
 <script src='../static/js/calendar_week.js'></script>
 <script type="text/javascript">
-    let reserves = {{ reserves | tojson }}
-    let conferences = {{ conferences | tojson }}
-    var test = {{ test | tojson }}
+    //let reserves = {{reserves | tojson }};
+    let conferences = {{ conferences | tojson }};
+    var test = {{ test | tojson }};
+    calendar_week_ajax();
 </script>
 {% endblock %}
 
@@ -22,13 +23,13 @@
             <div class="col-md-6 text-center">
                 <div class="row justify-content-end">
                     <div class="col-auto p-b-20">
-                        <button class="btn btn-secondary" type="button" id="prev" onclick="prev()">←前の週</button>
+                        <button class="btn btn-secondary" type="button" id="prev" onclick="prev(),calendar_week_ajax()">←前の週</button>
                     </div>
                     <div class="col-auto p-b-20">
-                        <button class="btn btn-secondary" type="button" id="current" onclick="current()">今日</button>
+                        <button class="btn btn-secondary" type="button" id="current" onclick="current(),calendar_week_ajax()">今日</button>
                     </div>
                     <div class="col-auto p-b-20">
-                        <button class="btn btn-secondary" type="button" id="next" onclick="next()">次の週→</button>
+                        <button class="btn btn-secondary" type="button" id="next" onclick="next(),calendar_week_ajax()">次の週→</button>
                     </div>
                 </div>
             </div>
@@ -47,6 +48,7 @@
                 reserveID : <label id="test"></label>
             </div>
         </div>
+
     </div>
 </div>
 {% endblock %}

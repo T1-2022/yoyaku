@@ -3,18 +3,18 @@ const today = new Date();
 var showDate = new Date(today.getFullYear(), today.getMonth(), 1);
 var startDay = "";
 var reserveID = -1; // 予約ID
-
+let reserves = []
 
 // 初期表示
 window.onload = function () {
-    createCalendar();
     current();
+    calendar_week_ajax();
 };
 
 // 前の週へ
 function prev() {
     startDay = changeDate(startDay, -7);
-    createCalendar();
+    //createCalendar();
 }
 
 // 今の週へ
@@ -30,7 +30,7 @@ function current() {
 // 次の週へ
 function next() {
     startDay = changeDate(startDay, 7);
-    createCalendar();
+    //createCalendar();
 }
 
 // カレンダー作成
@@ -48,8 +48,6 @@ function createCalendar() {
     document.querySelector('#date').innerHTML = year + "年 " + month + "月" + date + "日～";
     document.querySelector('#calendar').innerHTML = calendar;
     document.querySelector('#test').innerHTML = test;
-
-    //document.querySelector('#reserveID').value = "blue";
 }
 
 // カレンダー日にち部分作成
@@ -95,23 +93,24 @@ function createReserve() {
             // 予約検索
             calendar += "<td>";
             for (k = 0; k < reserves.length; k++) {
-                var reserveDay = reserves[k][3].split("/");
-                if (i == reserves[k][2]
+                var reserveDay = reserves[k][4].split("/");
+                if (i == reserves[k][2] - 1
                     && year == Number(reserveDay[0])
                     && month == Number(reserveDay[1])
                     && date == Number(reserveDay[2])) {
 
                     // ボタン内容定義
                     var id = reserves[k][0];
-                    var text = reserves[k][4] + "<br>" + reserves[k][5];
+                    var time = reserves[k][5] + "~" + reserves[k][6]
+                    var text = time + "<br>" + reserves[k][7];
 
                     // 予約詳細定義
-                    var detail = "　　　　　　予約者名　　：" + reserves[k][0] + "<br>";
-                    detail += "　　　　　　予約時間　　：" + reserves[k][4] + "<br>";
-                    detail += "　　　　　　　目的　　　：" + reserves[k][7] + "<br>";
-                    detail += "　　　　　　利用者名　　：" + reserves[k][5] + "<br>";
-                    detail += "　　　　　利用者連絡先　：" + reserves[k][6] + "<br>";
-                    detail += "　　　　　　　備考　　　：" + reserves[k][8];
+                    var detail = "　　　　　　予約者名　　：" + reserves[k][3] + "<br>";
+                    detail += "　　　　　　予約時間　　：" + time + "<br>";
+                    detail += "　　　　　　　目的　　　：" + reserves[k][9] + "<br>";
+                    detail += "　　　　　　利用者名　　：" + reserves[k][7] + "<br>";
+                    detail += "　　　　　利用者連絡先　：" + reserves[k][8] + "<br>";
+                    detail += "　　　　　　　備考　　　：" + reserves[k][10];
 
                     // ボタン設定
                     calendar += "<button class='btn btn-secondary font-small' type='button' data-bs-toggle='modal' data-bs-target='#reserve" + id + "' ";
@@ -183,4 +182,49 @@ function setReserve(num) {
     
     var formName = "reserveID" + num;
     document.querySelector('input[id="' + formName + '"]').value = num;
+}
+
+function calendar_week_ajax(){
+    calendar_ajax_POST(startDay);
+    calendar_ajax_GET();
+}
+
+function calendar_ajax_GET() {
+    //window.alert('GET開始');
+    $(function () {
+        $.ajax({
+            type: "GET",
+            url: "/main/week_Ajax_GET",
+            dataType: "json",
+        })
+            .done(function (data) {
+                reserves = data;
+                createCalendar();
+            })
+            //通信失敗時の処理
+            .fail(function () {
+                window.alert('データが取れていません');
+                createCalendar();
+            })
+    })
+
+
+}
+
+function calendar_ajax_POST(data) {
+    json = JSON.stringify(data);  // object型からJSON文字列(string型)に変換
+
+    $.ajax({
+        type: "POST",
+        url: "/main/week_Ajax_POST",
+        data: json,
+        contentType: "application/json",
+        success: function (msg) {
+            console.log(msg);
+        },
+        error: function (msg) {
+            console.log("error");
+        }
+    })
+    //window.alert('POST完了');
 }
