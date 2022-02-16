@@ -14,8 +14,6 @@ def reserve_delete(reserve_id):
         register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
         reserve = db.session.query(Reserve).filter_by(reserve_id=reserve_id).first()
         if register.admin or reserve.registers.users.email == session['user']:
-            #print(register.admin)
-            #print(reserve.registers.users.email*)
             db.session.delete(reserve)
             db.session.commit()
         return redirect(url_for('main_tab.calendar_week'))

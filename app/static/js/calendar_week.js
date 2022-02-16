@@ -3,18 +3,18 @@ const today = new Date();
 var showDate = new Date(today.getFullYear(), today.getMonth(), 1);
 var startDay = "";
 var reserveID = -1; // 予約ID
-
+let reserves = []
 
 // 初期表示
 window.onload = function () {
-    createCalendar();
     current();
+    calendar_week_ajax();
 };
 
 // 前の週へ
 function prev() {
     startDay = changeDate(startDay, -7);
-    createCalendar();
+    //createCalendar();
 }
 
 // 今の週へ
@@ -30,7 +30,7 @@ function current() {
 // 次の週へ
 function next() {
     startDay = changeDate(startDay, 7);
-    createCalendar();
+    //createCalendar();
 }
 
 // カレンダー作成
@@ -79,18 +79,6 @@ function createDate() {
 
 // カレンダー予約部分作成
 function createReserve() {
-    var xhttp = new XMLHttpRequest();
-    //const reserves = document.getElementById('reserve_lists').value;
-    //xhttp.open("GET", `http://127.0.0.1:5000/?reserve_lists=${reserves}`, true);
-    //xhttp.send();
-
-    //console.log("Ajax通信 成功")
-    //xhttp.open("POST", "http://127.0.0.1:5000/", true);
-    // POSTはURLにパラメータを載せないので、以下のようにやるよ
-    //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    //const user_name = document.getElementById('user_name').value;
-    //xhttp.send(`test2="user_name"`);
-
     var calendar = "<tbody>";
 
     for (var i = 0; i < conferences.length; i++) {
@@ -194,4 +182,49 @@ function setReserve(num) {
     
     var formName = "reserveID" + num;
     document.querySelector('input[id="' + formName + '"]').value = num;
+}
+
+function calendar_week_ajax(){
+    calendar_ajax_POST(startDay);
+    calendar_ajax_GET();
+}
+
+function calendar_ajax_GET() {
+    //window.alert('GET開始');
+    $(function () {
+        $.ajax({
+            type: "GET",
+            url: "/main/week_Ajax_GET",
+            dataType: "json",
+        })
+            .done(function (data) {
+                reserves = data;
+                createCalendar();
+            })
+            //通信失敗時の処理
+            .fail(function () {
+                window.alert('データが取れていません');
+                createCalendar();
+            })
+    })
+
+
+}
+
+function calendar_ajax_POST(data) {
+    json = JSON.stringify(data);  // object型からJSON文字列(string型)に変換
+
+    $.ajax({
+        type: "POST",
+        url: "/main/week_Ajax_POST",
+        data: json,
+        contentType: "application/json",
+        success: function (msg) {
+            console.log(msg);
+        },
+        error: function (msg) {
+            console.log("error");
+        }
+    })
+    //window.alert('POST完了');
 }
