@@ -58,10 +58,11 @@ def calendar_week():
     reserve_lists=[]
     conferences = Conference.query.all()
     conference_lists=[]
-    for conference in conferences:
-        conference_lists.append(conference.name)
     for reserve in reserves:
         reserve_lists.append(reserve_list(reserve))
+    for conference in conferences:
+        data = [conference.conference_id, conference.name]
+        conference_lists.append(data)
 
     return render_template('calendar/calendar_week.html',reserves=reserve_lists, conferences=conference_lists, registerID=registerID, adminFlag=adminFlag)
 

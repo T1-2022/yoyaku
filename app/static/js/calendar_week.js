@@ -80,7 +80,7 @@ function createReserve() {
     var calendar = "<tbody>";
 
     for (var i = 0; i < conferences.length; i++) {
-        calendar += "<tr><th scope='row'>" + conferences[i] + "</th>";
+        calendar += "<tr><th scope='row'>" + conferences[i][1] + "</th>";
         for (var j = 0; j < week.length; j++) {
             // 日加算
             var day = changeDate(startDay, j).split("/");
@@ -92,7 +92,7 @@ function createReserve() {
             calendar += "<td>";
             for (k = 0; k < reserves.length; k++) {
                 var reserveDay = reserves[k][4].split("/");
-                if (i == reserves[k][2] - 1
+                if (conferences[i][0] == reserves[k][2]
                     && year == Number(reserveDay[0])
                     && month == Number(reserveDay[1])
                     && date == Number(reserveDay[2])) {
