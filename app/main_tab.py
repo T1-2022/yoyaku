@@ -148,7 +148,7 @@ def reserve_page():
 @main_bp.route("/room")
 def room_page():
     conferences = Conference.query.all()
-    return render_template('room.html',conferences)
+    return render_template('room.html',conferences=conferences)
 
 # ユーザー情報
 @main_bp.route("/user_info")
