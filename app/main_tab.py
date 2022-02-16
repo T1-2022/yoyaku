@@ -89,7 +89,13 @@ def calendar_simple():
     for i in reserve_lists_simple:
         print(i)
 
-    return render_template('calendar/calendar_simple.html', reserves=reserve_lists_simple)
+    conferences = Conference.query.all()
+    conference_lists = []
+
+    for conference in conferences:
+        conference_lists.append(conference.name)
+
+    return render_template('calendar/calendar_simple.html', reserves=reserve_lists_simple,conferences=conference_lists)
 
 # 予約ページ
 @main_bp.route("/reserve")

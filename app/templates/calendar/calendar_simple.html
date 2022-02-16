@@ -7,13 +7,8 @@
 
 {% block content %}
 <script type="text/javascript">
-    let yoyaku = {{ reserves | tojson }}
-
-</script>
-    <div id="div0"></div>
-<script>
-    var doc0= document.getElementById("div0");
-    doc0.innerHTML= yoyaku[0][2];
+    let yoyaku = {{ reserves | tojson }};
+    let conferences = {{ conferences | tojson }};
 </script>
     <div class="limiter">
         <div class="container-simple">
@@ -66,7 +61,7 @@
                                 //会議室
                                 else if(j==2){
                                     if(yoyaku[i][2]==1){
-                                        td.innerHTML = "A-101";
+                                        td.innerHTML = conferences[0];
                                     }
                                     else if(yoyaku[i][2]==2){
                                         td.innerHTML = "A-201";
@@ -117,6 +112,5 @@
                 </div>
             </div>
         </div>
-        >
     </div>
 {% endblock %}
