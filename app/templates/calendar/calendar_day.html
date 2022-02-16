@@ -5,10 +5,11 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/calendar_day.css') }}">
   <script src="{{ url_for('static',filename='js/calendar_day.js') }}"></script>
   <script type="text/javascript">
-    let reserves = {{ reserves | tojson }}
-    let conferences = {{ conferences | tojson }}
+    let yoyaku = {{ reserves | tojson }};
+    let room = {{ conferences | tojson }};
   </script>
 {% endblock %}
+
 {% block content %}
 
     <div class="row align-items-start p-b">

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <body>
+        <h1 id="output">Hello</h1>
+        <button onclick=test_click()>ボタン</button>
+        <button onclick=test_ajax()>Ajax</button>
+        <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+        <script>
+            function test_click(){
+                $("#output").html("<b>JQuery使用成功</b>");
+            };
+            function test_ajax(){
+                data = {"hoge": "fuga"};
+                json = JSON.stringify(data);  // object型からJSON文字列(string型)に変換
+                $.ajax({
+                    type: "POST",
+                    url: "/test",
+                    data: json,
+                    contentType: "application/json",
+                    success: function(msg) {
+                        console.log(msg);
+                    },
+                    error: function(msg) {
+                        console.log("error");
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

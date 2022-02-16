@@ -1,4 +1,5 @@
-from datetime import datetime
+import json
+from datetime import datetime, timedelta
 
 from flask import Flask
 from flask import render_template
@@ -17,6 +18,10 @@ from login import login_required
 
 # ブループリント設定
 main_bp = Blueprint('main_tab', __name__, url_prefix='/main')
+
+#非同期用グローバル変数
+week_day = None
+day_time = None
 
 # メイン画面
 @main_bp.route("/", methods=["GET"])
@@ -60,8 +65,38 @@ def calendar_week():
 
     return render_template('calendar/calendar_week.html',reserves=reserve_lists,conferences=conference_lists, test=reserveID)
 
+@main_bp.route('/week_Ajax_POST', methods=['POST'])
+def week_Ajax_POST():
+    global week_day
+    if request.method == "POST":
+        week_day = request.json
+
+    return week_day
+
+@main_bp.route('/week_Ajax_GET', methods=['GET'])
+def week_Ajax_GET():
+    global week_day
+    reserve_lists=[]
+    if(week_day != None):
+        Sunday = datetime.strptime(week_day,'%Y/%m/%d').date()
+        Saturday = Sunday+ timedelta(days=6)
+        Sunday="{0:%Y/%m/%d}".format(Sunday)
+        Saturday="{0:%Y/%m/%d}".format(Saturday)
+
+        print(Sunday)
+        reserves = db.session.query(Reserve).filter(
+            (str(Sunday) <= Reserve.date)
+            & (str(Saturday) >= Reserve.date)).all()
+
+        for reserve in reserves:
+            reserve_lists.append(reserve_list(reserve))
+
+        return json.dumps(reserve_lists)
+
+    return json.dumps(None)
+
 # 日表示カレンダー
-@main_bp.route("/day")
+@main_bp.route("/day",methods=["GET"])
 def calendar_day():
     if request.method == "POST":
         reserveID = request.form['reserveID']
@@ -73,7 +108,14 @@ def calendar_day():
     for reserve in reserves:
         reserve_lists.append(reserve_list(reserve))
 
-    conference_lists = ["会議室1","会議室2","会議室3","会議室4","会議室5","会議室6","会議捨7","会議室8"]
+    conferences = Conference.query.all()
+    conference_lists = []
+
+    for conference in conferences:
+        data = [conference.conference_id, conference.name]
+        conference_lists.append(data)
+
+
     return render_template('calendar/calendar_day.html',reserves=reserve_lists, conferences=conference_lists)
 
 # 簡易表示カレンダー
@@ -127,3 +169,4 @@ def reserve_list(reserve):
                     reserve.users.email,reserve.purpose,reserve.remarks]
 
     return reserve_data
+
