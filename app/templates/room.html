@@ -10,16 +10,18 @@
    <div class="container-user100">
        <div class="wrap-room100">
           <div class="row row-cols-3 align-items-center">
+              {% for conference in conferences %}
               <div class="col-sm-4  p-b-20">
                   <div class="card" style="width: 18rem;">
-                      <img src="{{ url_for('static',filename='img/1.jpg') }}" class="card-img-top" alt="classroom">
+                      <img src='../static/img/{{ conference.__dict__['fhoto_id'] }}.jpg' class="card-img-top" alt="classroom">
                       <div class="card-body">
-                          <h5 class="card-title">会議室番号</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">人数</h6>
-                          <p class="card-text">詳細</p>
+                          <h5 class="card-title">{{ conference.__dict__['name'] }}</h5>
+                          <h6 class="card-subtitle mb-2 text-muted">{{ conference.__dict__['capacity'] }}</h6>
+                          <p class="card-text">{{ conference.__dict__['remarks'] }}</p>
                       </div>
                   </div>
               </div>
+              {% endfor %}
           </div>
        </div>
    </div>
