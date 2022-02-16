@@ -60,15 +60,16 @@
                                 }
                                 //会議室
                                 else if(j==2){
-                                    if(yoyaku[i][2]==1){
+                                    td.innerHTML = conferences[yoyaku[i][2]-1]
+                                    /*if(yoyaku[i][2]==1){
                                         td.innerHTML = conferences[0];
                                     }
                                     else if(yoyaku[i][2]==2){
-                                        td.innerHTML = "A-201";
+                                        td.innerHTML = conferences[1];
                                     }
                                     else if(yoyaku[i][2]==3){
-                                        td.innerHTML = "A-301";
-                                    }
+                                        td.innerHTML = conferences[2];
+                                    }*/
                                 }
                                 //利用者
                                 else if(j==3){
