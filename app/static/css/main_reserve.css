@@ -33,6 +33,18 @@ iframe{
   padding: 15px;
   font-size: 20px;
 }
+.wrap-user100 {
+  width: 600px;
+  overflow: hidden;
+}
+.wrap-room100 {
+  width: 950px;
+  overflow: hidden;
+}
+.colreserve{
+  text-align: right;
+  padding: 15px;
+}
 
 .wrap-reserve100 {
   width: 1200px;

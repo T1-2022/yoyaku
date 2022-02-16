@@ -1,0 +1,29 @@
+{% extends "template.html" %}
+{% block title %}会議室詳細{% endblock %}
+{% block head %}
+  {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_reserve.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_tab.css') }}">
+{% endblock %}
+{% block content %}
+<div class="limiter">
+   <div class="container-user100">
+       <div class="wrap-room100">
+          <div class="row row-cols-3 align-items-center">
+              {% for conference in conferences %}
+              <div class="col-sm-4  p-b-20">
+                  <div class="card" style="width: 18rem;">
+                      <img src='../static/img/{{ conference.__dict__['fhoto_id'] }}.jpg' class="card-img-top" alt="classroom">
+                      <div class="card-body">
+                          <h5 class="card-title">{{ conference.__dict__['name'] }}</h5>
+                          <h6 class="card-subtitle mb-2 text-muted">{{ conference.__dict__['capacity'] }}</h6>
+                          <p class="card-text">{{ conference.__dict__['remarks'] }}</p>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+       </div>
+   </div>
+</div>
+{% endblock %}
