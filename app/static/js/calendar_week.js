@@ -2,8 +2,7 @@ const week = ["(日)", "(月)", "(火)", "(水)", "(木)", "(金)", "(土)"];
 const today = new Date();
 var showDate = new Date(today.getFullYear(), today.getMonth(), 1);
 var startDay = "";
-var reserveID = -1; // 予約ID
-let reserves = []
+let reserves = [];
 
 // 初期表示
 window.onload = function () {
@@ -47,7 +46,6 @@ function createCalendar() {
 
     document.querySelector('#date').innerHTML = year + "年 " + month + "月" + date + "日～";
     document.querySelector('#calendar').innerHTML = calendar;
-    document.querySelector('#test').innerHTML = test;
 }
 
 // カレンダー日にち部分作成
@@ -112,10 +110,15 @@ function createReserve() {
                     detail += "　　　　　利用者連絡先　：" + reserves[k][8] + "<br>";
                     detail += "　　　　　　　備考　　　：" + reserves[k][10];
 
+                    // 削除できるかチェック
+                    var delete_button = "";
+                    if (adminFlag == true || reserves[k][11] == registerID) {
+                        delete_button = "<button class='btn btn-secondary' type='submit' data-bs-dismiss='modal'>削除</button>";
+                    }
+
                     // ボタン設定
                     calendar += "<button class='btn btn-secondary font-small' type='button' data-bs-toggle='modal' data-bs-target='#reserve" + id + "' ";
                     calendar += "onclick = 'setReserve(" + id + ")'>" + text + "</button>";
-
                     calendar += "<div class='modal fade' id='reserve";
                     calendar += reserves[k][0] + "' tabindex=' - 1' aria-hidden='true'>";
                     calendar += "<div class='modal-dialog'>";
@@ -132,8 +135,7 @@ function createReserve() {
                     calendar += "<div class='modal-footer'>";
                     calendar += "   <form name='reserveForm' method='post'>"
                     calendar += "       <input hidden type='text'  name='reserveID' id='reserveID" + id + "'>";
-                    //calendar += "       <button class='btn btn-secondary' type='submit' data-bs-dismiss='modal'>変更</button>";
-                    calendar += "       <button class='btn btn-secondary' type='submit' data-bs-dismiss='modal'>削除</button>";
+                    calendar +=         delete_button;
                     calendar += "   </form>";
                     calendar += "</div>";
 
@@ -178,8 +180,6 @@ function changeDate(day, num) {
 
 // 予約内容取得
 function setReserve(num) {
-    reserveID = num;
-    
     var formName = "reserveID" + num;
     document.querySelector('input[id="' + formName + '"]').value = num;
 }
