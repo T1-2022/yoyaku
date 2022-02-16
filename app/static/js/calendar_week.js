@@ -23,7 +23,7 @@ function current() {
     var date = today.getDate();
     var currentDay = year + "/" + month + "/" + date;
     startDay = changeDate(currentDay, -today.getDay());
-    createCalendar();
+    //createCalendar();
 }
 
 // 次の週へ
