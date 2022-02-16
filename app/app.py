@@ -13,7 +13,6 @@ from models.User import User
 from models import database
 from login import login_bp
 from main_tab import main_bp
-from reserve_delete import reserve_delete_bp
 
 app = Flask(__name__)
 
