@@ -30,7 +30,6 @@ app.register_blueprint(user_add_bp)
 app.register_blueprint(admin_main_bp)
 app.register_blueprint(user_delete_bp)
 app.register_blueprint(reserves_bp)
-app.register_blueprint(reserve_delete_bp)
 app.register_blueprint(admin_room_bp)
 
 app.secret_key = 'user'
