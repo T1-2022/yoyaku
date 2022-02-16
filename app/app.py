@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from flask import Flask, request
+from flask import Flask
 from flask import render_template,session
 from flask import redirect
 
@@ -13,7 +13,6 @@ from models.User import User
 from models import database
 from login import login_bp
 from main_tab import main_bp
-from reserve_delete import reserve_delete_bp
 
 app = Flask(__name__)
 
@@ -30,7 +29,6 @@ app.register_blueprint(user_add_bp)
 app.register_blueprint(admin_main_bp)
 app.register_blueprint(user_delete_bp)
 app.register_blueprint(reserves_bp)
-app.register_blueprint(reserve_delete_bp)
 app.register_blueprint(admin_room_bp)
 
 app.secret_key = 'user'
