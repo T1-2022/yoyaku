@@ -44,17 +44,47 @@
                                     <div class="modal-dialog modal-sm modal-dialog-centered" id="{{conference.__dict__['conference_id']}}">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="change-room-label">削除確認</h5>
+                                                <h5 class="modal-title" id="change-room-label">更新確認</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                             <div class="modal-body">
-                                                <div class="wrap-input100 validate-input"  data-validate = "Introduce Name">
-                                                    <input class="input100" type="text" name="Name" value="{{ request.form.username }}">
+                                                <div class="row rows-cols-2 text-center">
+                                                    <div class="col-12">
+                                                        <div class="wrap-inputadmin100">
+                                                            <input class="inputadmin100" type="text" name="Name" value="{{ conference.__dict__['name'] }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="wrap-inputadmin100">
+                                                            <input class="inputadmin100" type="text" name="Capacity" value="{{ conference.__dict__['capacity'] }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="wrap-inputadmin100">
+                                                            <input class="inputadmin100" type="text" name="Photo" value="{{ conference.__dict__['fhoto_id'] }}">
+                                                        </div>
+                                                    </div>
+                                                    {% for equipment in conference.equipments %}
+                                                        <div class="col-8">
+                                                            <div class="wrap-inputadmin100">
+                                                                <select class="inputadmin100" name="Eq{{ equipment.__dict__['equipment_id'] }}" >
+                                                                    {% for eq in equipments %}
+                                                                        <option value="{{ eq.__dict__['equipment_id'] }}" {% if equipment.__dict__['equipment_id'] == eq.__dict__['equipment_id'] %} selected {% endif %}>{{ eq.__dict__['name'] }}></option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                        <div class="wrap-inputadmin100">
+                                                            <input class="inputadmin100" type="text" name="Eqamount" value="0">
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                                                <button class="login100-form-btn">更新</button>
+                                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">更新</button>
                                                 </div>
                                             </div>
                                         </div>

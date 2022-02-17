@@ -110,6 +110,37 @@
   left: 0;
 }
 
+/*[ Input ]*/
+.inputadmin100 {
+  font-family: Poppins-Regular;
+  font-size: 15px;
+  color: #555555;
+  line-height: 0.5;
+
+  display: block;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  padding: 0 1px;
+}
+
+.wrap-inputadmin100 {
+  width: 100%;
+  position: relative;
+  padding: 5px;
+  border: 2px solid #adadad;
+  margin-bottom: 10px;
+}
+
+
+.wrap-smallinput100 {
+  width: 100%;
+  position: relative;
+  padding: 5px;
+  border: 2px solid #adadad;
+  margin-bottom: 10px;
+}
+
 /*[ Table ]*/
 .my-custom-scrollbar {
 position: relative;
