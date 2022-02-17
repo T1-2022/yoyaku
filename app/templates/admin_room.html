@@ -34,9 +34,9 @@
                             <td>{{ conference.__dict__['capacity'] }}</td>
                             <td>{{ conference.__dict__['fhoto_id'] }}</td>
                             <td>
-                                {% for equipment in conference.equipments %}
-                                    <p class="card-text">&emsp; {{ equipment.__dict__['name'] }}
-                                {% endfor %}
+                                {% for equipment in conference.conference_equipments %}
+                                    <p class="card-text">{{ equipment.equipments.__dict__['name'] }} x{{ equipment.__dict__['num'] }}</p>
+                          {% endfor %}
                             </td>
                             <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ChangeRoom{{conference.__dict__['conference_id'] }}">更新</button>
                                 <form class="login100-form" method="post">
@@ -73,7 +73,7 @@
                                                                 <input class="inputadmin100" type="text" name="equipment{{ eq.__dict__['equipment_id'] }}"
                                                                        {% for equipment in conference.conference_equipments %}
                                                                             {% if eq.__dict__['equipment_id']==equipment.__dict__['equipment_id'] %}
-                                                                                value="{{ equipment.__dict__['equipment_id']}}"
+                                                                                value="{{ equipment.__dict__['num']}}"
                                                                             {% endif %}
                                                                        {% endfor %}>
                                                             </div>
@@ -116,33 +116,23 @@
                         </tr>
                         </tbody>
                     </table>
-
                 </div>
                 <div class="container-admin100-form-btn">
                     <div class="wrap-admin100-form-btn">
                         <div class="admin100-form-bgbtn"></div>
-                            <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_user_add.admin_user_add')) }}">
-								ユーザー登録
+                            <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_main.admin_main')) }}">
+								会議室登録
 							</a>
                         </div>
                 </div>
-
                 <div class="container-admin100-form-btn">
                     <div class="wrap-admin100-form-btn">
                         <div class="admin100-form-bgbtn"></div>
-                            <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_room.admin_room')) }}">
-								会議室
-							</a>
-                        </div>
-                </div>
-
-                <div class="container-admin100-form-btn">
-                    <div class="wrap-admin100-form-btn">
-                        <div class="admin100-form-bgbtn"></div>
-                            <a type="button" class="admin100-form-btn" href="{{ url_for('main_tab.main_tab') }}">
+                            <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_main.admin_main')) }}">
 								戻る
 							</a>
                         </div>
+                </div>
 	</div>
     </div>
         </div>
