@@ -1,15 +1,16 @@
 {% extends "template.html" %}
 {% block title %}メイン画面{% endblock %}
 {% block head %}
-  {{ super() }}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_reserve.css') }}">
-    <link href='../static/css/main_tab.css' rel='stylesheet' />
+
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_reserve.css') }}">
+<link href='../static/css/main_tab.css' rel='stylesheet' />
+
 {% endblock %}
 {% block content %}
-
-    <div class="limiter">
-	<div class="container-reserve100">
-		<div class="wrap-reserve100">
+<div class="limiter">
+    <div class="container-reserve100">
+        <div class="wrap-reserve100">
             <div class="row align-items-start p-b">
                 <div class="col reserve100-form-title p-b-20 text-left">
                     会議室予約システム
@@ -18,8 +19,6 @@
                     <small class="text-muted">『{{user_info.name}}』としてログイン中 </small>
                 </div>
             </div>
-
-
             <nav>
                 <div class="nav nav-pills nav-fill p-b-10" id="nav-tab" role="tablist">
                     <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">予約情報</button>
@@ -38,15 +37,15 @@
                             <button class="nav-link" id="nav-simple-tab" data-bs-toggle="tab" data-bs-target="#nav-simple" type="button" role="tab" aria-controls="nav-simple" aria-selected="false">簡易表示</button>
                         </div>
                     </nav>
-                    <div class="tab-content " id="nav-subtabContent" >
+                    <div class="tab-content " id="nav-subtabContent">
                         <div class="tab-pane fade show active" id="nav-week" role="tabpanel" aria-labelledby="nav-week-tab">
                             <iframe src="week" width="100%"></iframe>
                         </div>
                         <div class="tab-pane fade" id="nav-day" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <iframe src="day" width="100%" ></iframe>
+                            <iframe src="day" width="100%"></iframe>
                         </div>
                         <div class="tab-pane fade" id="nav-simple" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            <iframe src="simple" width="100%" ></iframe>
+                            <iframe src="simple" width="100%"></iframe>
                         </div>
                     </div>
                 </div>
