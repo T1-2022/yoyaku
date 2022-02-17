@@ -9,6 +9,7 @@ from flask import url_for
 from flask import Blueprint
 from flask import session
 
+from models.Equipment import Equipment
 from models.ConferenceEquipment import ConferenceEquipment
 from models.Register import Register
 from models.database import db
@@ -151,12 +152,8 @@ def reserve_page():
 @main_bp.route("/room")
 def room_page():
     conferences = Conference.query.all()
+    equipments=Equipment.query.all()
 
-    for conference in conferences:
-        for equipment in conference.conference_equipments:
-            num = equipment.num  # 備品数
-            name = equipment.equipments.name  # 備品名
-            print(name,num)
     return render_template('room.html',conferences=conferences)
 
 # ユーザー情報

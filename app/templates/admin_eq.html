@@ -6,6 +6,12 @@
 {% endblock %}
 {% block content %}
 <div class="limiter">
+    <script>
+        if({{ error | tojson }}==true)
+        {
+            window.alert("入力内容に誤りがあります");
+        }
+    </script>
    <div class="container-admin100">
       <div class="wrap-admin100">
          <span class="admin100-form-title p-b-26">
@@ -45,7 +51,7 @@
                                           </div>
                                        </div>
                                     <div class="modal-footer">
-                                       <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">更新</button>
+                                       <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="update" value="{{ equipment.__dict__['name'] }}">更新</button>
                                     </div>
                            </div>
                                  </div>
@@ -69,7 +75,7 @@
                                  </div>
                                  <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                                    <a type="button" class="btn btn-secondary" href="">削除</a>
+                                    <a type="button" class="btn btn-secondary" href="{{ url_for('eq_delete.eq_delete',name= equipment.__dict__['name']) }}">削除</a>
                                  </div>
                               </div>
                            </div>
@@ -106,7 +112,7 @@
                            </div>
                      </div>
                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">登録</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="Registration">登録</button>
                      </div>
                   </div>
                </div>
