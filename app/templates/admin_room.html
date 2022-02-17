@@ -76,14 +76,13 @@
                                                         </div>
                                                         <div class="col-4">
                                                         <div class="wrap-inputadmin100">
-                                                            <input class="inputadmin100" type="text" name="Eqamount" value="0">
+                                                            <input class="inputadmin100" type="text" name="Eqamount{{ equipment.__dict__['equipment_id'] }}" value="0">
                                                         </div>
                                                     </div>
                                                     {% endfor %}
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                                                 <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">更新</button>
                                                 </div>
                                             </div>
