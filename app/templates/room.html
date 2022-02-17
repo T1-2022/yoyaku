@@ -18,8 +18,8 @@
                           <h5 class="card-title">{{ conference.__dict__['name'] }}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">収容人数：{{ conference.__dict__['capacity'] }}名</h6>
                           <p>設置機器：</p>
-                          {% for equipment in conference.equipments %}
-                          <p class="card-text">&emsp; {{ equipment.__dict__['name'] }} x2</p>
+                          {% for equipment in conference.conference_equipments %}
+                          <p class="card-text">&emsp; {{ equipment.equipments.__dict__['name'] }} x{{ equipment.__dict__['num'] }}</p>
                           {% endfor %}
                       </div>
                   </div>
