@@ -64,21 +64,21 @@
                                                             <input class="inputadmin100" type="text" name="Photo" value="{{ conference.__dict__['fhoto_id'] }}">
                                                         </div>
                                                     </div>
-                                                    {% for equipment in conference.equipments %}
-                                                        <div class="col-8">
+                                                    {% for eq in equipments %}
+                                                        <div class="col-8 align-self-center">
+                                                            <label class="text-align-center ">{{ eq.__dict__['name'] }}</label>
+                                                        </div>
+                                                        <div class="col-4 ">
                                                             <div class="wrap-inputadmin100">
-                                                                <select class="inputadmin100" name="Eq{{ equipment.__dict__['equipment_id'] }}" >
-                                                                    {% for eq in equipments %}
-                                                                        <option value="{{ eq.__dict__['equipment_id'] }}" {% if equipment.__dict__['equipment_id'] == eq.__dict__['equipment_id'] %} selected {% endif %}>{{ eq.__dict__['name'] }}></option>
-                                                                    {% endfor %}
-                                                                </select>
+                                                                <input class="inputadmin100" type="text" name="equipment{{ eq.__dict__['equipment_id'] }}"
+                                                                       {% for equipment in conference.conference_equipments %}
+                                                                            {% if eq.__dict__['equipment_id']==equipment.__dict__['equipment_id'] %}
+                                                                                value="{{ equipment.__dict__['equipment_id']}}"
+                                                                            {% endif %}
+                                                                       {% endfor %}>
                                                             </div>
                                                         </div>
-                                                        <div class="col-4">
-                                                        <div class="wrap-inputadmin100">
-                                                            <input class="inputadmin100" type="text" name="Eqamount{{ equipment.__dict__['equipment_id'] }}" value="0">
-                                                        </div>
-                                                    </div>
+
                                                     {% endfor %}
                                                 </div>
                                             </div>

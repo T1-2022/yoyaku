@@ -14,4 +14,9 @@ admin_room_bp = Blueprint('admin_room', __name__, url_prefix='/admin_room')
 def admin_room():
     conferences = Conference.query.all()
     equipments = Equipment.query.all()
+    for conference in conferences:
+        for equipment in conference.conference_equipments:
+            num = equipment.num  # 備品数
+            name = equipment.equipments.name  # 備品名
+            print(name, num)
     return render_template('admin_room.html', conferences=conferences, equipments=equipments)
