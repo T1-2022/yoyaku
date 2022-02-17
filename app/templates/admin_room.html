@@ -120,11 +120,55 @@
                 <div class="container-admin100-form-btn">
                     <div class="wrap-admin100-form-btn">
                         <div class="admin100-form-bgbtn"></div>
-                            <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_main.admin_main')) }}">
+                            <button type="button" class="admin100-form-btn" data-bs-toggle="modal" data-bs-target="#AddRoom">
 								会議室登録
-							</a>
+							</button>
                         </div>
                 </div>
+                <form class="login100-form" method="post">
+                    <div class="modal fade" id="AddRoom" tabindex="-1" aria-labelledby="add-room-label" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered" id="addroom">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="add-room-label">会議室登録</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                            <div class="modal-body">
+                                                <div class="row rows-cols-2 text-center">
+                                                    <div class="col-12">
+                                                        <div class="wrap-inputadmin100">
+                                                            <input class="inputadmin100" type="text" name="Name" placeholder="会議室名">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="wrap-inputadmin100">
+                                                            <input class="inputadmin100" type="text" name="Capacity" placeholder="収容人数">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="wrap-inputadmin100">
+                                                            <input class="inputadmin100" type="text" name="Photo" placeholder="写真ID">
+                                                        </div>
+                                                    </div>
+                                                    {% for eq in equipments %}
+                                                        <div class="col-8 align-self-center">
+                                                            <label class="text-align-center ">{{ eq.__dict__['name'] }}</label>
+                                                        </div>
+                                                        <div class="col-4 ">
+                                                            <div class="wrap-inputadmin100">
+                                                                <input class="inputadmin100" type="text" name="equipment{{ eq.__dict__['equipment_id'] }}"　value="0">
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">登録</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                 <div class="container-admin100-form-btn">
                     <div class="wrap-admin100-form-btn">
                         <div class="admin100-form-bgbtn"></div>
