@@ -168,6 +168,15 @@ def room_page():
     conferences = Conference.query.all()
     return render_template('room.html',conferences=conferences)
 
+# ログアウト機能
+@main_bp.route('/logout', methods=["GET"])
+def logout():
+    if login_required():
+        # セッション情報を削除
+        session.pop('user', None)
+        session.pop('flag', None)
+    return redirect(url_for('login.login'))
+
 # 予約情報の削除
 def reserve_delete(reserve_id):
     register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
