@@ -1,0 +1,121 @@
+{% extends "template.html" %}
+{% block title %}会議室管理{% endblock %}
+{% block head %}
+  {{ super() }}
+      	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_admin.css') }}">
+{% endblock %}
+{% block content %}
+
+	<div class="limiter">
+        <div class="container-admin100">
+			<div class="wrap-admin100">
+                <span class="admin100-form-title p-b-26">
+						会議室管理
+                </span>
+
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">会議室名</th>
+                            <th scope="col">収容人数</th>
+                            <th scope="col">写真ID</th>
+                            <th scope="col">設置機器
+                            <th scope="col">更新</th>
+                            <th scope="col">削除</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for conference in conferences %}
+                        <tr>
+                            <th>{{ conference.__dict__['conference_id'] }}</th>
+                            <td>{{ conference.__dict__['name'] }}</td>
+                            <td>{{ conference.__dict__['capacity'] }}</td>
+                            <td>{{ conference.__dict__['fhoto_id'] }}</td>
+                            <td>
+                                {% for equipment in conference.equipments %}
+                                    <p class="card-text">&emsp; {{ equipment.__dict__['name'] }}
+                                {% endfor %}
+                            </td>
+                            <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ChangeRoom{{conference.__dict__['conference_id'] }}">更新</button>
+                                <form class="login100-form" method="post">
+                                <div class="modal fade" id="ChangeRoom{{conference.__dict__['conference_id'] }}" tabindex="-1" aria-labelledby="change-room-label" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered" id="{{conference.__dict__['conference_id']}}">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="change-room-label">削除確認</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                            <div class="modal-body">
+                                                <div class="wrap-input100 validate-input"  data-validate = "Introduce Name">
+                                                    <input class="input100" type="text" name="Name" value="{{ request.form.username }}">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                                                <button class="login100-form-btn">更新</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                </td>
+                        <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#DeleteRoom{{conference.__dict__['conference_id'] }}">削除</button>
+                                <div class="modal fade" id="DeleteRoom{{conference.__dict__['conference_id'] }}" tabindex="-1" aria-labelledby="delete-room-label" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered" id="{{conference.__dict__['conference_id'] }}">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="delete-room-label">削除確認</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                            <div class="modal-body">
+                                                ID:　{{ conference.__dict__['conference_id'] }}<br>
+                                                会議室名:　{{ conference.__dict__['name'] }}<br>
+                                                を削除しますか？
+                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                                                <a type="button" class="btn btn-secondary" href="">削除</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                        </tr>
+                        {% endfor %}
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="container-admin100-form-btn">
+                    <div class="wrap-admin100-form-btn">
+                        <div class="admin100-form-bgbtn"></div>
+                            <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_user_add.admin_user_add')) }}">
+								ユーザー登録
+							</a>
+                        </div>
+                </div>
+
+                <div class="container-admin100-form-btn">
+                    <div class="wrap-admin100-form-btn">
+                        <div class="admin100-form-bgbtn"></div>
+                            <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_room.admin_room')) }}">
+								会議室
+							</a>
+                        </div>
+                </div>
+
+                <div class="container-admin100-form-btn">
+                    <div class="wrap-admin100-form-btn">
+                        <div class="admin100-form-bgbtn"></div>
+                            <a type="button" class="admin100-form-btn" href="{{ url_for('main_tab.main_tab') }}">
+								戻る
+							</a>
+                        </div>
+	</div>
+    </div>
+        </div>
+    </div>
+{% endblock %}

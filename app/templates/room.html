@@ -9,7 +9,7 @@
 <div class="limiter">
    <div class="container-user100">
        <div class="wrap-room100">
-          <div class="row row-cols-3 align-items-center">
+          <div class="row row-cols-3">
               {% for conference in conferences %}
               <div class="col-sm-4  p-b-20">
                   <div class="card" style="width: 18rem;">
@@ -17,7 +17,10 @@
                       <div class="card-body">
                           <h5 class="card-title">{{ conference.__dict__['name'] }}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">収容人数：{{ conference.__dict__['capacity'] }}名</h6>
-                          <p class="card-text">{{ conference.__dict__['remarks'] }}</p>
+                          <p>設置機器：</p>
+                          {% for equipment in conference.equipments %}
+                          <p class="card-text">&emsp; {{ equipment.__dict__['name'] }}</p>
+                          {% endfor %}
                       </div>
                   </div>
               </div>
