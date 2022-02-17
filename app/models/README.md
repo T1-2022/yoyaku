@@ -61,6 +61,7 @@
   * registers   : 1名の予約者(Register)と紐づく
   * users       : 1名の利用者(User)と紐づく
   * conferences : 1つの会議室と紐づく
+  * conference_equipments : 会議室と備品の中間テーブル（複数）に紐づく
 
 * コンストラクタ：Reserve(register_id, conference_id, date, starttime, endtime, purpose, remarks, user_id=None)
 
@@ -71,6 +72,7 @@
   * name             : 備品名(文字列，30文字上限)
 * リレーション
   * conferences : 複数の会議室と紐づく
+  * conference_equipments : 会議室と備品の中間テーブル（複数）に紐づく
 * コンストラクタ：Equipment(name)
 
 ### ConferenceEquipment
@@ -84,6 +86,9 @@
   * conference_id : 会議室id（整数，外部キー）
   * equipment_id  : 予約者id（整数，外部キー）
   * num           : 備品の数（整数）
+* リレーション
+  * conferences : 1つの会議室と紐づく
+  * equipments  : 1つの備品と紐づく
 
 ## データベース（SQL）の使い方
 ここでは、基本的なCRUD操作について記述する．
