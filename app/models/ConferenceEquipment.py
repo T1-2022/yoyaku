@@ -14,9 +14,13 @@ class ConferenceEquipment(db.Model):
 
     # テーブルのカラムを設計
     conference_equipments_id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True) # 主キー
-    conference_id = db.Column(db.Integer, db.ForeignKey("conferences.conference_id", onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
-    equipment_id = db.Column(db.Integer, db.ForeignKey("equipments.equipment_id", onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+    conference_id = db.Column(db.Integer, db.ForeignKey("conferences.conference_id", onupdate='CASCADE', ondelete='CASCADE'))
+    equipment_id = db.Column(db.Integer, db.ForeignKey("equipments.equipment_id", onupdate='CASCADE', ondelete='CASCADE'))
     num = db.Column(db.Integer)
+
+    # リレーションを定義
+    equipments = db.relation("Equipment", backref='conference_equipments')
+    conferences = db.relation("Conference", backref='conference_equipments')
 
     def __init__(self, num, conference_id=None, equipment_id=None):
         self.num = num
