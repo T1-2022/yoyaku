@@ -21,8 +21,8 @@ def login():
                     session['user'] = register.users.__dict__['email']
                     session['flag'] = True
 
-                    if register.__dict__['admin'] == 1:
-                        return redirect(url_for('admin_main.admin_main'))
+                    #if register.__dict__['admin'] == 1:
+                    #    return redirect(url_for('admin_main.admin_main'))
 
                     return redirect(url_for('main_tab.main_tab'))
 

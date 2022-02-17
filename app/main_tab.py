@@ -35,8 +35,8 @@ def main_tab():
         user_info['name'] =  register.users.name # ユーザーネームを格納
         user_info['email'] = register.users.email # メールアドレスを格納
         user_info['passwd'] = register.passwd # パスワードを格納
+        user_info['admin'] = register.admin # 管理者権限を格納
 
-        # 予約情報を全取得 <- 部分的に読み込むようにjsを書いた方がよいかも
         return render_template("main_tab.html", user_info=user_info)
 
     else:
