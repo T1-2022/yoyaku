@@ -12,6 +12,7 @@ def user_delete(user_email):
             user = db.session.query(User).filter_by(email=user_email).first()
             db.session.delete(user)
             db.session.commit()
-
+            
         return redirect(url_for('admin_main.admin_main'))
     return redirect(url_for('login.login'))
+

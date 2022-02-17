@@ -1,10 +1,11 @@
 {% extends "template.html" %}
 {% block title %}メイン画面{% endblock %}
 {% block head %}
+
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_reserve.css') }}">
 <link href='../static/css/main_tab.css' rel='stylesheet' />
-<link href='../static/css/user_info.css' rel='stylesheet' />
+
 {% endblock %}
 {% block content %}
 <div class="limiter">
@@ -24,7 +25,6 @@
                     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-reserve" type="button" role="tab" aria-controls="nav-reserve" aria-selected="false">予約する</button>
                     <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-room" type="button" role="tab" aria-controls="nav-room" aria-selected="false">会議室詳細</button>
                     <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-help" type="button" role="tab" aria-controls="nav-help" aria-selected="false">オンラインヘルプ</button>
-                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-user" type="button" role="tab" aria-controls="nav-user" aria-selected="false">ユーザー情報</button>
                     <a class="nav-link" type="button" role="tab" aria-controls="nav-logout" aria-selected="false" href="/">ログアウト</a>
                 </div>
             </nav>
@@ -57,9 +57,6 @@
                 </div>
                 <div class="tab-pane fade" id="nav-help" role="tabpanel" aria-labelledby="nav-help-tab">
                     <p>オンラインの内容がここに入ります</p>
-                </div>
-                <div class="tab-pane fade" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
-                    <iframe src="user_info" width="100%"></iframe>
                 </div>
             </div>
         </div>

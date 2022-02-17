@@ -26,13 +26,12 @@ def reserves():
             end_time =request.form['endtime']
 
             if end_time < start_time:
-               conferences = Conference.query.all()
-               return render_template('reserve.html',conferences = conferences)
+                conferences = Conference.query.all()
+                return render_template('reserve.html',conferences = conferences,error=True)
 
             register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
             user_name = request.form['name']
             user_email = request.form['email']
-
 
             user_conference = request.form.get('conference')
             reserve_date = datetime.strptime(request.form['date'],'%Y-%m-%d').date()
@@ -76,18 +75,13 @@ def reserves():
                 db.session.add(add_reserve)
                 db.session.commit()
 
-
             else:
                 conferences = Conference.query.all()
-                print("aaa")
-                return render_template('reserve.html', conferences=conferences)
-
-
-
-            #return redirect(url_for('main_tab.main_tab'))
+                return render_template('reserve.html', conferences=conferences,error=True)
 
         conferences = Conference.query.all()
 
-        return render_template('reserve.html',conferences = conferences)
+        return render_template('reserve.html',conferences = conferences,error=False)
     else:
         return redirect(url_for('login.login'))
+

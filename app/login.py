@@ -12,7 +12,6 @@ login_bp = Blueprint('login', __name__, url_prefix='/login')
 def login():
     try:
         if request.method == "POST":
-
             attempted_email = request.form['email']
             attempted_password = request.form['password']
 

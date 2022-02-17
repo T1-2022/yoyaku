@@ -5,9 +5,9 @@
 <link href='../static/css/calendar_week.css' rel='stylesheet' />
 <script src='../static/js/calendar_week.js'></script>
 <script type="text/javascript">
-    //let reserves = {{reserves | tojson }};
     let conferences = {{ conferences | tojson }};
-    var test = {{ test | tojson }};
+    var registerID = {{ registerID | tojson }}
+    var adminFlag = {{ adminFlag | tojson }}
     calendar_week_ajax();
 </script>
 {% endblock %}
@@ -41,14 +41,6 @@
                 <div id="calendar"></div>
             </div>
         </div>
-
-        <!-- 仮出力 -->
-        <div class="row justify-content-between align-items-center vcenter-item">
-            <div class="col-md-4 text-left p-b-20 lead font-large">
-                reserveID : <label id="test"></label>
-            </div>
-        </div>
-
     </div>
 </div>
 {% endblock %}

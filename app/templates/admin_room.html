@@ -1,0 +1,66 @@
+{% extends "template.html" %}
+{% block title %}会議室{% endblock %}
+{% block head %}
+    {{ super() }}
+      	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_admin.css') }}">
+{% endblock %}
+{% block content %}
+
+	<div class="limiter">
+		<div class="container-admin100">
+			<div class="wrap-admin100">
+				<form class="login100-form validate-form" method="post">
+					<span class="login100-form-title p-b-26">
+						会議室
+					</span>
+
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">会議室明</th>
+                            <th scope="col">収容人数</th>
+                            <th scope="col">備考</th>
+                            <th scope="col">写真</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for conference in conferences %}
+                        <tr>
+                            <th>{{ conference.__dict__['conference_id'] }}</th>
+                            <td>{{ conference.__dict__['name'] }}</td>
+                            <td>{{ conference.__dict__['capacity'] }}</td>
+                            <td>{{ conference.__dict__['remarks'] }}</td>
+                            <td>{{ conference.__dict__['fhoto_id'] }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                            <a type="button" class="login100-form-btn" href="{{ url_for('admin_room.add_room') }}">
+								追加
+							</a>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                            <a type="button" class="login100-form-btn" href="/admin_main/">
+								戻る
+							</a>
+                    </div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
