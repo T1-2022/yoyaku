@@ -6,6 +6,7 @@ from flask import redirect
 
 from admin_user_add import user_add_bp
 from admin_main import admin_main_bp
+from admin_eq import admin_eq_bp
 from admin_room import admin_room_bp
 from reserves import reserves_bp
 from user_delete import user_delete_bp
@@ -30,6 +31,7 @@ app.register_blueprint(admin_main_bp)
 app.register_blueprint(user_delete_bp)
 app.register_blueprint(reserves_bp)
 app.register_blueprint(admin_room_bp)
+app.register_blueprint(admin_eq_bp)
 
 app.secret_key = 'user'
 app.permanent_session_lifetime = timedelta(minutes=5)
