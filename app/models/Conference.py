@@ -35,8 +35,8 @@ class Conference(db.Model):
                                 order_by='Equipment.equipment_id')
   reserves = db.relationship("Reserve", uselist=True, back_populates='conferences', cascade='all, delete-orphan')
 
-  def __init__(self, name, capacity, fhoto_id, remarks):
+  def __init__(self, name, capacity, photo_id, remarks):
       self.name = name
       self.capacity = capacity
-      self.fhoto_id = fhoto_id
+      self.photo_id = photo_id
       self.remarks = remarks

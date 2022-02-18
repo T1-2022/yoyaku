@@ -19,6 +19,9 @@ from main_tab import main_bp
 
 app = Flask(__name__)
 
+UPLOAD_FOLDER = './img'
+ALLOWED_EXTENSIONS = set(['jpg'])
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # config を設定ファイルから読み込む
 app.config.from_object('config.DevelopmentConfig')
 
