@@ -60,36 +60,57 @@ def admin_room():
                         db.session.delete(conference_equipment)
                         db.session.commit()
 
-            if name != subject_name and db.session.query(Conference).filter_by(name=subject_name).first() == None:
-                conference.name = name
-                conference.capacity = capacity
+            #名前に変更がある場合の処理
+            if name != subject_name:
+                if db.session.query(Conference).filter_by(name=name).first() == None:
+                    conference.name = name
+                    conference.capacity = capacity
+                    os.rename('app/static/img/'+str(conference.photo_id)+'.jpg','app/static/img/'+name+'.jpg')
+                    conference.photo_id = name
+                    db.session.add(conference)
+                    db.session.commit()
+                    # 変更しようとした名前が既存の名前である場合のエラー処理
 
-                db.session.add(conference)
-                db.session.commit()
+                else:
+                    print("名前",subject_name,name)
+                    conferences = Conference.query.all()
+                    equipments = Equipment.query.all()
+                    return render_template('admin_room.html', conferences=conferences, equipments=equipments,
+                                           error=True)
 
-            elif name == subject_name:
-                conference.capacity = capacity
-                db.session.add(conference)
-                db.session.commit()
-
+            # 名前に変更が無い場合の処理
             else:
-                print("名前")
-                conferences = Conference.query.all()
-                equipments = Equipment.query.all()
-                return render_template('admin_room.html', conferences=conferences, equipments=equipments, error=True)
+                conference.capacity = capacity
+                db.session.add(conference)
+                db.session.commit()
 
-            if 'file' in request.files['Photo']:
-                file = request.files['Photo']
-                print(file.filename)
+
+
+            file = request.files.get('Photo')
+            if file != None:
+                if name != subject_name:
+                    file.filename = name+".jpg"
+                    conference_name = conference
+                    if os.path.isfile('app/static/img/'+file.filename):
+                        os.remove('app/static/img/'+file.filename)
+
+                    file.save('app/static/img/' + file.filename)
+
+                else:
+                    file.filename = name + ".jpg"
+                    if os.path.isfile('app/static/img/'+file.filename):
+                        os.remove('app/static/img/'+file.filename)
+
+                    file.save('app/static/img/'+file.filename)
 
         else:
+            print("追加")
             name = request.form['Name']
             capacity = request.form['Capacity']
-            Photo = request.form['Photo']
             conference = db.session.query(Conference).filter_by(name=name).first()
-            print(name,capacity,Photo,conference)
+
             if conference == None:
-                conferences = Conference(name,capacity,Photo,name)
+                conferences = Conference(name,capacity,name,name)
                 db.session.add(conferences)
                 db.session.commit()
                 for equipment in equipments:
@@ -108,6 +129,17 @@ def admin_room():
                 conferences = Conference.query.all()
                 equipments = Equipment.query.all()
                 return render_template('admin_room.html', conferences=conferences, equipments=equipments,error=True)
+
+            file = request.files.get('Photo')
+            if file != None:
+                file.filename = name + ".jpg"
+                if os.path.isfile('app/static/img/' + file.filename):
+                    conferences = Conference.query.all()
+                    equipments = Equipment.query.all()
+                    return render_template('admin_room.html', conferences=conferences, equipments=equipments,
+                                           error=True)
+
+            file.save('app/static/img/' + file.filename)
 
     conferences = Conference.query.all()
     equipments = Equipment.query.all()

@@ -56,7 +56,7 @@
                      </td>
                      <td>
                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ChangeRoom{{conference.__dict__['conference_id'] }}">更新</button>
-                        <form class="login100-form" method="post">
+                        <form class="login100-form" enctype = multipart/form-data method="post">
                            <div class="modal fade" id="ChangeRoom{{conference.__dict__['conference_id'] }}" tabindex="-1" aria-labelledby="change-room-label" aria-hidden="true">
                               <div class="modal-dialog modal-sm modal-dialog-centered" id="{{conference.__dict__['conference_id']}}">
                                  <div class="modal-content">
@@ -142,7 +142,7 @@
                </button>
             </div>
          </div>
-         <form class="login100-form" method="post">
+         <form class="login100-form" enctype = multipart/form-data method="post">
             <div class="modal fade" id="AddRoom" tabindex="-1" aria-labelledby="add-room-label" aria-hidden="true">
                <div class="modal-dialog modal-sm modal-dialog-centered" id="addroom">
                   <div class="modal-content">
