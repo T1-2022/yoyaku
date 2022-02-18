@@ -43,7 +43,7 @@
                            <div class="modal-dialog modal-sm modal-dialog-centered" id="{{conference.__dict__['conference_id'] }}">
                               <div class="modal-content">
                                   <div class="modal-body">
-                                    <img src="../static/img/{{ conference.__dict__['fhoto_id'] }}.jpg" alt="{{ conference.__dict__['name'] }}" class="img-thumbnail">
+                                    <img src="../static/img/{{ conference.__dict__['photo_id'] }}.jpg" alt="{{ conference.__dict__['name'] }}" class="img-thumbnail">
                                   </div>
                               </div>
                            </div>
@@ -78,7 +78,7 @@
                                           </div>
                                           <div class="col-6">
                                               <div class="wrap-inputadmin100">
-                                              <input type="file" class="inputadminupload100" name="Photo" value="../static/img/{{ conference.__dict__['fhoto_id'] }}.jpg">
+                                              <input type="file" class="inputadminupload100" name="Photo" value="../static/img/{{ conference.__dict__['photo_id'] }}.jpg">
                                               </div>
                                           </div>
                                           {% for eq in equipments %}

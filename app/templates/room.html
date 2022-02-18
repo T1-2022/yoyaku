@@ -13,7 +13,7 @@
               {% for conference in conferences %}
               <div class="col-sm-4  p-b-20">
                   <div class="card" style="width: 18rem;">
-                      <img src='../static/img/{{ conference.__dict__['fhoto_id'] }}.jpg' class="card-img-top" alt="classroom">
+                      <img src='../static/img/{{ conference.__dict__['photo_id'] }}.jpg' class="card-img-top" alt="classroom">
                       <div class="card-body">
                           <h5 class="card-title">{{ conference.__dict__['name'] }}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">収容人数：{{ conference.__dict__['capacity'] }}名</h6>
