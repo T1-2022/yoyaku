@@ -88,9 +88,9 @@ def admin_room():
 
             file = request.files.get('Photo')
             if file != None:
+                file = request.files['Photo']
                 if name != subject_name:
                     file.filename = name+".jpg"
-                    conference_name = conference
                     if os.path.isfile('app/static/img/'+file.filename):
                         os.remove('app/static/img/'+file.filename)
 
@@ -115,16 +115,13 @@ def admin_room():
                 db.session.commit()
                 for equipment in equipments:
                     num = request.form.get('equipment' + str(equipment.equipment_id))
-                    print("num:",num)
+
                     if num and int(num) != 0:
                         conference_equipments = ConferenceEquipment(num, conferences.conference_id,
                                                                     equipment.equipment_id)
                         db.session.add(conference_equipments)
                         db.session.commit()
-                    else:
-                        conferences = Conference.query.all()
-                        equipments = Equipment.query.all()
-                        return render_template('admin_room.html', conferences=conferences, equipments=equipments,error=True)
+
             else:
                 conferences = Conference.query.all()
                 equipments = Equipment.query.all()
@@ -132,6 +129,7 @@ def admin_room():
 
             file = request.files.get('Photo')
             if file != None:
+                file = request.files['Photo']
                 file.filename = name + ".jpg"
                 if os.path.isfile('app/static/img/' + file.filename):
                     conferences = Conference.query.all()
