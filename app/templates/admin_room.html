@@ -37,7 +37,18 @@
                      <th>{{ conference.__dict__['conference_id'] }}</th>
                      <td>{{ conference.__dict__['name'] }}</td>
                      <td>{{ conference.__dict__['capacity'] }}</td>
-                     <td>{{ conference.__dict__['fhoto_id'] }}</td>
+                  <td>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ShowPic{{conference.__dict__['conference_id'] }}">表示</button>
+                        <div class="modal fade" id="ShowPic{{conference.__dict__['conference_id'] }}" tabindex="-1" aria-labelledby="show-room-label" aria-hidden="true">
+                           <div class="modal-dialog modal-sm modal-dialog-centered" id="{{conference.__dict__['conference_id'] }}">
+                              <div class="modal-content">
+                                  <div class="modal-body">
+                                    <img src="../static/img/{{ conference.__dict__['fhoto_id'] }}.jpg" alt="{{ conference.__dict__['name'] }}" class="img-thumbnail">
+                                  </div>
+                              </div>
+                           </div>
+                        </div>
+                     </td>
                      <td>
                         {% for equipment in conference.conference_equipments %}
                         <p class="card-text">{{ equipment.equipments.__dict__['name'] }} x{{ equipment.__dict__['num'] }}</p>
@@ -66,9 +77,9 @@
                                              </div>
                                           </div>
                                           <div class="col-6">
-                                             <div class="wrap-inputadmin100">
-                                                <input class="inputadmin100" type="text" name="Photo" value="{{ conference.__dict__['fhoto_id'] }}">
-                                             </div>
+                                              <div class="wrap-inputadmin100">
+                                              <input type="file" class="inputadminupload100" name="Photo" value="../static/img/{{ conference.__dict__['fhoto_id'] }}.jpg">
+                                              </div>
                                           </div>
                                           {% for eq in equipments %}
                                           <div class="col-8 align-self-center">
@@ -153,7 +164,7 @@
                            </div>
                            <div class="col-6">
                               <div class="wrap-inputadmin100">
-                                 <input class="inputadmin100" type="text" name="Photo" placeholder="写真ID">
+                                  <input type="file" class="inputadminupload100" name="Photo" placeholder="写真ID">
                               </div>
                            </div>
                            {% for eq in equipments %}
