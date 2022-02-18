@@ -25,7 +25,7 @@ class Conference(db.Model):
   conference_id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True) # 主キー
   name = db.Column(db.String(20), nullable=False, unique=True)
   capacity = db.Column(db.Integer)
-  fhoto_id = db.Column(db.Integer, unique=True)
+  photo_id = db.Column(db.String(20))
   remarks = db.Column(db.String(100))
 
   equipments = db.relationship("Equipment", 
