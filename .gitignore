@@ -1,3 +1,6 @@
 # 上げる必要のないファイルを書いておけば取り除かれる
 
 __pycache__/
+app/sqlite3.exe
+app/res_test.py
+app/test_delete.py
