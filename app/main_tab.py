@@ -97,12 +97,15 @@ def week_Ajax_GET():
     return json.dumps(None)
 
 # 日表示カレンダー
-@main_bp.route("/day",methods=["GET"])
+@main_bp.route("/day",methods=["GET","POST"])
 def calendar_day():
     if request.method == "POST":
-        reserveID = request.form['reserveID']
-    else:
-        reserveID = "null"
+        reserve_delete(request.form['reserveID'])
+    
+    # データベースからユーザー情報を取得
+    register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
+    registerID = register.users.user_id     # reserveListに追加した予約者idと比較
+    adminFlag = register.admin              # ログイン者に管理者権限があるか比較
 
     reserves = Reserve.query.all()
     reserve_lists=[]
@@ -117,7 +120,7 @@ def calendar_day():
         conference_lists.append(data)
 
 
-    return render_template('calendar/calendar_day.html',reserves=reserve_lists, conferences=conference_lists)
+    return render_template('calendar/calendar_day.html',reserves=reserve_lists, conferences=conference_lists, registerID=registerID, adminFlag=adminFlag)
 
 # 簡易表示カレンダー
 @main_bp.route("/simple")
@@ -145,6 +148,12 @@ def calendar_simple():
 @main_bp.route("/reserve")
 def reserve_page():
     return redirect(url_for('reserves.reserves'))
+
+# 会議室詳細ページ
+@main_bp.route("/room")
+def room_page():
+    conferences = Conference.query.all()
+    return render_template('room.html',conferences=conferences)
 
 # ユーザー情報
 @main_bp.route("/user_info")
