@@ -32,10 +32,14 @@ def reserves():
         user_name = request.form['name']
         user_email = request.form['email']
 
+        # 名前かメアドが空欄なら予約者情報を代入
+        if len(user_name) == 0:
+            user_name = register.users.name
+        if len(user_email) == 0:
+            user_email = register.users.email
 
         user_conference = request.form.get('conference')
         reserve_date = datetime.strptime(request.form['date'],'%Y-%m-%d').date()
-
         reserve_date = "{0:%Y/%m/%d}".format(reserve_date)
 
         user_purpose = request.form.get('purpose')
