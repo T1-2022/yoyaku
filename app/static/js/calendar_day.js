@@ -40,11 +40,8 @@ function showProcess(date) {
 
 // カレンダー作成
 function createProcess(year, month, dates) {
-    //var dataMonth = createCalendar(year, month);
     var calendar = "<table><tr class='OneDay'>";
     var tr_time = ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"];
-    //var room_name = ["0","1","2","3","4","5","6","7"];
-    //yoyaku = [id, user_id, conf_id, register_name, date, starttime, endtime, user_name, user_email, purpose, remarks]
 
     // 日付
     calendar += "<tr><th></th>";
@@ -54,18 +51,15 @@ function createProcess(year, month, dates) {
     calendar += "</tr>";
     for (var j = 0; j < room.length; j++) {
         calendar += "<tr><th scope='row'>" + room[j][1] + "</th>";
+        var zure = 0;
         for (var k = 0; k < tr_time.length; k++) {
             // 予約検索
             calendar += "<td>";
-            //var zure = 0;
             for (var l = 0; l < yoyaku.length; l++) {
                 //予約idを取得
                 var id = yoyaku[l][0];
                 //dateを年月日に分割
                 var date = yoyaku[l][4].split("/");
-                //時間を取得
-                var start_time = yoyaku[l][5];
-                var end_time = yoyaku[l][6];
                 //使用時間の計算
                 var st_t = yoyaku[l][5].split(":"); //例）12:30
                 var en_t = yoyaku[l][6].split(":"); //例) 14:00
@@ -73,7 +67,7 @@ function createProcess(year, month, dates) {
                 var use_en = Number(en_t[0]); //14
                 //スタート時間を数字にする
                 if ( Number(st_t[1]) != 0 ){use_st += (Number(st_t[1])/60);} //12.5
-                if ( Number(en_t[1]) != 0 ){use_en += (Number(en_t[1])/60);} 
+                if ( Number(en_t[1]) != 0 ){use_en += (Number(en_t[1])/60);} //14
 
                 //使用時間
                 var using = use_en - use_st; //1.5時間
@@ -82,8 +76,8 @@ function createProcess(year, month, dates) {
 
                 //テーブルの表示時間を数値にする
                 var tr_t = tr_time[k].split(":");
-                var num_tr_t = Number(tr_t[0]);
-                if ( num_table != 0 || num_table != 1){num_tr_t += 0.5;}
+                var num_tr_t = Number(tr_t[0])+0.5;
+                if ( num_table == 1 ){num_tr_t -= 0.5;}
                 if ( Number(tr_t[1]) != 0 ){num_tr_t += (Number(tr_t[1])/60);}
 
 
@@ -92,15 +86,18 @@ function createProcess(year, month, dates) {
                     && Number(date[1]) == month+1
                     && Number(date[2]) == dates
                     && room[j][0] == yoyaku[l][2]
-                    //&& use_time[k+1] == yoyaku[l][5]
-                    && (num_tr_t) <= use_st
-                    && use_st < (num_tr_t+0.5)){
+                    && (num_tr_t) <= (use_st-zure*0.5)
+                    && (use_st-zure*0.5) < (num_tr_t+0.5)){
                     
-                    //calendar += "<h1>"+num_table+"</h1>"
-                    //calendar += "<h1>"+en_t[1]+"</h1>"
-                    if ( Number(en_t[1]) > 0 && Number(en_t[1] < 30) ){num_table += 1;}
-                    if ( Number(en_t[1]) > 31 && Number(en_t[1] < 60) ){num_table += 1;}
+                    if(num_table == 1){
+                        zure -= 1;
+                    }else{
+                        if ( Number(en_t[1]) > 0 && Number(en_t[1] < 30) ){num_table += 1;}
+                        if ( Number(en_t[1]) > 31 && Number(en_t[1] < 60) ){num_table += 1;}
+                    }
 
+                    //予約日が同じ時のズレを計算
+                    zure += num_table;
                     
                     //必要なテーブルの数結合する
                     if (num_table == 2) {calendar += "<td colspan=\"2\">";}
@@ -127,9 +124,7 @@ function createProcess(year, month, dates) {
                     else if (num_table == 23) {calendar += "<td colspan=\"23\">";}
                     else if (num_table == 24) {calendar += "<td colspan=\"24\">";}
                     else if (num_table == 25) {calendar += "<td colspan=\"25\">";}
-                    //calendar += "<td colspan = \"num_table\">";
 
-                    
                     // ボタン内容定義
                     var text = yoyaku[l][5] + "-" +yoyaku[l][6]+ "<br>" + yoyaku[l][7];
 
@@ -178,7 +173,6 @@ function createProcess(year, month, dates) {
 
             }
             calendar += "</td>";
-            //calendar += "<td><p>a</p></td>";
         }
     }
     calendar += "</tr>";
@@ -190,4 +184,3 @@ function setReserve(num) {
     var formName = "reserveID" + num;
     document.querySelector('input[id="' + formName + '"]').value = num;
 }
-
