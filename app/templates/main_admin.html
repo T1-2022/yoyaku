@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                         {% for register in registers %}
-                        <tr>
+                        <tr class="text-center">
                             <th>{{ register.users.__dict__['user_id'] }}</th>
                             <td>{{ register.users.__dict__['name'] }}</td>
                             <td>{{ register.users.__dict__['email'] }}</td>
@@ -78,12 +78,19 @@
 							</a>
                         </div>
                 </div>
-
                 <div class="container-admin100-form-btn">
                     <div class="wrap-admin100-form-btn">
                         <div class="admin100-form-bgbtn"></div>
-                            <a type="button" class="admin100-form-btn" href="/">
-								ログアウト
+                            <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_eq.admin_eq')) }}">
+								設置機器
+							</a>
+                        </div>
+                </div>
+                <div class="container-admin100-form-btn">
+                    <div class="wrap-admin100-form-btn">
+                        <div class="admin100-form-bgbtn"></div>
+                            <a type="button" class="admin100-form-btn" href="{{ url_for('main_tab.main_tab') }}">
+								戻る
 							</a>
                         </div>
 	</div>
