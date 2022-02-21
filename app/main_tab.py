@@ -102,9 +102,12 @@ def week_Ajax_GET():
 @main_bp.route("/day",methods=["GET"])
 def calendar_day():
     if request.method == "POST":
-        reserveID = request.form['reserveID']
-    else:
-        reserveID = "null"
+        reserve_delete(request.form['reserveID'])
+
+    # データベースからユーザー情報を取得
+    register = db.session.query(Register).join(User).filter_by(email=session['user']).first()
+    registerID = register.users.user_id     # reserveListに追加した予約者idと比較
+    adminFlag = register.admin              # ログイン者に管理者権限があるか比較
 
     reserves = Reserve.query.all()
     reserve_lists=[]
@@ -119,7 +122,35 @@ def calendar_day():
         conference_lists.append(data)
 
 
-    return render_template('calendar/calendar_day.html',reserves=reserve_lists, conferences=conference_lists)
+    return render_template('calendar/calendar_day.html',reserves=reserve_lists, conferences=conference_lists, registerID=registerID, adminFlag=adminFlag)
+
+@main_bp.route('/day_Ajax_POST', methods=['POST'])
+def day_Ajax_POST():
+    global day_time
+    if request.method == "POST":
+        day_time = request.json
+    print("日付",day_time)
+    return week_day
+
+@main_bp.route('/day_Ajax_GET', methods=['GET'])
+def day_Ajax_GET():
+    global day_time
+    reserve_lists=[]
+    print("GET")
+    print(day_time[0:10])
+    if(day_time != None):
+        today = datetime.strptime(day_time[0:10],'%Y-%m-%d').date()
+        today="{0:%Y/%m/%d}".format(today)
+
+        reserves = db.session.query(Reserve).filter_by(date=today).all()
+        #reserves = Reserve.query.all()
+        print(reserves)
+        for reserve in reserves:
+            reserve_lists.append(reserve_list(reserve))
+
+        return json.dumps(reserve_lists)
+
+    return json.dumps(None)
 
 # 簡易表示カレンダー
 @main_bp.route("/simple")
