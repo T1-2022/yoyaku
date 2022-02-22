@@ -40,75 +40,113 @@ function showProcess(date) {
 
 // カレンダー作成
 function createProcess(year, month, dates) {
-    //var dataMonth = createCalendar(year, month);
     var calendar = "<table><tr class='OneDay'>";
-    var use_time = ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"];
-    //var room_name = ["会議室1","会議室2","会議室3","会議室4","会議室5","会議室6","会議室7","会議室8"];
+    var tr_time = ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"];
 
     // 日付
     calendar += "<tr><th></th>";
-    for (var i = 0; i < use_time.length; i++) {
-        calendar += "<th>" + use_time[i] + "</th>";
+    for (var i = 0; i < tr_time.length; i++) {
+        calendar += "<th>" + tr_time[i] + "</th>";
     }
     calendar += "</tr>";
     for (var j = 0; j < room.length; j++) {
-        calendar += "<tr><th scope='row'>" + room[j] + "</th>";
-        for (var k = 0; k < use_time.length; k++) {
+        calendar += "<tr><th scope='row'>" + room[j][1] + "</th>";
+        var zure = 0;
+        for (var k = 0; k < tr_time.length; k++) {
             // 予約検索
             calendar += "<td>";
             for (var l = 0; l < yoyaku.length; l++) {
+                //予約idを取得
+                var id = yoyaku[l][0];
                 //dateを年月日に分割
-                var date = yoyaku[l][3].split("/");
-                //時間を取得
-                var start_time = yoyaku[l][4];
-                var end_time = yoyaku[l][5];
+                var date = yoyaku[l][4].split("/");
                 //使用時間の計算
-                var st_t_h = yoyaku[l][4].split(":");
-                var en_t_m = yoyaku[l][5].split(":");
-                var use_st = Number(st_t_h[0]);
-                var use_en = Number(en_t_m[0]);
+                var st_t = yoyaku[l][5].split(":"); //例）12:30
+                var en_t = yoyaku[l][6].split(":"); //例) 14:00
+                var use_st = Number(st_t[0]); //12
+                var use_en = Number(en_t[0]); //14
                 //スタート時間を数字にする
-                if ( Number(st_t_h[1]) == 15 ){
-                    use_st += 0.25;
-                }
-                else if ( Number(st_t_h[1]) == 30 ) {
-                    use_st += 0.5;
-                }
-                else if ( Number(st_t_h[1]) == 45 ) {
-                    use_st += 0.75;
-                }
-                else {
-                    use_st += 0;
-                }
-                //エンド時間を数字にする
-                if ( Number(en_t_m[1]) == 15 ){use_en += 0.25;}
-                else if ( Number(en_t_m[1]) == 30 ) {use_en += 0.5;}
-                else if ( Number(en_t_m[1]) == 45 ) {use_en += 0.75;}
-                else {use_en += 0;}
-                //使用時間
-                var using = use_en - use_st;
+                if ( Number(st_t[1]) != 0 ){use_st += (Number(st_t[1])/60);} //12.5
+                if ( Number(en_t[1]) != 0 ){use_en += (Number(en_t[1])/60);} //14
 
+                //使用時間
+                var using = use_en - use_st; //1.5時間
+                //必要なコマ数を計算
+                var num_table = Math.ceil(using / 0.5); //3:3つのテーブルが必要
+
+                //テーブルの表示時間を数値にする
+                var tr_t = tr_time[k].split(":");
+                var num_tr_t = Number(tr_t[0])+0.5;
+                if ( num_table == 1 ){num_tr_t -= 0.5;}
+                if ( Number(tr_t[1]) != 0 ){num_tr_t += (Number(tr_t[1])/60);}
+
+
+                //予約検索
                 if ( Number(date[0]) == year
                     && Number(date[1]) == month+1
                     && Number(date[2]) == dates
-                    && room[j] == yoyaku[l][2]
-                    && use_time[k] == yoyaku[l][4]){
+                    && room[j][0] == yoyaku[l][2]
+                    && (num_tr_t) <= (use_st-zure*0.5)
+                    && (use_st-zure*0.5) < (num_tr_t+0.5)){
+                    
+                    if(num_table == 1){
+                        zure -= 1;
+                    }else{
+                        if ( Number(en_t[1]) > 0 && Number(en_t[1] < 30) ){num_table += 1;}
+                        if ( Number(en_t[1]) > 31 && Number(en_t[1] < 60) ){num_table += 1;}
+                    }
 
+                    //予約日が同じ時のズレを計算
+                    zure += num_table;
+                    
+                    //必要なテーブルの数結合する
+                    if (num_table == 2) {calendar += "<td colspan=\"2\">";}
+                    else if (num_table == 3) {calendar += "<td colspan=\"3\">";}
+                    else if (num_table == 4) {calendar += "<td colspan=\"4\">";}
+                    else if (num_table == 5) {calendar += "<td colspan=\"5\">";}
+                    else if (num_table == 6) {calendar += "<td colspan=\"6\">";}
+                    else if (num_table == 7) {calendar += "<td colspan=\"7\">";}
+                    else if (num_table == 8) {calendar += "<td colspan=\"8\">";}
+                    else if (num_table == 9) {calendar += "<td colspan=\"9\">";}
+                    else if (num_table == 10) {calendar += "<td colspan=\"10\">";}
+                    else if (num_table == 11) {calendar += "<td colspan=\"11\">";}
+                    else if (num_table == 12) {calendar += "<td colspan=\"12\">";}
+                    else if (num_table == 13) {calendar += "<td colspan=\"13\">";}
+                    else if (num_table == 14) {calendar += "<td colspan=\"14\">";}
+                    else if (num_table == 15) {calendar += "<td colspan=\"15\">";}
+                    else if (num_table == 16) {calendar += "<td colspan=\"16\">";}
+                    else if (num_table == 17) {calendar += "<td colspan=\"17\">";}
+                    else if (num_table == 18) {calendar += "<td colspan=\"18\">";}
+                    else if (num_table == 19) {calendar += "<td colspan=\"19\">";}
+                    else if (num_table == 20) {calendar += "<td colspan=\"20\">";}
+                    else if (num_table == 21) {calendar += "<td colspan=\"21\">";}
+                    else if (num_table == 22) {calendar += "<td colspan=\"22\">";}
+                    else if (num_table == 23) {calendar += "<td colspan=\"23\">";}
+                    else if (num_table == 24) {calendar += "<td colspan=\"24\">";}
+                    else if (num_table == 25) {calendar += "<td colspan=\"25\">";}
 
                     // ボタン内容定義
-                    var text = yoyaku[l][4] + "-" +yoyaku[l][5]+ "<br>" + yoyaku[l][6];
+                    var text = yoyaku[l][5] + "-" +yoyaku[l][6]+ "<br>" + yoyaku[l][7];
 
                     // 予約詳細定義
-                    var detail = "　　　　　　予約者名　　：" + yoyaku[l][0] + "<br>";
-                    detail +=    "　　　　　　予約時間　　：" + yoyaku[l][4] + "-" + yoyaku[l][5] + "<br>";
-                    detail +=    "　　　　　　　目的　　　：" + yoyaku[l][8] + "<br>";
-                    detail +=    "　　　　　　利用者名　　：" + yoyaku[l][6] + "<br>";
-                    detail +=    "　　　　　利用者連絡先　：" + yoyaku[l][7] + "<br>";
-                    detail +=    "　　　　　　　備考　　　：" + yoyaku[l][9];
+                    var detail = "　　　　　　予約者名　　：" + yoyaku[l][3] + "<br>";
+                    detail +=    "　　　　　　予約時間　　：" + yoyaku[l][5] + "-" + yoyaku[l][6] + "<br>";
+                    detail +=    "　　　　　　　目的　　　：" + yoyaku[l][9] + "<br>";
+                    detail +=    "　　　　　　利用者名　　：" + yoyaku[l][7] + "<br>";
+                    detail +=    "　　　　　利用者連絡先　：" + yoyaku[l][8] + "<br>";
+                    detail +=    "　　　　　　　備考　　　：" + yoyaku[l][10];
+
+                    // 削除できるかチェック
+                    var delete_button = "";
+                    if (adminFlag == true || yoyaku[l][11] == registerID) {
+                        delete_button = "<button class='btn btn-secondary' type='submit' data-bs-dismiss='modal'>削除</button>";
+                    }
 
                     // ボタン設定
-                    calendar += "<button class='btn btn-secondary font-small' type='button' data-bs-toggle='modal' data-bs-target='#test'>" + text + "</button>";
-                    calendar += "<div class='modal fade' id='test' tabindex='-1' aria-hidden='true'>";
+                    calendar += "<button class='btn btn-secondary font-small' type='button' data-bs-toggle='modal' data-bs-target='#reserve" + id + "' ";
+                    calendar += "onclick = 'setReserve(" + id + ")'>" + text + "</button>";
+                    calendar += "<div class='modal fade' id='reserve";
+                    calendar += yoyaku[l][0] + "' tabindex=' - 1' aria-hidden='true'>";
                     calendar += "<div class='modal-dialog'>";
                     calendar += "<div class='modal-content'>";
 
@@ -121,27 +159,28 @@ function createProcess(year, month, dates) {
                     calendar += "   <p class='text-left'>" + detail + "</p>";
                     calendar += "</div>";
                     calendar += "<div class='modal-footer'>";
-                    calendar += "   <button class='btn btn-secondary' type='button' data-bs-dismiss='modal'>変更</button>";
-                    calendar += "   <button class='btn btn-secondary' type='button' data-bs-dismiss='modal'>削除</button>";
+                    calendar += "   <form name='reserveForm' method='post'>"
+                    calendar += "       <input hidden type='text'  name='reserveID' id='reserveID" + id + "'>";
+                    calendar +=         delete_button;
+                    calendar += "   </form>";
                     calendar += "</div>";
 
                     calendar += "</div>";
                     calendar += "</div>";
                     calendar += "</div>";
                     calendar += "</div>";
-                    //calendar += "<h1>"+year+"</h1>"
                 }
-
-                //var num = use_time.length - using;
-                //calendar += "<h1>"+Number(date[0])+"<br>"+Number(date[1])+"<br>"+Number(date[2])+"<br>"+month+"<br>"+dates+"</h1>";
-
 
             }
             calendar += "</td>";
-            //calendar += "<td><p>a</p></td>";
         }
     }
     calendar += "</tr>";
     return calendar;
 }
 
+// 予約内容取得
+function setReserve(num) {
+    var formName = "reserveID" + num;
+    document.querySelector('input[id="' + formName + '"]').value = num;
+}
