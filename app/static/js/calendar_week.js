@@ -79,6 +79,15 @@ function createDate() {
 function createReserve() {
     var calendar = "<tbody>";
 
+    // 予約のソート(開始時間-昇順)
+    reserves.sort(function (a, b) {
+        var A = a[5].split(":");
+        var B = b[5].split(":");
+        var numA = Number(A[0]) * 60 + Number(A[1]);
+        var numB = Number(B[0]) * 60 + Number(B[1]);
+        return numA - numB;
+    });
+
     for (var i = 0; i < conferences.length; i++) {
         calendar += "<tr><th scope='row'>" + conferences[i][1] + "</th>";
         for (var j = 0; j < week.length; j++) {
