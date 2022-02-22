@@ -25,7 +25,7 @@ class Conference(db.Model):
   conference_id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True) # 主キー
   name = db.Column(db.String(20), nullable=False, unique=True)
   capacity = db.Column(db.Integer)
-  fhoto_id = db.Column(db.Integer, unique=True)
+  photo_id = db.Column(db.String(20))
   remarks = db.Column(db.String(100))
 
   equipments = db.relationship("Equipment", 
@@ -35,8 +35,8 @@ class Conference(db.Model):
                                 order_by='Equipment.equipment_id')
   reserves = db.relationship("Reserve", uselist=True, back_populates='conferences', cascade='all, delete-orphan')
 
-  def __init__(self, name, capacity, fhoto_id, remarks):
+  def __init__(self, name, capacity, photo_id, remarks):
       self.name = name
       self.capacity = capacity
-      self.fhoto_id = fhoto_id
+      self.photo_id = photo_id
       self.remarks = remarks

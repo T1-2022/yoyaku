@@ -9,6 +9,8 @@ from flask import url_for
 from flask import Blueprint
 from flask import session
 
+from models.Equipment import Equipment
+from models.ConferenceEquipment import ConferenceEquipment
 from models.Register import Register
 from models.database import db
 from models.User import User
@@ -35,8 +37,8 @@ def main_tab():
         user_info['name'] =  register.users.name # ユーザーネームを格納
         user_info['email'] = register.users.email # メールアドレスを格納
         user_info['passwd'] = register.passwd # パスワードを格納
+        user_info['admin'] = register.admin # 管理者権限を格納
 
-        # 予約情報を全取得 <- 部分的に読み込むようにjsを書いた方がよいかも
         return render_template("main_tab.html", user_info=user_info)
 
     else:
@@ -153,6 +155,8 @@ def reserve_page():
 @main_bp.route("/room")
 def room_page():
     conferences = Conference.query.all()
+    equipments=Equipment.query.all()
+
     return render_template('room.html',conferences=conferences)
 
 # ユーザー情報

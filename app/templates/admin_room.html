@@ -1,0 +1,201 @@
+{% extends "template.html" %}
+{% block title %}会議室管理{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_admin.css') }}">
+{% endblock %}
+{% block content %}
+
+<div class="limiter">
+    <script>
+        if({{ error | tojson }}==true)
+        {
+            window.alert("入力内容に誤りがあります");
+        }
+    </script>
+   <div class="container-admin100">
+      <div class="wrap-admin100">
+         <span class="admin100-form-title p-b-26">
+         会議室管理
+         </span>
+         <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-bordered table-striped mb-0">
+               <thead>
+                  <tr>
+                     <th scope="col">ID</th>
+                     <th scope="col">会議室名</th>
+                     <th scope="col">収容人数</th>
+                     <th scope="col">写真ID</th>
+                      <th scope="col">設置機器</th>
+                     <th scope="col">更新</th>
+                     <th scope="col">削除</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for conference in conferences %}
+                  <tr class="text-center">
+                     <th>{{ conference.__dict__['conference_id'] }}</th>
+                     <td>{{ conference.__dict__['name'] }}</td>
+                     <td>{{ conference.__dict__['capacity'] }}</td>
+                  <td>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ShowPic{{conference.__dict__['conference_id'] }}">表示</button>
+                        <div class="modal fade" id="ShowPic{{conference.__dict__['conference_id'] }}" tabindex="-1" aria-labelledby="show-room-label" aria-hidden="true">
+                           <div class="modal-dialog modal-sm modal-dialog-centered" id="{{conference.__dict__['conference_id'] }}">
+                              <div class="modal-content">
+                                  <div class="modal-body">
+                                    <img src="../static/img/{{ conference.__dict__['photo_id'] }}.jpg" alt="{{ conference.__dict__['name'] }}" class="img-thumbnail">
+                                  </div>
+                              </div>
+                           </div>
+                        </div>
+                     </td>
+                     <td>
+                        {% for equipment in conference.conference_equipments %}
+                        <p class="card-text">{{ equipment.equipments.__dict__['name'] }} x{{ equipment.__dict__['num'] }}</p>
+                        {% endfor %}
+                     </td>
+                     <td>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ChangeRoom{{conference.__dict__['conference_id'] }}">更新</button>
+                        <form class="login100-form" enctype = multipart/form-data method="post">
+                           <div class="modal fade" id="ChangeRoom{{conference.__dict__['conference_id'] }}" tabindex="-1" aria-labelledby="change-room-label" aria-hidden="true">
+                              <div class="modal-dialog modal-sm modal-dialog-centered" id="{{conference.__dict__['conference_id']}}">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="change-room-label">更新確認</h5>
+                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                       <div class="row rows-cols-2 text-center">
+                                          <div class="col-12">
+                                             <div class="wrap-inputadmin100">
+                                                <input class="inputadmin100" type="text" name="Name" value="{{ conference.__dict__['name'] }}">
+                                             </div>
+                                          </div>
+                                          <div class="col-6">
+                                             <div class="wrap-inputadmin100">
+                                                <input class="inputadmin100" type="text" name="Capacity" value="{{ conference.__dict__['capacity'] }}">
+                                             </div>
+                                          </div>
+                                          <div class="col-6">
+                                              <div class="wrap-inputadmin100">
+                                              <input type="file" class="inputadminupload100" name="Photo" value="../static/img/{{ conference.__dict__['photo_id'] }}.jpg">
+                                              </div>
+                                          </div>
+                                          {% for eq in equipments %}
+                                          <div class="col-8 align-self-center">
+                                             <label class="text-align-center ">{{ eq.__dict__['name'] }}</label>
+                                          </div>
+                                          <div class="col-4 ">
+                                             <div class="wrap-inputadmin100">
+                                                <input class="inputadmin100" type="text" name="equipment{{ eq.__dict__['equipment_id'] }}"
+                                                {% for equipment in conference.conference_equipments %}
+                                                {% if eq.__dict__['equipment_id']==equipment.__dict__['equipment_id'] %}
+                                                value="{{ equipment.__dict__['num']}}"
+                                                {% endif %}
+                                                {% endfor %}>
+                                             </div>
+                                          </div>
+                                          {% endfor %}
+                                       </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="conference" value="{{ conference.__dict__['name'] }}">更新</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
+                     </td>
+                     <td>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#DeleteRoom{{conference.__dict__['conference_id'] }}">削除</button>
+                        <div class="modal fade" id="DeleteRoom{{conference.__dict__['conference_id'] }}" tabindex="-1" aria-labelledby="delete-room-label" aria-hidden="true">
+                           <div class="modal-dialog modal-sm modal-dialog-centered" id="{{conference.__dict__['conference_id'] }}">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="delete-room-label">削除確認</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body">
+                                    ID:　{{ conference.__dict__['conference_id'] }}<br>
+                                    会議室名:　{{ conference.__dict__['name'] }}<br>
+                                    を削除しますか？
+                                 </div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                                    <a type="button" class="btn btn-secondary" href="{{ url_for('room_delete.room_delete',name= conference.__dict__['name']) }}">削除</a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </td>
+                  </tr>
+                  {% endfor %}
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="container-admin100-form-btn">
+            <div class="wrap-admin100-form-btn">
+               <div class="admin100-form-bgbtn"></div>
+               <button type="button" class="admin100-form-btn" data-bs-toggle="modal" data-bs-target="#AddRoom">
+               会議室登録
+               </button>
+            </div>
+         </div>
+         <form class="login100-form" enctype = multipart/form-data method="post">
+            <div class="modal fade" id="AddRoom" tabindex="-1" aria-labelledby="add-room-label" aria-hidden="true">
+               <div class="modal-dialog modal-sm modal-dialog-centered" id="addroom">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="add-room-label">会議室登録</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                        <div class="row rows-cols-2 text-center">
+                           <div class="col-12">
+                              <div class="wrap-inputadmin100">
+                                 <input class="inputadmin100" type="text" name="Name" placeholder="会議室名">
+                              </div>
+                           </div>
+                           <div class="col-6">
+                              <div class="wrap-inputadmin100">
+                                 <input class="inputadmin100" type="text" name="Capacity" placeholder="収容人数">
+                              </div>
+                           </div>
+                           <div class="col-6">
+                              <div class="wrap-inputadmin100">
+                                  <input type="file" class="inputadminupload100" name="Photo" placeholder="写真ID">
+                              </div>
+                           </div>
+                           {% for eq in equipments %}
+                           <div class="col-8 align-self-center">
+                              <label class="text-align-center ">{{ eq.__dict__['name'] }}</label>
+                           </div>
+                           <div class="col-4 ">
+                              <div class="wrap-inputadmin100">
+                                 <input class="inputadmin100" type="text" name="equipment{{ eq.__dict__['equipment_id'] }}"　>
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                     <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">登録</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </form>
+         <div class="container-admin100-form-btn">
+            <div class="wrap-admin100-form-btn">
+               <div class="admin100-form-bgbtn"></div>
+               <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_main.admin_main')) }}">
+               戻る
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+{% endblock %}

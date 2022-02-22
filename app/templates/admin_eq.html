@@ -1,0 +1,134 @@
+{% extends "template.html" %}
+{% block title %}設置機器管理{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main_admin.css') }}">
+{% endblock %}
+{% block content %}
+<div class="limiter">
+    <script>
+        if({{ error | tojson }}==true)
+        {
+            window.alert("入力内容に誤りがあります");
+        }
+    </script>
+   <div class="container-admin100">
+      <div class="wrap-admin100">
+         <span class="admin100-form-title p-b-26">
+         設置機器管理
+         </span>
+         <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-bordered table-striped mb-0">
+               <thead>
+                  <tr>
+                     <th scope="col">ID</th>
+                     <th scope="col">設置機器名</th>
+                     <th scope="col">更新</th>
+                     <th scope="col">削除</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for equipment in equipments %}
+                  <tr class="text-center">
+                     <th>{{ equipment.__dict__['equipment_id'] }}</th>
+                     <td>{{ equipment.__dict__['name'] }}</td>
+                     <td>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ChangeEq{{equipment.__dict__['equipment_id'] }}">更新</button>
+                        <form class="login100-form" method="post">
+                           <div class="modal fade" id="ChangeEq{{equipment.__dict__['equipment_id'] }}" tabindex="-1" aria-labelledby="change-eq-label" aria-hidden="true">
+                              <div class="modal-dialog modal-sm modal-dialog-centered" id="{{equipment.__dict__['equipment_id']}}">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="change-eq-label">更新確認</h5>
+                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                       <div class="row rows-cols-2 text-center">
+                                          <div class="col-12">
+                                             <div class="wrap-inputadmin100">
+                                                <input class="inputadmin100" type="text" name="Name" value="{{ equipment.__dict__['name'] }}">
+                                             </div>
+                                          </div>
+                                       </div>
+                                    <div class="modal-footer">
+                                       <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="update" value="{{ equipment.__dict__['name'] }}">更新</button>
+                                    </div>
+                           </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
+                     </td>
+                     <td>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#DeleteEq{{equipment.__dict__['equipment_id'] }}">削除</button>
+                        <div class="modal fade" id="DeleteEq{{equipment.__dict__['equipment_id'] }}" tabindex="-1" aria-labelledby="delete-eq-label" aria-hidden="true">
+                           <div class="modal-dialog modal-sm modal-dialog-centered" id="{{equipment.__dict__['equipment_id'] }}">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="delete-eq-label">削除確認</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body">
+                                    ID:　{{ equipment.__dict__['equipment_id'] }}<br>
+                                    設置機器名:　{{ equipment.__dict__['name'] }}<br>
+                                    を削除しますか？
+                                 </div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                                    <a type="button" class="btn btn-secondary" href="{{ url_for('eq_delete.eq_delete',name= equipment.__dict__['name']) }}">削除</a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </td>
+                  </tr>
+                  {% endfor %}
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="container-admin100-form-btn">
+            <div class="wrap-admin100-form-btn">
+               <div class="admin100-form-bgbtn"></div>
+               <button type="button" class="admin100-form-btn" data-bs-toggle="modal" data-bs-target="#AddEq">
+               設置機器追加
+               </button>
+            </div>
+         </div>
+         <form class="login100-form" method="post">
+            <div class="modal fade" id="AddEq" tabindex="-1" aria-labelledby="add-eq-label" aria-hidden="true">
+               <div class="modal-dialog modal-sm modal-dialog-centered" id="addeq">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="add-eq-label">設置機器登録</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                        <div class="row rows-cols-2 text-center">
+                           <div class="col-12">
+                              <div class="wrap-inputadmin100">
+                                 <input class="inputadmin100" type="text" name="Name" placeholder="設置機器名">
+                              </div>
+                           </div>
+                     </div>
+                     <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="Registration">登録</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            </div>
+         </form>
+         <div class="container-admin100-form-btn">
+            <div class="wrap-admin100-form-btn">
+               <div class="admin100-form-bgbtn"></div>
+               <a type="button" class="admin100-form-btn" href="{{ url_for(('admin_main.admin_main')) }}">
+               戻る
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+{% endblock %}
